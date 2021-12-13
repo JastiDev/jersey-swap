@@ -62,7 +62,6 @@
                         method: 'GET',
                         success: function(result){
                         
-                            console.log(result);
                             result.listings.data.forEach((item)=>{
                                 var tr = document.createElement('tr');
                                 {{-- Creating First Column --}}

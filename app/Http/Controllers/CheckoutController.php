@@ -58,6 +58,33 @@ class CheckoutController extends Controller
     }
 
     /**
+     * @return the checkout page from Buy it now.
+     */
+    public function buyit(Request $request){
+      $user_id = Auth::id();
+      $offer = Offers::create([
+          'listing_id' => $request->listing_id,
+          'offer_price' => $request->amount,
+          'posted_by' =>$user_id
+      ]);
+
+      $settings = $this->settings();
+      $data = [];
+
+      $offer = Deals::where('listing_id',$request->listing)->first();
+      $offer = Offers::find($offer->offer_id);
+      $settings['prices']['offer'] = $offer->offer_price;
+      $data['offer'] = $offer->id;
+
+      $data['type'] = "offerMaker";
+      $data['listing'] = Listing::find($request->listing);
+      return view('frontend.pages.checkout',[
+          "prices"=>$settings['prices'],
+          "data" => $data
+      ]);
+    }
+
+    /**
      * @return the thank you page
      */
     public function charge(Request $request){

@@ -44,8 +44,17 @@
                     </div>
                     @auth
                         @if (auth()->user()->id !== $listing->posted_by && auth()->user()->role->role!=="admin")
-                            <div class="text-end">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <div class="text-end" style="display: flex; justify-content: flex-end">
+                              <form method="POST" action="{{ url('buyit') }}">
+                                @csrf
+                                <input type="hidden" name="listing_id"  value="{{$listing->id}}">
+                                <input type="hidden" name="amount"  value="{{$listing->price}}">
+                                <button type="submit" class="btn btn-success">
+                                    Buy it now
+                                </button>
+                              </form>
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 8px"
                                     data-bs-target="#exampleModal">
                                     Make an Offer
                                 </button>

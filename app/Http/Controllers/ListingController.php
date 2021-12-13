@@ -101,7 +101,8 @@ class ListingController extends Controller
         }
         $listing->product_title = $request->input('product_title');
         $listing->product_description = $request->input('product_description');
-	$listing->category = $request->input('category');
+	      $listing->category = $request->input('category');
+	      $listing->price = $request->input('price');
         $listing->authentic = $request->authenticity;
         $listing->update();
         $this->upload_gallery_images($request,$listing->id);
@@ -146,7 +147,8 @@ class ListingController extends Controller
             'posted_by' => $posted_by,
             'slug' => $slug,
             'authentic' => $authentic,
-	    'category' => $request->category
+	          'category' => $request->category,
+	          'price' => $request->price
         ]);
         $this->upload_gallery_images($request,$listing->id);
         

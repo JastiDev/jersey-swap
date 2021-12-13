@@ -14,10 +14,11 @@ class Listing extends Model
         'product_description',
         'product_img',
         'posted_by',
+        'category',
+        'price',
         'slug',
         'status',
-        'authentic',
-        'category'
+        'authentic'
     ];
     public function user()
     {

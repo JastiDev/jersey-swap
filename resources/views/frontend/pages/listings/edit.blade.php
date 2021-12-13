@@ -23,17 +23,21 @@
                                 <form id="product-upload-form" method="POST" action="{{url('/listing/update')}}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="listing_id" value="{{$listing->id}}">
+                                    <div class="mb-3">
+                                        <label for="product_title" class="form-label">Product Title</label>
+                                        <input type="text" class="form-control @error('product_title') is-invalid @enderror" id="product_title" placeholder="Product Title" value="{{$listing->product_title}}" name="product_title" required>
+                                        @error('product_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                     <div class="row">
-                                      <div class="col-md-8 mb-3">
-                                          <label for="product_title" class="form-label">Product Title</label>
-                                          <input type="text" class="form-control @error('product_title') is-invalid @enderror" id="product_title" placeholder="Product Title" value="{{$listing->product_title}}" name="product_title" required>
-                                          @error('product_title')
-                                              <span class="invalid-feedback" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                              </span>
-                                          @enderror
+                                      <div class="col-md-6 mb-3">
+                                          <label for="price" class="form-label">Price($)</label>
+                                          <input type="number" class="form-control" id="price" min="1" name="price"  value="{{$listing->price}}">
                                       </div>
-                                      <div class="col-md-4 mb-3">
+                                      <div class="col-md-6 mb-3">
                                           <label for="category" class="form-label">Category</label>
                                           <select name="category" id="category" class="form-control" value=1>
                                               <option value = 0 @if($listing->category==0) selected="selected" @endif>Jersey</option>

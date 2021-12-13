@@ -79,7 +79,6 @@
   <script>
     $(document).ready(function() {
       var listing = {!! json_encode($listing) !!};
-      console.log(listing);
       var index = 1;
       var pageSize = 12;
       var category = -1;
@@ -91,7 +90,6 @@
         if(category > -1){
           listingData = listingData.filter(item => item.category == category);
         }
-        console.log(listingData);
         
         if(keyword != ''){
           listingData = 

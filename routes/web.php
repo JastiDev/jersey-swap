@@ -107,6 +107,7 @@ Route::middleware(['auth', 'checkuserrole:user','checkbanned'])->group(function 
     Route::get('/trading_by_user', [TradingController::class, 'get_by_user']);
     Route::post('/trading/status', [TradingController::class, 'get_by_status']);
     Route::post('/checkout', [CheckoutController::class,'checkout']);
+    Route::post('/buyit', [CheckoutController::class,'buyit']);
 
     /**
      * Notification Controller
