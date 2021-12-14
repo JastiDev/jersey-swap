@@ -71,13 +71,11 @@ class CheckoutController extends Controller
       $settings = $this->settings();
       $data = [];
 
-      $offer = Deals::where('listing_id',$request->listing)->first();
-      $offer = Offers::find($offer->offer_id);
       $settings['prices']['offer'] = $offer->offer_price;
       $data['offer'] = $offer->id;
 
       $data['type'] = "offerMaker";
-      $data['listing'] = Listing::find($request->listing);
+      $data['listing'] = Listing::find($request->listing_id);
       return view('frontend.pages.checkout',[
           "prices"=>$settings['prices'],
           "data" => $data
@@ -92,7 +90,7 @@ class CheckoutController extends Controller
         $type = $request->type;
         $price = 0;
         $settings = $this->settings();
-        $price = $settings['prices']['shipping'] + $settings['prices']['security'];
+        $price = $settings['prices']['security'];
         $offer = Offers::findOrFail($request->offer_id);
         $listing = Listing::where('id',$offer->listing_id)->first();
         

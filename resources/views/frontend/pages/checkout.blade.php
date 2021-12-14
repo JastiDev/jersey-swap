@@ -28,13 +28,13 @@
                                         </div>
                                         <span class="text-muted">${{$prices['security']}}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <!-- <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
                                             <h6 class="my-0">Shipping & Handling</h6>
                                             <small class="text-muted">Deliver your jersey safely!</small>
                                         </div>
                                         <span class="text-muted">${{$prices['shipping']}}</span>
-                                    </li>
+                                    </li> -->
                                     @if($prices['offer']>0)
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
@@ -46,7 +46,8 @@
                                     @endif
                                     <li class="list-group-item d-flex justify-content-between">
                                         <span>Total (USD)</span>
-                                        <strong>${{$prices['security']+$prices['shipping']+$prices['offer']}}</strong>
+                                        <!-- <strong>${{$prices['security']+$prices['shipping']+$prices['offer']}}</strong> -->
+                                        <strong>${{$prices['security']+$prices['offer']}}</strong>
                                     </li>
                                 </ul>
                             </div>
@@ -78,7 +79,7 @@
                                             <label for="email" class="form-label">Email</span></label>
                                             <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{auth()->user()->email}}" readonly="">
                                             <div class="invalid-feedback">
-                                                Please enter a valid email address for shipping updates.
+                                                Please enter a valid email address.
                                             </div>
                                         </div>
 
@@ -240,7 +241,8 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    const stripe = Stripe("{{env('STRIPE_KEY','pk_live_51JMJCNLaRKsO1rdUaYMI4zbBHPssGkbtMFsbtGzAEwzcFZzZfPuFTxu37UDy2oy6hVHZdhRLlB1hdJZktcIlpZrl00RVv5kmjq')}}");
+    // const stripe = Stripe("{{env('STRIPE_KEY','pk_live_51JMJCNLaRKsO1rdUaYMI4zbBHPssGkbtMFsbtGzAEwzcFZzZfPuFTxu37UDy2oy6hVHZdhRLlB1hdJZktcIlpZrl00RVv5kmjq')}}");
+    const stripe = Stripe("{{env('STRIPE_KEY','pk_test_51JMJCNLaRKsO1rdUIvC4wtL5UHKd23TNkDVB28r9n2Pa9KtjDMwO9fQOEsD42Skh6yAfg6BCQsMoTGyJBvoTDLV400VtyPWbEh')}}");
 
     var flag = false;
 
@@ -253,6 +255,7 @@
     
 
     $("#payment-form").submit(function(e){
+      console.log(flag);
         if(flag==false){
             e.preventDefault();
             return false;
@@ -293,15 +296,6 @@
             flag = false;
             $("#zipcode-message").html("Zip Code Required!");
         }
-        else{
-            if(isUSAZipCode($("#zipcode").val())){
-                $("#zipcode-message").html("Invalid Zip Code!");
-                $("#zipcode").addClass('is-invalid');
-            }
-            else{
-                $("#zipcode").removeClass('is-invalid');
-            }
-        }
         return flag;
     }
     cardButton.addEventListener('click', async (e) => {
@@ -318,6 +312,7 @@
         );
         if (error) {
             // Display "error.message" to the user...
+            console.error(error);
             $("#loader").removeClass('show');
             swal("Error!", "Please check your card details!", "error");
         } else {
