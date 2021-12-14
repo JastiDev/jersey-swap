@@ -65,6 +65,7 @@ class CheckoutController extends Controller
       $offer = Offers::create([
           'listing_id' => $request->listing_id,
           'offer_price' => $request->amount,
+          'offer_status' => 'buyRequest',
           'posted_by' =>$user_id
       ]);
 

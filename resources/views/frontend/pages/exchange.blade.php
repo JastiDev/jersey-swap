@@ -143,6 +143,7 @@
           userNameDiv.append(userNameA);
           var span = document.createElement('span');
           span.innerHTML = " $"+ list.price;
+          span.style.cssText = 'color:green;font-weight:bold';
           userNameDiv.append(span);
           userDiv.append(userNameDiv);
           cardBody.append(userDiv);

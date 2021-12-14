@@ -19,7 +19,6 @@ class SingleListing extends React.Component {
             fetch('/offers/'+listing)
             .then(res => res.json())
             .then(result => {
-                console.log(result);
                 this.setState({
                         offers : result.response, makePayment : result.makePayment, isLoaded:true
                     });
@@ -102,7 +101,7 @@ class SingleListing extends React.Component {
                                                     })}
                                                     </div>
 
-                                                    {listing_status!="closed" && listing_status!="completed" && listing_status!="cancelled" ?
+                                                    {listing_status!="closed" && listing_status!="completed" && listing_status!="cancelled" && offer.offer_status!="buyRequest"?
                                                         <div className="buttons text-end">
                                                         <form className="me-2" method="POST" action="/decline-offer">
                                                             <input type="hidden" name="_token" value={csrf} />
@@ -120,6 +119,24 @@ class SingleListing extends React.Component {
                                                             <input type="hidden" name="listing" value={offer.listing_id} />
                                                             <button type="submit" className="btn btn-success"><i className="fa fa-check"></i> Accept
                                                                 Offer</button>
+                                                        </form>
+                                                    </div>
+                                                    :
+                                                    ''
+                                                    }
+
+                                                    {offer.offer_status=="buyRequest"?
+                                                      <div className="buttons text-end">
+                                                        <form className="me-2" method="POST" action="/checkout">
+                                                            <input type="hidden" name="type" value="lister" />
+                                                            <input type="hidden" name="offer_id" value={offer.id} />
+                                                            <input type="hidden" name="offerBy" value={offer.posted_by} />
+                                                            <input type="hidden" name="_token" value={csrf} />
+                                                            <input type="hidden" name="price" value={offer.offer_price} />
+                                                            <input type="hidden" name="listing" value={offer.listing_id} />
+                                                            <button type="submit" className="btn btn-success">
+                                                              <i className="fa fa-check"></i>Pay security fee
+                                                            </button>
                                                         </form>
                                                     </div>
                                                     :

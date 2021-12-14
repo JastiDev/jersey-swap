@@ -30,7 +30,7 @@
                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>
                         </div>
                         
-                        <div class="user-name align-self-center" style="margin-left: 8px">
+                        <div class="user-name align-self-center" style="margin-left: 8px; color: green; font-weight: bold;">
                             <span>${{$listing->price}}</span>
                         </div>
                     </div>

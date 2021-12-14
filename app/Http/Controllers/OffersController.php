@@ -17,7 +17,7 @@ use Throwable;
 class OffersController extends Controller
 {
     public function index(){
-        
+      
     }
     public function store(Request $request){
         $request->validate([
@@ -104,7 +104,11 @@ class OffersController extends Controller
             $offers = Offers::where([
                 'listing_id' => $id,
                 'offer_status' => 'posted'
-            ])->get();
+            ])->orWhere([
+                'listing_id' => $id,
+                'offer_status' => 'buyRequest'
+            ])
+            ->get();
             $i=0;
             while($i<count($offers)){
                 $user = User::find($offers[$i]->posted_by);
@@ -112,6 +116,7 @@ class OffersController extends Controller
                 $offers[$i]->user_profile_picture = url('/')."/".$user->profile_picture;
                 $offers[$i]->gallery = OfferGallery::where('offer_id',$offers[$i]->id)->get();
                 $offers[$i]->description="Jersey Swap Offer!";
+                $offers[$i]->offer_status=$offers[$i]->offer_status;
                 $i++;
             }
         }
