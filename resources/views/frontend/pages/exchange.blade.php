@@ -141,6 +141,9 @@
           userNameA.text = list.owner.username;
           userNameDiv.innerHTML = 'By ';
           userNameDiv.append(userNameA);
+          var span = document.createElement('span');
+          span.innerHTML = " $"+ list.price;
+          userNameDiv.append(span);
           userDiv.append(userNameDiv);
           cardBody.append(userDiv);
           cardDiv.append(cardBody);
