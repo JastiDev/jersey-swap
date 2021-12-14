@@ -29,6 +29,10 @@
                         <div class="user-name align-self-center">
                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>
                         </div>
+                        
+                        <div class="user-name align-self-center" style="margin-left: 8px">
+                            <span>${{$listing->price}}</span>
+                        </div>
                     </div>
                     <img id="featured" src="{{ asset($listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
                     <div class="description mt-2 mb-2">
