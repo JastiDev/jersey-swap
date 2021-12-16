@@ -98,13 +98,12 @@
                             @csrf
                             <div class="modal-body">
                                 <p>Users can make trade offers! Offers can be made:</p>
+                                <ul>
+                                    <li>Item for item: Please include images of the item you are trading and leave the “amount” empty. Then press “post offer”. </li>
+                                    <li>Money for item: Please include the amount you wish to offer and leave the “image gallery” empty.  Then press “post offer”. </li>
+                                    <li>Item and money for item: Please include the amount you wish to offer and images of the item you are attempting to trade. The press “post offer”.  (Please use this feature when the trade needs to be more equal). </li>
+                                </ul>
                                 <input type="hidden" name="listing_id" value="{{ $listing->id }}">
-                                <div class="row">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-6">
-                                        <img src="{{asset($listing->product_img)}}" width="100%">
-                                    </div>
-                                </div>
                                 <div class="mb-3">
                                     <label for="amount" class="col-form-label">Amount($)</label>
                                     <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount">
