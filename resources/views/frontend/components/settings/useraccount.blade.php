@@ -1,20 +1,6 @@
 <form method="POST" action="{{ url('users/settings/account') }}">
     @csrf
-    {{-- Tag Line --}}
-    <div class="mb-3 row">
-        <label for="tagline" class="col-sm-3 col-form-label">Tagline</label>
-        <div class="col-sm-9">
-            <input id="tagline" type="text" class="form-control @error('tagline') is-invalid @enderror" name="tagline"
-                placeholder="Tagline" value="{{ $user->tag_line }}">
-            @error('tagline')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-    </div>
-
-
+    
     {{-- First Name --}}
     <div class="mb-3 row">
         <label for="f_name" class="col-sm-3 col-form-label">First Name</label>

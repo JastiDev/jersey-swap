@@ -17,10 +17,10 @@
                                     @endif
                                     <div class="mt-3">
                                         <h4>{{auth()->user()->username}}</h4>
-                                        @if(isset(auth()->user()->tag_line))
+                                        <!-- @if(isset(auth()->user()->tag_line))
                                         <p class="text-secondary mb-1">{{auth()->user()->tag_line}}</p>
                                         @endif
-                                       {{--  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> --}}
+                                       {{--  <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> --}} -->
                                     </div>
                                 </div>
                             </div>

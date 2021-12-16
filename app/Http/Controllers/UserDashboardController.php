@@ -55,7 +55,7 @@ class UserDashboardController extends Controller
         $user =  Auth::user();
         $user->f_name = trim($request->input('f_name'));
         $user->l_name = trim($request->input('l_name'));
-        $user->tag_line = trim($request->input('tagline'));
+        // $user->tag_line = trim($request->input('tagline'));
         $user->phone = trim($request->input('phone'));
         $user->postcode = trim($request->input('postcode'));
         $user->address = trim($request->input('address'));

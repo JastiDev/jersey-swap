@@ -9,13 +9,13 @@
                     <div class="col-md-12">
                         <ul id="deals-tab" class="tab-list">
                             <li>
-                                <a class="active" href="#" data-title="In Progress" data-status="progress">In Progress</a>
+                                <a class="active" href="#" data-title="Pending Payment" data-status="payment">Pending Payment</a>
+                            </li>
+                            <li>
+                                <a href="#" data-title="In Progress" data-status="progress">In Progress</a>
                             </li>
                             <li>
                                 <a href="#" data-title="Completed" data-status="completed">Completed</a>
-                            </li>
-                            <li>
-                                <a href="#" data-title="Pending Payment" data-status="payment">Pending Payment</a>
                             </li>
                             <li>
                                 <a href="#" data-title="Cancelled" data-status="cancelled">Cancelled</a>
@@ -55,7 +55,7 @@
             var page_url="{{url('/trading/status')}}";
             var base_url = "{{url('/')}}";
             var pg_url = "{{url('/trading/status')}}";
-            var status = "progress";
+            var status = "payment";
             function load_data(){
                 if(page_url!=null && page_url!=""){
                     $.ajaxSetup({

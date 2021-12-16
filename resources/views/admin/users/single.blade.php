@@ -35,7 +35,7 @@
                         <div class="text-center">
                             <img src="{{asset($user->profile_picture)}}" class="rounded-circle" width="150" />
                             <h4 class="card-title mt-10">{{$user->f_name." ".$user->l_name}}</h4>
-                            <p class="card-subtitle">{{$user->tag_line}}</p>
+                            <!-- <p class="card-subtitle">{{$user->tag_line}}</p> -->
                         </div>
                     </div>
                     <hr class="mb-0">

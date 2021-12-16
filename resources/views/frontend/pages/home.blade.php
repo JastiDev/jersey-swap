@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h1>Jersey Exchange!</h1>
-                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, Sell, and Trade for iconic sports jerseys with users across the country! The destination for sports jerseys on desktop, iPhone, and Android.
+                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, Sell, and Trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys on desktop, iPhone, and Android.
                     </p>
                     <a href="{{url('exchange')}}" class="btn btn-primary">Start Exchange</a>
                 </div>
@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                     <div style="margin-bottom: 8px; color: green; font-weight: bold;">
-                                        <span>Buy it now for: ${{$listing->price}}</span>
+                                        <span>Buy Now: ${{$listing->price}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@
                     <div class="card w-100">
                         <div class="card-body text-center">
                             <img src="assets/images/icons/jersey.png" class="mb-2" alt="Jersey">
-                            <h5 class="card-title">Start Trading</h5>
+                            <h5 class="card-title">List It</h5>
                             <p class="card-text">Create listing and find the perfect match.</p>
                         </div>
                     </div>
@@ -147,8 +147,8 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <img src="assets/images/icons/versus.png" class="mb-2" alt="Versus">
-                            <h5 class="card-title">Find Match</h5>
-                            <p class="card-text">Buyers/Traders will be able to give offers for each listing.</p>
+                            <h5 class="card-title">Send It</h5>
+                            <p class="card-text">Users will send items to each other when a deal is made.</p>
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <img src="assets/images/icons/confirmation.png" class="mb-2" alt="Confirmation">
-                            <h5 class="card-title">Jersey Swapped!</h5>
+                            <h5 class="card-title">Collect it</h5>
                             <p class="card-text">Complete your trade or purchase and swap again.</p>
                         </div>
                     </div>

@@ -69,7 +69,7 @@
                                     <hr>
                                     <div class="mb-3">
                                         <h2>Upload Image Gallery</h2>
-                                        <small>Gallery images are used to show the condition of the sports jersey.</small>
+                                        <small>Gallery images are used to show the condition of the sports jersey or sports card.</small>
                                     </div>
                                     <div class="mb-3 text-center">
                                         <label for="product_photos">

@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2 class="footer-logo"><img src="{{asset('assets/images/logo-transparent.png')}}"> Jersey Swap</h2>
-                    <p>Jersey Swap is revolutionizing the sports jersey industry. Our platform operates as the central hub for all sports jersey trading. All transactions will be completed via online.</p>
+                    <p>Jersey Swap is revolutionizing the industry. Our platform operates as the central hub for all sports jersey and sports cards transactions. Everything is completed online!</p>
                 </div>
                 <div class="col-md-2">
                     <h4>Quick Links</h4>
@@ -19,7 +19,7 @@
                             <a href="{{route('contact')}}">Contact us</a>
                         </li>
                         <li>
-                            <a href="{{route('exchange')}}">Start Trading</a>
+                            <a href="{{route('exchange')}}">List It</a>
                         </li>
                     </ul>
                 </div>

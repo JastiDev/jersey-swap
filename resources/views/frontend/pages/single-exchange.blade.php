@@ -31,12 +31,12 @@
                         </div>
                     </div>
                     <img id="featured" src="{{ asset($listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
+                    <div style="margin-top: 8px; color: green; font-weight: bold;">
+                        <span>Buy it now for ${{$listing->price}}</span>
+                    </div>
                     <div class="description mt-2 mb-2">
                         <h3>Description</h3>
                         <p>{{ $listing->product_description }}</p>
-                    </div>
-                    <div style="margin-bottom: 8px; color: green; font-weight: bold;">
-                        <span>Buy it now for ${{$listing->price}}</span>
                     </div>
                     <div class="gallery mb-3">
                         @foreach ($listing_gallery as $img)
@@ -60,7 +60,7 @@
 
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 8px"
                                     data-bs-target="#exampleModal">
-                                    Make an Offer
+                                    Make trade Offer
                                 </button>
                             </div>
                         @endif
@@ -91,21 +91,23 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Make Offer</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Make Trade Offer</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form id="offer-form" method="POST" action="{{ url('offer/post') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                <ul>
-                                    <li>Jersey for Jersey Swap</li>
-                                    <li>Money for Jersey Swap</li>
-                                    <li>Jersey and money for Jersey Swap</li>
-                                </ul>
+                                <p>Users can make trade offers! Offers can be made:</p>
                                 <input type="hidden" name="listing_id" value="{{ $listing->id }}">
+                                <div class="row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <img src="{{asset($listing->product_img)}}" width="100%">
+                                    </div>
+                                </div>
                                 <div class="mb-3">
                                     <label for="amount" class="col-form-label">Amount($)</label>
-                                    <input type="number" class="form-control" id="amount" name="amount" value="0">
+                                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount">
                                 </div>
                                 <div class="mb-3">
                                     <h5>Upload Image Gallery</h5>

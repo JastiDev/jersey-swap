@@ -82,11 +82,9 @@ Jersey Swap is revolutionizing the sports jersey industry by providing a  platfo
 		    <p>
                          List It - Sellers / Traders can create listings completely free.
 			 <br/>
-			Trade It - Users will have the opportunity to accept or decline offers from different users.
+			Send It - When a trade is made both parties will send the sports jersey or sports card to each other.
 			 <br/>
-			Send It - When a trade is made both parties will send the sports jersey or card to each other.
-			 <br/>
-			Collect It - Expand your sports collection beyond your wildest dtreams.
+			Collect It - Expand your sports collections!
                     </p>
                 </div>
             </div>
