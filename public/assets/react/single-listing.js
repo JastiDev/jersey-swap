@@ -23,9 +23,23 @@ class SingleListing extends React.Component {
                         offers : result.response, makePayment : result.makePayment, isLoaded:true
                     });
                 if(result.response.length>0){
-                    this.setState({
-                        offers : result.response, makePayment : result.makePayment, isLoaded:true
-                    });
+                    // let hasBuyRequest = false;
+                    // for(let item of result.response){
+                    //     if(item.offer_status === "buyRequest"){
+                    //         hasBuyRequest = true;
+                    //         break;
+                    //     }
+                    // }
+
+                    // if(hasBuyRequest){
+                    //     let tempResult = result.response.filter(item => item.offer_status === "buyRequest");
+                    //     this.setState({
+                    //         offers : tempResult, makePayment : result.makePayment, isLoaded:true
+                    //     });
+                    // }else
+                        this.setState({
+                            offers : result.response, makePayment : result.makePayment, isLoaded:true
+                        });
                 }
                 if(result.makePayment==false){
                     fetch('/deal_tracking/'+listing)
@@ -101,7 +115,7 @@ class SingleListing extends React.Component {
                                                     })}
                                                     </div>
 
-                                                    {listing_status!="closed" && listing_status!="completed" && listing_status!="cancelled" && offer.offer_status!="buyRequest"?
+                                                    {listing_status!="closed" && listing_status!="completed" && listing_status!="cancelled"?
                                                         <div className="buttons text-end">
                                                         <form className="me-2" method="POST" action="/decline-offer">
                                                             <input type="hidden" name="_token" value={csrf} />
@@ -117,25 +131,9 @@ class SingleListing extends React.Component {
                                                             <input type="hidden" name="_token" value={csrf} />
                                                             <input type="hidden" name="price" value={offer.offer_price} />
                                                             <input type="hidden" name="listing" value={offer.listing_id} />
-                                                            <button type="submit" className="btn btn-success"><i className="fa fa-check"></i> Accept
-                                                                Offer</button>
-                                                        </form>
-                                                    </div>
-                                                    :
-                                                    ''
-                                                    }
-
-                                                    {offer.offer_status=="buyRequest"?
-                                                      <div className="buttons text-end">
-                                                        <form className="me-2" method="POST" action="/checkout">
-                                                            <input type="hidden" name="type" value="lister" />
-                                                            <input type="hidden" name="offer_id" value={offer.id} />
-                                                            <input type="hidden" name="offerBy" value={offer.posted_by} />
-                                                            <input type="hidden" name="_token" value={csrf} />
-                                                            <input type="hidden" name="price" value={offer.offer_price} />
-                                                            <input type="hidden" name="listing" value={offer.listing_id} />
-                                                            <button type="submit" className="btn btn-success">
-                                                              <i className="fa fa-check"></i>Pay security fee
+                                                            <button type="submit" className="btn btn-success"><i className="fa fa-check">
+                                                                </i> 
+                                                                {offer.offer_status == "buyRequest"?" Pay security fee":" Accept Offer"}
                                                             </button>
                                                         </form>
                                                     </div>

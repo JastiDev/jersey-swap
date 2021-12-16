@@ -25,11 +25,20 @@ class OffersController extends Controller
             'amount' => 'required'
         ]);
         $user_id = Auth::id();
-        $offer = Offers::create([
-            'listing_id' => $request->listing_id,
-            'offer_price' => $request->amount,
-            'posted_by' =>$user_id
-        ]);
+        $offer;
+        if($request->isBuy== true)
+            $offer = Offers::create([
+                'listing_id' => $request->listing_id,
+                'offer_price' => $request->amount,
+                'posted_by' =>$user_id,
+                'offer_status' =>'buyRequest'
+            ]);
+        else 
+            $offer = Offers::create([
+                'listing_id' => $request->listing_id,
+                'offer_price' => $request->amount,
+                'posted_by' =>$user_id
+            ]);
         $this->upload_gallery_images($request,$offer->id);
         
         $listingBy = Listing::findOrFail($request->listing_id);
@@ -101,13 +110,11 @@ class OffersController extends Controller
             }
         }
         else{
-            $offers = Offers::where([
-                'listing_id' => $id,
-                'offer_status' => 'posted'
-            ])->orWhere([
-                'listing_id' => $id,
-                'offer_status' => 'buyRequest'
-            ])
+            $offers = Offers::where(function($query) {
+                $query->where('offer_status', 'posted')
+                    ->orWhere('offer_status' , 'buyRequest');
+            })
+            ->where('listing_id', $id)
             ->get();
             $i=0;
             while($i<count($offers)){

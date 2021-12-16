@@ -49,10 +49,11 @@
                     @auth
                         @if (auth()->user()->id !== $listing->posted_by && auth()->user()->role->role!=="admin")
                             <div class="text-end" style="display: flex; justify-content: flex-end">
-                              <form method="POST" action="{{ url('buyit') }}">
+                              <form method="POST" action="{{ url('offer/post') }}">
                                 @csrf
                                 <input type="hidden" name="listing_id"  value="{{$listing->id}}">
                                 <input type="hidden" name="amount"  value="{{$listing->price}}">
+                                <input type="hidden" name="isBuy"  value="true">
                                 <button type="submit" class="btn btn-success">
                                     Buy it now
                                 </button>
