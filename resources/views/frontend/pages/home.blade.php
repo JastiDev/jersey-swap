@@ -102,6 +102,9 @@
                                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>
                                         </div>
                                     </div>
+                                    <div style="margin-bottom: 8px; color: green; font-weight: bold;">
+                                        <span>Buy it now for: ${{$listing->price}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

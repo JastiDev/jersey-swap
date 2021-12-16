@@ -29,15 +29,14 @@
                         <div class="user-name align-self-center">
                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>
                         </div>
-                        
-                        <div class="user-name align-self-center" style="margin-left: 8px; color: green; font-weight: bold;">
-                            <span>${{$listing->price}}</span>
-                        </div>
                     </div>
                     <img id="featured" src="{{ asset($listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
                     <div class="description mt-2 mb-2">
                         <h3>Description</h3>
                         <p>{{ $listing->product_description }}</p>
+                    </div>
+                    <div style="margin-bottom: 8px; color: green; font-weight: bold;">
+                        <span>Buy it now for ${{$listing->price}}</span>
                     </div>
                     <div class="gallery mb-3">
                         @foreach ($listing_gallery as $img)

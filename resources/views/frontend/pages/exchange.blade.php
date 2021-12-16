@@ -114,6 +114,7 @@
           cardDiv.append(imgA);
           var cardBody = document.createElement('div');
           cardBody.className = "card-body";
+
           var titleDiv = document.createElement('div');
           titleDiv.className = "mb-2";
           var h = document.createElement("H6");
@@ -125,8 +126,9 @@
           h.append(titleA);
           titleDiv.append(h);
           cardBody.append(titleDiv);
+
           var userDiv = document.createElement('div');
-          userDiv.className = "product-meta d-flex flex-row";
+          userDiv.className = "product-meta d-flex flex-row mb-2";
           var userAvatarDiv = document.createElement('div');
           userAvatarDiv.className = "user-avatar p-1";
           var imgUserAvatar = document.createElement("img");
@@ -141,12 +143,14 @@
           userNameA.text = list.owner.username;
           userNameDiv.innerHTML = 'By ';
           userNameDiv.append(userNameA);
-          var span = document.createElement('span');
-          span.innerHTML = " $"+ list.price;
-          span.style.cssText = 'color:green;font-weight:bold';
-          userNameDiv.append(span);
           userDiv.append(userNameDiv);
           cardBody.append(userDiv);
+          
+          var span = document.createElement('span');
+          span.innerHTML = "Buy Now For: $"+ list.price;
+          span.style.cssText = 'color:green;font-weight:bold';
+          cardBody.append(span);
+
           cardDiv.append(cardBody);
           ret.append(cardDiv);
           $("#listing").append(ret);
