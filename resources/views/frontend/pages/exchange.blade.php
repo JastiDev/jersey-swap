@@ -147,7 +147,7 @@
           cardBody.append(userDiv);
           
           var span = document.createElement('span');
-          span.innerHTML = "Buy Now For: $"+ list.price;
+          span.innerHTML = "Buy Now: $"+ list.price;
           span.style.cssText = 'color:green;font-weight:bold';
           cardBody.append(span);
 

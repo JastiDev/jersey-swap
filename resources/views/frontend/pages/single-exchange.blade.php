@@ -32,7 +32,7 @@
                     </div>
                     <img id="featured" src="{{ asset($listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
                     <div style="margin-top: 8px; color: green; font-weight: bold;">
-                        <span>Buy it now for ${{$listing->price}}</span>
+                        <span>Buy Now: ${{$listing->price}}</span>
                     </div>
                     <div class="description mt-2 mb-2">
                         <h3>Description</h3>
