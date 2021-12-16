@@ -98,6 +98,8 @@ Route::middleware(['auth', 'checkuserrole:user','checkbanned'])->group(function 
     Route::post('/offer/post', [OffersController::class, 'store']);
 
 
+    Route::get('/offers', [OffersController::class, 'index']);
+    Route::post('/offers/status', [OffersController::class, 'get_by_status']);
     Route::get('/offers/{id}', [OffersController::class, 'get_offers']);
     
 

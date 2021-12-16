@@ -17,7 +17,7 @@ use Throwable;
 class OffersController extends Controller
 {
     public function index(){
-      
+        return view('frontend.pages.offers.all');
     }
     public function store(Request $request){
         $request->validate([
@@ -131,6 +131,26 @@ class OffersController extends Controller
             'response' => $offers,
             'makePayment' => $makePayment
         ],200);
+    }
+    public function get_by_status(Request $request){
+
+        $user_id = Auth::id();
+        $offers = Offers::where(['posted_by'=>$user_id, 'offer_status'=>$request->status])->orderBy('id','DESC')->get();
+        
+        $i=0;
+        while($i<count($offers)){
+            $listing = Listing::find($offers[$i]->listing_id);
+            $offers[$i]->product_img = $listing->product_img;
+            $offers[$i]->product_title = $listing->product_title;
+            $offers[$i]->slug = $listing->slug;
+            $offers[$i]->gallery = OfferGallery::where('offer_id',$offers[$i]->id)->get();
+            $i++;
+        }
+
+
+        return response()->json([
+            'offers' => $offers,
+        ]);
     }
     public function decline_offer(Request $request){
         $listing_id = $request->listing;

@@ -62,6 +62,9 @@
                             <a class="dropdown-item" href="{{url('/users/listings')}}">Listings</a>
                         </li>
                         <li>
+                            <a class="dropdown-item" href="{{url('offers')}}">Active Offers</a>
+                        </li>
+                        <li>
                             <a class="dropdown-item" href="{{url('trading')}}">Transactions</a>
                         </li>
                         @endif
