@@ -154,7 +154,7 @@ class ListingController extends Controller
         
         $user = Auth::user();
         try {
-            $user->notify(new ListingCreated());
+            $user->notify(new ListingCreated(url('/'.$listing->product_img)));
         }catch (Throwable $e) {
             report($e);
         }
@@ -205,7 +205,8 @@ class ListingController extends Controller
             'type' => 'cancelled',
             'message' => 'Your listing has been cancelled.',
             'url' => url('/')."/listings/add-listing",
-            'url_text' => "Create another listing"
+            'url_text' => "Create another listing",
+            'image_url' => url('/'.$listing->product_img)
         ];
         
         $user = Auth::user();
@@ -230,7 +231,8 @@ class ListingController extends Controller
             'type' => 'cancelled',
             'message' => 'Your listing has been cancelled by the admin!',
             'url' => url('/')."/listings/add-listing",
-            'url_text' => "Create another listing"
+            'url_text' => "Create another listing",
+            'image_url' => url('/'.$listing->product_img)
         ];
         
         $user = User::find($listing->posted_by);

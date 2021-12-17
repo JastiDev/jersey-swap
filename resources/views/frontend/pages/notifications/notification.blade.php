@@ -45,14 +45,12 @@
                                             </td>
                                             <td>
                                                 <div class="row">
-                                                    <div id="notify_img" class="col-md-6 col-12 mb-md-0 mb-2">
-                                                        <?php var_dump($notification->type)?><br/>
-                                                        <?php var_dump($notification->data)?>
+                                                    <div id="notify_img" class="col-md-2 col-12 mb-md-0 mb-2">
                                                         @if(isset($notification->data['image_url']))
                                                             <img src="{{$notification->data['image_url']}}" class="product_img" alt="Jersey Swap">
                                                         @endif
                                                     </div>
-                                                    <div class="col-md-4 col-12 mb-md-0 mb-2">
+                                                    <div class="col-md-6 col-12 mb-md-0 mb-2">
                                                         {{$notification->data['message']}}
                                                     </div>
                                                     <div class="col-md-4 col-12 text-end">

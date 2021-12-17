@@ -16,9 +16,9 @@ class ListingCreated extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        
+        $this->image_url = $data;
     }
 
     /**
@@ -54,11 +54,13 @@ class ListingCreated extends Notification
      */
     public function toArray($notifiable)
     {
+        
         return [
             'type' => 'listing',
             'message' => 'Congrats! You just created a listing on Jersey Swap!',
             'url' => null,
-            'url_text' => null
+            'url_text' => null,
+            'image_url'=> $this->image_url
         ];
     }
 }
