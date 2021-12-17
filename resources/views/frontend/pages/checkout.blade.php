@@ -292,16 +292,16 @@
             flag = false;
             $("#zipcode-message").html("Zip Code Required!");
         }
-        else{
-            if(isUSAZipCode($("#zipcode").val())){
-                $("#zipcode-message").html("Invalid Zip Code!");
-                $("#zipcode").addClass('is-invalid');
-                flag = false;
-            }
-            else{
-                $("#zipcode").removeClass('is-invalid');
-            }
-        }
+        // else{
+        //     if(isUSAZipCode($("#zipcode").val())){
+        //         $("#zipcode-message").html("Invalid Zip Code!");
+        //         $("#zipcode").addClass('is-invalid');
+        //         flag = false;
+        //     }
+        //     else{
+        //         $("#zipcode").removeClass('is-invalid');
+        //     }
+        // }
         return flag;
     }
     cardButton.addEventListener('click', async (e) => {
