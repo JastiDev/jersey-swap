@@ -233,8 +233,8 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    const stripe = Stripe("{{env('STRIPE_KEY','pk_live_51JMJCNLaRKsO1rdUaYMI4zbBHPssGkbtMFsbtGzAEwzcFZzZfPuFTxu37UDy2oy6hVHZdhRLlB1hdJZktcIlpZrl00RVv5kmjq')}}");
-    // const stripe = Stripe("{{env('STRIPE_KEY','pk_test_51JMJCNLaRKsO1rdUIvC4wtL5UHKd23TNkDVB28r9n2Pa9KtjDMwO9fQOEsD42Skh6yAfg6BCQsMoTGyJBvoTDLV400VtyPWbEh')}}");
+    // const stripe = Stripe("{{env('STRIPE_KEY','pk_live_51JMJCNLaRKsO1rdUaYMI4zbBHPssGkbtMFsbtGzAEwzcFZzZfPuFTxu37UDy2oy6hVHZdhRLlB1hdJZktcIlpZrl00RVv5kmjq')}}");
+    const stripe = Stripe("{{env('STRIPE_KEY','pk_test_51JMJCNLaRKsO1rdUIvC4wtL5UHKd23TNkDVB28r9n2Pa9KtjDMwO9fQOEsD42Skh6yAfg6BCQsMoTGyJBvoTDLV400VtyPWbEh')}}");
 
     var flag = false;
 
@@ -291,6 +291,7 @@
             if(isUSAZipCode($("#zipcode").val())){
                 $("#zipcode-message").html("Invalid Zip Code!");
                 $("#zipcode").addClass('is-invalid');
+                flag = false;
             }
             else{
                 $("#zipcode").removeClass('is-invalid');

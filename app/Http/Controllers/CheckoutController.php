@@ -245,6 +245,7 @@ class CheckoutController extends Controller
         $notification_text = [
             'type' => 'lister',
             'url'  => url('listing/'.$listing->slug), 'url_text' => 'Go to listing',
+            'image_url'  => url('/'.$listing->product_img),
             'message' => 'You have successfully paid your invoice!'
         ];
         $user = Auth::user();
@@ -258,6 +259,7 @@ class CheckoutController extends Controller
             $notification_text = [
                 'type' => 'offerMaker',
                 'url'  => url('listing/'.$listing->slug), 'url_text' =>'Pay Invoice',
+                'image_url'  => url('/'.$listing->product_img),
                 'message' => $user->username." has accepted your offer. Pay your invoice to start the trade!"
             ];
             $user= User::find($data['offerMaker']);

@@ -59,7 +59,8 @@ class InvoicePaid extends Notification
             'type' => $this->data['type'],
             'message' => $this->data['message'],
             'url' => $this->data['url'] ?? null,
-            'url_text' => $this->data['url_text'] ?? null
+            'url_text' => $this->data['url_text'] ?? null,
+            'image_url' => $this->data['image_url'] ?? null
         ];
     }
 }
