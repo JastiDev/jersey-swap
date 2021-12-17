@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h1>Jersey Exchange!</h1>
-                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, Sell, and Trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys on desktop, iPhone, and Android.
+                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, Sell, and Trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
                     </p>
                     <a href="{{url('exchange')}}" class="btn btn-primary">Start Exchange</a>
                 </div>
@@ -127,7 +127,7 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <img src="assets/images/icons/add-user.png" class="mb-2" alt="Signup">
-                            <h5 class="card-title">Sign up</h5>
+                            <h5 class="card-title">Sign Up</h5>
                             <p class="card-text">Users will need to complete the registration process.</p>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <img src="assets/images/icons/confirmation.png" class="mb-2" alt="Confirmation">
-                            <h5 class="card-title">Collect it</h5>
+                            <h5 class="card-title">Collect It</h5>
                             <p class="card-text">Complete your trade or purchase and swap again.</p>
                         </div>
                     </div>

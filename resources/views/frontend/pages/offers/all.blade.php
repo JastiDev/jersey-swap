@@ -30,8 +30,9 @@
                             <div class="table-responsive">
                                 <table class="table table-hover w-100" style="text-align:center;">
                                     <thead>
-                                        <td>Product</td>
-                                        <td>Attached</td>
+                                        <td>Listing</td>
+                                        <td>Trade</td>
+                                        <td>Username</td>
                                         <td>Amount</td>
                                     </thead>
                                     <tbody id="table-data-body">
@@ -73,12 +74,16 @@
                             console.log(result);
                             result.offers.forEach((item)=>{
                                 var tr = document.createElement('tr');
+
                                 {{-- Creating First Column --}}
                                 var td = document.createElement('td');
+                                var imgA = document.createElement('a');
+                                imgA.setAttribute('href', "{{url('/listing')}}/" + item.slug);
                                 var img = document.createElement('img');
                                 img.classList.add('product_img');
                                 img.setAttribute('src',base_url+'/'+item.product_img);
-                                td.append(img);
+                                imgA.append(img);
+                                td.append(imgA);
 
                                 tr.appendChild(td);
 
@@ -99,6 +104,13 @@
                                         td.append(imgA);
                                     });
                                 }
+                                tr.appendChild(td);
+
+                                {{-- Creating Third Column --}}
+                                td = document.createElement('td');
+                                td.innerHTML="<span class='text-center'>"+item.username+"</span>";
+                                tr.appendChild(td);
+
                                 tr.appendChild(td);
                                 
                                 {{-- Creating Fourth Column --}}

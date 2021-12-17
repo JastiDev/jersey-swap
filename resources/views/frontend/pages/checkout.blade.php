@@ -75,7 +75,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <label for="phone" class="form-label">Phone</span></label>
                                             @if(auth()->user()->phone!==null)
                                             <input type="phone" class="form-control" id="phone" placeholder="Enter Phone Number" value="{{auth()->user()->phone}}" required="" readonly="">
@@ -86,8 +86,13 @@
                                             <div class="invalid-feedback">
                                                 Please enter a valid phone number.
                                             </div>
-                                        </div>
+                                        </div> -->
                                         
+                                        <div class="col-12">
+                                            <label for="transaction" class="form-label">Transaction</span></label>
+                                            <input type="text" class="form-control" id="text" placeholder="transaction" value="${{$prices['security']+$prices['offer']}}" required="" readonly="">
+                                        </div>
+
                                         <div class="col-12">
                                             <label for="shipping_address" class="form-label">Shipping Address</label>
                                             <input type="text" class="form-control" id="shipping_address" placeholder="1234 Main St" name="shipping_address" required>
@@ -266,10 +271,10 @@
             $("#l_name").addClass('is-invalid');
             flag = false;
         }
-        if($("#phone").val()==""){
-            $("#phone").addClass('is-invalid');
-            flag = false;
-        }
+        // if($("#phone").val()==""){
+        //     $("#phone").addClass('is-invalid');
+        //     flag = false;
+        // }
         if($("#shipping_address").val()==""){
             $("#shipping_address").addClass('is-invalid');
             flag = false;

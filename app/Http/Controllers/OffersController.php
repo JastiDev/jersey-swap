@@ -135,13 +135,25 @@ class OffersController extends Controller
     public function get_by_status(Request $request){
 
         $user_id = Auth::id();
-        $offers = Offers::where(['posted_by'=>$user_id, 'offer_status'=>$request->status])->orderBy('id','DESC')->get();
+        if($request->status=='posted'){
+            $offers = Offers::where(function($query) {
+                $query->where('offer_status', 'posted')
+                    ->orWhere('offer_status' , 'buyRequest');
+            })
+            ->where('posted_by', $user_id)
+            ->orderBy('id','DESC')
+            ->get();
+        }else {
+            $offers = Offers::where(['posted_by'=>$user_id, 'offer_status'=>$request->status])->orderBy('id','DESC')->get();
+        }
         
         $i=0;
         while($i<count($offers)){
             $listing = Listing::find($offers[$i]->listing_id);
             $offers[$i]->product_img = $listing->product_img;
             $offers[$i]->product_title = $listing->product_title;
+            $user = User::findOrFail($listing->posted_by);
+            $offers[$i]->username = $user->username;
             $offers[$i]->slug = $listing->slug;
             $offers[$i]->gallery = OfferGallery::where('offer_id',$offers[$i]->id)->get();
             $i++;
