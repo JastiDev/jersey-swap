@@ -96,8 +96,9 @@ class CheckoutController extends Controller
              */
             $listing->update([
                 'status' => 'closed'
-            ]); $offer->update([
-                'status' => 'closed'
+            ]); 
+            $offer->update([
+                'offer_status' => 'closed'
             ]);
             $deal_id = $this->dealMaker([
                 'listing_id' => $listing->id,

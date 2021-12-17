@@ -78,7 +78,7 @@
                                 {{-- Creating First Column --}}
                                 var td = document.createElement('td');
                                 var imgA = document.createElement('a');
-                                imgA.setAttribute('href', "{{url('/listing')}}/" + item.slug);
+                                imgA.setAttribute('href', "{{url('/exchange')}}/" + item.slug);
                                 var img = document.createElement('img');
                                 img.classList.add('product_img');
                                 img.setAttribute('src',base_url+'/'+item.product_img);
