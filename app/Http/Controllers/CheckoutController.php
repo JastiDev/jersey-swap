@@ -181,7 +181,8 @@ class CheckoutController extends Controller
                 'type' => 'tracking',
                 'message' => 'There is a new update available for the tracking of the trade.',
                 'url' => url('listing/'.$listing->slug),
-                'url_text' => 'Go to Listing'
+                'url_text' => 'Go to Listing',
+                'image_url' => url('listing/'.$listing->product_img)
             ];
             try {
                 $user->notify(new TrackingNotification($data));

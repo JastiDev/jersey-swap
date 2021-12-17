@@ -79,7 +79,8 @@ class ADDeals extends Controller
             'type' => 'completed',
             'message' => 'Hooray! Your trading status has been changed to completed. You can leave your feedback now!',
             'url' => url('listing/'.$listing->slug),
-            'url_text' => 'Give Feedback'
+            'url_text' => 'Give Feedback',
+            'url' => url('listing/'.$listing->product_img)
         ];
         try {
             $user->notify(new DealNotification($data));
@@ -113,7 +114,8 @@ class ADDeals extends Controller
             'type' => 'tracking',
             'message' => 'There is a new update available for the tracking of the trade.',
             'url' => url('listing/'.$listing->slug),
-            'url_text' => 'Go to Listing'
+            'url_text' => 'Go to Listing',
+            'image_url' => url('listing/'.$listing->product_img)
         ];
         try {
             $user->notify(new TrackingNotification($data));
@@ -158,7 +160,8 @@ class ADDeals extends Controller
             'type' => 'cancelled',
             'message' => 'Your trading status has been cancelled by the Jersey Swap Team!',
             'url' => url('listing/'.$listing->slug),
-            'url_text' => 'Go to Listing'
+            'url_text' => 'Go to Listing',
+            'url' => url('listing/'.$listing->product_img)
         ];
         try {
             $user->notify(new DealNotification($data));
