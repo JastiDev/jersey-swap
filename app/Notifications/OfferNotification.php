@@ -59,7 +59,7 @@ class OfferNotification extends Notification
             'message' => $this->offer['message'],
             'url' => $this->offer['url'] ?? null,
             'url_text' => $this->offer['url_text'] ?? null,
-            'image_url' => $this->data['image_url'] ?? null
+            'image_url' => $this->data['image_url']
         ];
     }
 }
