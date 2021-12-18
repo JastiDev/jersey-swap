@@ -111,7 +111,7 @@ class CheckoutController extends Controller
                 $data = [
                     'type'=> 'declined',
                     'message' => $user->username.' has declined your offer!',
-                    'image_url'  => url('/'.$listing->product_img),
+                    'image_url' => url('/'.$listing->product_img),
                 ];
                 try {
                     $user_noti->notify(new OfferNotification($data));
@@ -203,7 +203,7 @@ class CheckoutController extends Controller
                 'message' => 'There is a new update available for the tracking of the trade.',
                 'url' => url('listing/'.$listing->slug),
                 'url_text' => 'Go to Listing',
-                'image_url' => url('listing/'.$listing->product_img)
+                'image_url' => url('/'.$listing->product_img)
             ];
             try {
                 $user->notify(new TrackingNotification($data));
@@ -268,7 +268,7 @@ class CheckoutController extends Controller
         $notification_text = [
             'type' => 'lister',
             'url'  => url('listing/'.$listing->slug), 'url_text' => 'Go to listing',
-            'image_url'  => url('/'.$listing->product_img),
+            'image_url' => url('/'.$listing->product_img),
             'message' => 'You have successfully paid your invoice!'
         ];
         $user = Auth::user();
@@ -282,7 +282,7 @@ class CheckoutController extends Controller
             $notification_text = [
                 'type' => 'offerMaker',
                 'url'  => url('listing/'.$listing->slug), 'url_text' =>'Pay Invoice',
-                'image_url'  => url('/'.$listing->product_img),
+                'image_url' => url('/'.$listing->product_img),
                 'message' => $user->username." has accepted your offer. Pay your invoice to start the trade!"
             ];
             $user= User::find($data['offerMaker']);

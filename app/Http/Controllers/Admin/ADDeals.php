@@ -80,7 +80,7 @@ class ADDeals extends Controller
             'message' => 'Hooray! Your trading status has been changed to completed. You can leave your feedback now!',
             'url' => url('listing/'.$listing->slug),
             'url_text' => 'Give Feedback',
-            'url' => url('listing/'.$listing->product_img)
+            'image_url' => url('/'.$listing->product_img)
         ];
         try {
             $user->notify(new DealNotification($data));
@@ -115,7 +115,7 @@ class ADDeals extends Controller
             'message' => 'There is a new update available for the tracking of the trade.',
             'url' => url('listing/'.$listing->slug),
             'url_text' => 'Go to Listing',
-            'image_url' => url('listing/'.$listing->product_img)
+            'image_url' => url('/'.$listing->product_img)
         ];
         try {
             $user->notify(new TrackingNotification($data));

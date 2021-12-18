@@ -70,6 +70,7 @@
                             status: status
                         },
                         success: function(result){
+                            if(!result.listings.data) return;
                             result.listings.data.forEach((item)=>{
                                 var tr = document.createElement('tr');
                                 {{-- Creating First Column --}}

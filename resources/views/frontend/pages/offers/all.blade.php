@@ -71,7 +71,7 @@
                             status: status
                         },
                         success: function(result){
-                            console.log(result);
+                            if(!result.offers) return;
                             result.offers.forEach((item)=>{
                                 var tr = document.createElement('tr');
 
