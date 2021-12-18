@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\ListingGallery;
 use App\Models\Deals;
 use App\Models\Offers;
-use App\Models\OfferGallery;
+use App\Models\User;
 use App\Models\Invoices;
 use App\Notifications\ListingCreated;
 use App\Notifications\ListingNotification;
-use App\Models\User;
+use App\Notifications\OfferNotification;
 use Throwable;
 
 class ListingController extends Controller
@@ -200,7 +200,8 @@ class ListingController extends Controller
         $listing = Listing:: findOrFail($request->listing);
         $listing->status = 'cancelled';
         $listing->save();
-
+        
+        $this->removeOffers($listing->id, $listing->product_img);
         $data = [
             'type' => 'cancelled',
             'message' => 'Your listing has been cancelled.',
@@ -227,6 +228,8 @@ class ListingController extends Controller
         $listing->status = 'cancelled';
         $listing->save();
 
+        $this->removeOffers($listing->id, $listing->product_img);
+
         $data = [
             'type' => 'cancelled',
             'message' => 'Your listing has been cancelled by the admin!',
@@ -245,4 +248,31 @@ class ListingController extends Controller
         return back()
                ->with('success','Listing cancelled successfully!');
     }
+
+    /**
+     * Remove offers when the listing is deleted.
+     */
+    private function removeOffers($listing_id, $product_img){
+        
+        $offers = Offers::where('listing_id', $listing_id)->get();
+
+        $user = Auth::user();
+        $i=0;
+        while($i<count($offers)){
+            $offers[$i]->offer_status="cancelled";
+            $offers[$i]->save();        
+            $user_noti = User::findOrFail($offers[$i]->posted_by);
+            $data = [
+                'type'=> 'declined',
+                'message' => $user->username.' has declined your offer!',
+                'image_url' => url('/'.$product_img),
+            ];
+            try {
+                $user_noti->notify(new OfferNotification($data));
+            }catch (Throwable $e) {
+                report($e);
+            }
+            $i++;
+        }
+   }
 }
