@@ -102,7 +102,8 @@ class CheckoutController extends Controller
                 'offer_status' => 'closed'
             ]);
             $offers = Offers::where([['listing_id', '=', $listing->id], ['id',  '!=',$request->offer_id]])->get();
-
+            
+            $i=0;
             while($i<count($offers)){
                 $offers[$i]->offer_status="cancelled";
                 $offers[$i]->save();        
