@@ -128,11 +128,6 @@
 
                                 $("#table-data-body").append(tr);
                             });
-                            //console.log("###########"+result.listing.next_page_url);
-                            page_url = result.offers.next_page_url;
-                            if(page_url==null){
-                                $("#load-more").fadeOut();
-                            }
                         },
                         error: function (request, status, error) {
                             $('#form-alert').addClass('alert-danger');

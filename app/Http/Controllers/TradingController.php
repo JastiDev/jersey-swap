@@ -17,34 +17,18 @@ class TradingController extends Controller
             'status' => 'required'
         ]);
         $user = Auth::id();
-        $listings_by_me = DB::table('listing')
+        $listings = DB::table('listing')
                     ->leftJoin('deals','listing.id','deals.listing_id')
                     ->leftJoin('users','listing.posted_by','users.id')
                     ->leftJoin('offers','deals.offer_id','offers.id')
                     ->select('listing.*','users.username','users.f_name','users.l_name' ,'deals.created_at')
+                    ->where(function($query) use ($user) {
+                        $query->where('listing.posted_by',$user)
+                            ->orWhere('offers.posted_by',$user);
+                    })
                     ->where('deals.deal_status',$request->status)
-                    ->where('listing.posted_by',$user)
-                    ->paginate(10);
-        $listings_by_someone = DB::table('listing')
-                    ->leftJoin('deals','listing.id','deals.listing_id')
-                    ->leftJoin('users','listing.posted_by','users.id')
-                    ->leftJoin('offers','deals.offer_id','offers.id')
-                    ->select('listing.*','users.username','users.f_name','users.l_name' ,'deals.created_at')
-                    ->where('deals.deal_status',$request->status)
-                    ->where('offers.posted_by',$user)
-                    ->paginate(10);
-        if($listings_by_me->total()>0 && $listings_by_someone->total()>0){
-            $listings = $listings_by_me->merge($listings_by_someone);
-        }
-        else if($listings_by_me->total()>0){
-            $listings = $listings_by_me;
-        }
-        else if($listings_by_someone->total()>0){
-            $listings = $listings_by_someone;
-        }
-        else{
-            $listings = [];
-        }
+                    ->orderBy('deals.id','DESC')
+                    ->get();
         return response()->json([
             'listings' => $listings
         ]);

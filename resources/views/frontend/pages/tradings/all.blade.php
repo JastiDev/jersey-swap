@@ -70,9 +70,9 @@
                             status: status
                         },
                         success: function(result){
-                            console.log(result.listings);
-                            if(!result.listings.data) return;
-                            result.listings.data.forEach((item)=>{
+                            console.log(result);
+                            if(!result.listings) return;
+                            result.listings.forEach((item)=>{
                                 var tr = document.createElement('tr');
                                 {{-- Creating First Column --}}
                                 var td = document.createElement('td');
@@ -99,11 +99,6 @@
 
                                 $("#table-data-body").append(tr);
                             });
-                            //console.log("###########"+result.listing.next_page_url);
-                            page_url = result.listings.next_page_url;
-                            if(page_url==null){
-                                $("#load-more").fadeOut();
-                            }
                         },
                         error: function (request, status, error) {
                             $('#form-alert').addClass('alert-danger');
