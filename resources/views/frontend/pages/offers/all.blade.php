@@ -77,7 +77,7 @@
 
                                 {{-- Creating First Column --}}
                                 var td = document.createElement('td');
-                                if(status == 'closed'){
+                                if(status == 'closed' || status == 'cancelled'){
                                     var img = document.createElement('img');
                                     img.classList.add('product_img');
                                     img.setAttribute('src',base_url+'/'+item.product_img);
