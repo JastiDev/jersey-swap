@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Invoices;
 use App\Models\InvoicesMeta;
 use App\Notifications\TrackingNotification;
+use App\Notifications\OfferNotification;
 use Illuminate\Support\Str;
 use Throwable;
 
@@ -100,6 +101,25 @@ class CheckoutController extends Controller
             $offer->update([
                 'offer_status' => 'closed'
             ]);
+            $offers = Offers::where([['listing_id', '=', $listing->id], ['id',  '!=',$request->offer_id]])->get();
+
+            while($i<count($offers)){
+                $offers[$i]->offer_status="cancelled";
+                $offers[$i]->save();        
+                $user_noti = User::findOrFail($offers[$i]->posted_by);
+                $data = [
+                    'type'=> 'declined',
+                    'message' => $user->username.' has declined your offer!',
+                    'image_url'  => url('/'.$listing->product_img),
+                ];
+                try {
+                    $user_noti->notify(new OfferNotification($data));
+                }catch (Throwable $e) {
+                    report($e);
+                }
+                $i++;
+            }
+            
             $deal_id = $this->dealMaker([
                 'listing_id' => $listing->id,
                 'offer_id' => $offer->id
