@@ -23,8 +23,12 @@
               </div>
               <div style="display: flex; flex-flow: row nowrap;">
                 <input id="chat_input" class="form-control" placeholder="Type a message and press Enter"/>
-                <i class="fa fa-paperclip fa-lg" aria-hidden="true" style="width: 38px; text-align: center; margin: auto;"></i>
-                <i class="fa fa-paper-plane fa-lg" aria-hidden="true" style="width: 38px; text-align: center; margin: auto;"></i>
+                <button type="button" class="btn">
+                  <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                </button>
+                <button id="sendBtn" type="button" class="btn">
+                  <i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
           </div>
@@ -168,6 +172,21 @@
                 $(this).val('');
                 console.log('{{auth()->id()}} sent ' + message_content);
             }
+        });
+        $('#sendBtn').click(function (e) {
+            if(sendTo==0) return;
+            console.log('its clicked...');
+            let message_content = $('#chat_input').val();
+            ws.send(
+                JSON.stringify({
+                    'type': 'chat',
+                    'from': '{{auth()->id()}}',
+                    'to': sendTo,
+                    'message_content': message_content
+                })
+            );
+            $('#chat_input').val('');
+            console.log('{{auth()->id()}} sent ' + message_content);
         });
     };
     ws.onerror = function (e) {
