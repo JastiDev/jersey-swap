@@ -6,7 +6,7 @@
    <section id="heading" class="mt-5">
      <div class="container">
           <div class="row" style="border: 1px solid gray; border-radius: 8px; height: 600px; margin-bottom: 10px;">
-            <div class="col-md-3" style="height: 100%; overflow-y: scroll; display: flex; flex-direction: column;">
+            <div class="col-md-3 user-list" style="height: 100%; overflow-y: scroll; display: flex; flex-direction: column;">
               <input id="search_input" class="form-control" placeholder="Type a username" style="margin-top: 8px;"/>
               <div id="search_result"></div>
               @foreach($user_list as $user)
@@ -17,8 +17,11 @@
                 </div>
               @endforeach
             </div>
-            <div class="col-md-9" style="height: 100%; padding: 4px; display: flex; flex-direction: column;">
-              <span id="chat_with" style="margin: 10px; font-weight: bold;"></span>
+            <div class="col-md-9 chat-box" style="height: 100%; padding: 4px; display: flex; flex-direction: column;">
+              <div class="d-flex align-items-center">
+                <i class="fa fa-arrow-left back-icon"></i>
+                <span id="chat_with" style="margin: 10px; font-weight: bold;"></span>
+              </div>
               <div id="chat_output" style="flex: 1; overflow-y: scroll; padding: 4px; margin: 4px; display: flex; flex-direction:column;">
               </div>
               <div style="display: flex; flex-flow: row nowrap;">
@@ -39,6 +42,7 @@
   <script>
     var sendTo=0;
     $(document).ready(function() {
+
       var userList = {!! json_encode($user_list) !!};
       console.log(userList);
       if(userList.length>0){
@@ -49,6 +53,9 @@
     })
 
     function onClickUser(userName, userId){
+      
+      $(".chat-box").removeClass("close-list");
+      $(".user-list").addClass("close-list");
       $("#chat_with").text("Chat with "+ userName);
       var chatOutput = "";
       var message_with= parseInt(userId);
@@ -144,9 +151,21 @@
             }
         });
       });
-    let ws = new WebSocket('ws://jerseyswaponline.com:8090');
-    console.log({{auth()->id()}});
-    ws.onopen = function (e) {
+    
+    $(".back-icon").click(function() {
+      $(".chat-box").addClass("close-list");
+      $(".user-list").removeClass("close-list");
+      
+    })
+    
+      let ws = new WebSocket('ws://localhost:8090');
+    
+    
+      console.log({{auth()->id()}});
+    
+    
+    
+      ws.onopen = function (e) {
         // Connect to websocket
         console.log('Connected to websocket');
         ws.send(

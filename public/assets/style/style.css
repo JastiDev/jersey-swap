@@ -139,6 +139,16 @@ footer .footer-top {
     footer .footer-top {
         padding: 20px;
     }
+    .close-list {
+        display: none !important;
+    }
+    .back-icon {
+        display: block !important;
+    }
+}
+
+.back-icon {
+    display: none;
 }
 
 footer .footer-top .row > div {
