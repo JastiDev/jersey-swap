@@ -144,7 +144,7 @@
             }
         });
       });
-    let ws = new WebSocket('ws://localhost:8090');
+    let ws = new WebSocket('ws://jerseyswaponline.com:8090');
     console.log({{auth()->id()}});
     ws.onopen = function (e) {
         // Connect to websocket
