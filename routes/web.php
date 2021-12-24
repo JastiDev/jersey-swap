@@ -20,6 +20,7 @@ use  App\Http\Controllers\UserDashboardController;
 use  App\Http\Controllers\ListingController;
 use  App\Http\Controllers\NotificationController;
 use App\Http\Controllers\BannedController;
+use App\Http\Controllers\WebSocketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +67,6 @@ Route::get('banned',[BannedController::class,'banned']);
 //Route::get('/users/{username}/offers', [PagesController::class, 'contact'])->name('contact');
 //Route::get('/users/{username}/start-a-trade', [PagesController::class, 'contact'])->name('start-a-trade');
 
-
-
-
 /**
  * Routes for Users
  */
@@ -94,6 +92,10 @@ Route::middleware(['auth', 'checkuserrole:user','checkbanned'])->group(function 
     Route::post('/listing/cancel', [ListingController::class, 'cancel']);
     Route::get('/listing/edit/{id}', [ListingController::class, 'edit']);
     Route::post('/listing/update', [ListingController::class, 'update']);
+
+    Route::get('/messages', [WebSocketController::class, 'index']);
+    Route::post('/messages/get_by_user', [WebSocketController::class, 'get_by_user']);
+    Route::post('/messages/get_users', [WebSocketController::class, 'get_users']);
 
     Route::post('/offer/post', [OffersController::class, 'store']);
 
