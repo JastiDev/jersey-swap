@@ -12,7 +12,7 @@
               @foreach($user_list as $user)
                 <div style="display: flex; flex-flow: row nowrap; margin-top: 8px; cursor: pointer;"
                 onclick="onClickUser('{{$user->username}}', '{{$user->id}}')">
-                  <img src="{{ asset($user->profile_picture) }}" class="table-user-thumb" alt="">
+                  <img src="{{ asset($user->profile_picture) }}" style="width:64px; height:64px; border-radius: 32px;" alt="">
                   <div style="display: flex; align-items: center; margin-left: 4px;">{{$user->username}}</div>
                 </div>
               @endforeach
@@ -136,8 +136,8 @@
                   });
 
                   var img = document.createElement('img');
-                  img.classList.add('table-user-thumb');
                   img.setAttribute('src',base_url+'/'+item.profile_picture);
+                  img.style.cssText = "width:64px; height: 64px; border-radius: 32px;";
                   userDiv.append(img);
 
                   var usernameDiv = $("<div style='display: flex; align-items: center; margin-left: 4px;'>"+item.username+"</div>");
