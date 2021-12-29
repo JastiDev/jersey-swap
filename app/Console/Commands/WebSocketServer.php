@@ -38,11 +38,10 @@ class WebSocketServer extends Command
     /**
      * Execute the console command.
      *
-     * @return int
+     * @return mixed
      */
     public function handle()
     {
-        // return Command::SUCCESS;
         $server = IoServer::factory(
              new HttpServer(
                  new WsServer(

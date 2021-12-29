@@ -24,15 +24,26 @@
               </div>
               <div id="chat_output" style="flex: 1; overflow-y: scroll; padding: 4px; margin: 4px; display: flex; flex-direction:column;">
               </div>
-              <div style="display: flex; flex-flow: row nowrap;">
-                <input id="chat_input" class="form-control" placeholder="Type a message and press Enter"/>
-                <button type="button" class="btn">
-                  <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
-                </button>
-                <button id="sendBtn" type="button" class="btn">
-                  <i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i>
-                </button>
-              </div>
+                <div class="mb-3 text-center">
+                    <div id="img-gallery" class="row g-3 img-gallery-uploader">
+                        
+                    </div>
+                </div>
+                <div style="display: flex; flex-flow: row nowrap;">
+                  <input id="chat_input" class="form-control" style="z-index: 1000;" placeholder="Type a message and press Enter"/>
+                  
+                  <label for="product_photos">
+                      <button type="button" id="uitp_gallery" class="btn">
+                        <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                      </button>
+                  </label>
+                  <div style="visibility:hidden; width: 0">
+                      <input type="file" id='product_photos' name="file" accept="image/*">
+                  </div>
+                  <button id="sendBtn" type="submit" class="btn">
+                    <i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i>
+                  </button>
+                </div>
             </div>
           </div>
       </div>
@@ -44,12 +55,10 @@
     $(document).ready(function() {
 
       var userList = {!! json_encode($user_list) !!};
-      console.log(userList);
       if(userList.length>0){
         sendTo= userList[0].id;
         onClickUser(userList[0].username, userList[0].id);
       } 
-      $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 1000);
     })
 
     function onClickUser(userName, userId){
@@ -59,7 +68,6 @@
       $("#chat_with").text("Chat with "+ userName);
       var chatOutput = "";
       var message_with= parseInt(userId);
-      console.log(message_with);
       sendTo= message_with;
       $.ajaxSetup({
           headers: {
@@ -74,6 +82,17 @@
           },
           success: function(result){
               result.messages.forEach((item)=>{
+                  var isImg = item.message_content.slice(0, 6) == "is_img" ? true : false;
+
+                  var img = document.createElement('img');
+                  if(isImg) img.setAttribute('src',"{{url('/storage/messages')}}/"+item.message_content);
+                  
+                  var imgA = document.createElement('a');
+                  if(isImg){
+                    imgA.setAttribute('href', "{{url('/storage/messages')}}/" + item.message_content);
+                    imgA.setAttribute('target', '_blank');
+                    imgA.append(img);
+                  }
 
                   var span = document.createElement('span');
                   span.innerHTML = item.message_content;
@@ -84,20 +103,23 @@
                   var month = new Intl.DateTimeFormat('en-US', options).format(date);
                   dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
-                  if(item.sent_from == message_with){
+                  if(item.sent_from == message_with){ // if other sent me.
                     span.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content;';
                     dateSpan.style.cssText = 'margin-top:4px; color: grey; font-size: small;';
+                    img.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
+                    imgA.style.cssText = 'margin-right: auto;';
                   }else{
                     span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
                     dateSpan.style.cssText = 'text-align: right; margin-top:4px; color: grey; font-size: small;';
+                    img.style.cssText = 'background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
+                    imgA.style.cssText = 'margin-left: auto;';
                   }
 
-
-
                   $("#chat_output").append(dateSpan);
-                  $("#chat_output").append(span);
-              });
-              $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 1000);
+                  if(isImg)$("#chat_output").append(imgA);
+                  else $("#chat_output").append(span);
+                });
+                $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 500);
 
           },
           error: function (request, status, error) {
@@ -131,7 +153,6 @@
                   var userDiv = $("<div style='display: flex; flex-flow: row nowrap; margin-top: 8px; cursor: pointer;'></div>");
                   
                   userDiv.click(function() {
-                    console.log("userdiv clicked...");
                     onClickUser(item.username, item.id);
                   });
 
@@ -147,7 +168,7 @@
               });
             },
             error: function (request, status, error) {
-              console.log(error);
+              console.error(error);
             }
         });
       });
@@ -155,17 +176,13 @@
     $(".back-icon").click(function() {
       $(".chat-box").addClass("close-list");
       $(".user-list").removeClass("close-list");
-      
     })
+
+    let ws = new WebSocket('ws://localhost:8090');
+  
+    console.log({{auth()->id()}});
     
-      let ws = new WebSocket('ws://54.175.113.46:8090');
-    
-    
-      console.log({{auth()->id()}});
-    
-    
-    
-      ws.onopen = function (e) {
+    ws.onopen = function (e) {
         // Connect to websocket
         console.log('Connected to websocket');
         ws.send(
@@ -177,34 +194,47 @@
 
         // Bind onkeyup event after connection
         $('#chat_input').on('keyup', function (e) {
-            if(sendTo==0) return;
+            if(sendTo==0 || $('#chat_input').val() == "") return;
+            let img_str = '';
+            let message_content = $(this).val();
+            $('#img-gallery').children().each(function () {
+              img_str += $(this).children().children("input").val() + ":::";
+            });
+            if((img_str.length<1 && message_content=='') || sendTo==0) return;
             if (e.keyCode === 13 && !e.shiftKey) {
-                let message_content = $(this).val();
                 ws.send(
                     JSON.stringify({
                         'type': 'chat',
                         'from': '{{auth()->id()}}',
                         'to': sendTo,
-                        'message_content': message_content
+                        'message_content': message_content,
+                        'images_str':img_str
                     })
                 );
                 $(this).val('');
+                $('#img-gallery').empty();
                 console.log('{{auth()->id()}} sent ' + message_content);
             }
         });
         $('#sendBtn').click(function (e) {
-            if(sendTo==0) return;
-            console.log('its clicked...');
             let message_content = $('#chat_input').val();
+            let img_str = '';
+            $('#img-gallery').children().each(function () {
+              img_str += $(this).children().children("input").val() + ":::";
+            });
+            if((img_str.length<1 && message_content=='') || sendTo==0) return;
             ws.send(
                 JSON.stringify({
                     'type': 'chat',
                     'from': '{{auth()->id()}}',
                     'to': sendTo,
-                    'message_content': message_content
+                    'message_content': message_content,
+                    'images_str':img_str
                 })
             );
             $('#chat_input').val('');
+            $('#img-gallery').empty();
+            
             console.log('{{auth()->id()}} sent ' + message_content);
         });
     };
@@ -243,6 +273,39 @@
 
                 $('#chat_output').append(dateSpan); // Append the new message received
                 $('#chat_output').append(span); // Append the new message received
+                $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 1000); // Scroll the chat output div
+                console.log("Received " + json.msg);
+                break;
+
+            case 'img':
+                var img = document.createElement('img');
+                img.setAttribute('src',"{{url('/storage/messages')}}/"+json.msg);
+                
+                var imgA = document.createElement('a');
+                imgA.setAttribute('href', "{{url('/storage/messages')}}/" + json.msg);
+                imgA.setAttribute('target', '_blank');
+                imgA.append(img);
+
+                var dateSpan = document.createElement('span');
+                var dateNow = Date.now();
+                var date = new Date(dateNow);
+
+                var options = { month: 'short'};
+                var month = new Intl.DateTimeFormat('en-US', options).format(date);
+                dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
+
+                if(json.from == 'me'){
+                  img.style.cssText = 'background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:200px; margin-left: auto';
+                  imgA.style.cssText = 'margin-left: auto;';
+                  dateSpan.style.cssText = 'text-align: right; margin-top:4px; color: grey; font-size: small;';
+                }else{
+                  imgA.style.cssText = 'margin-right: auto;';
+                  img.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
+                  dateSpan.style.cssText = 'margin-top:4px; color: grey; font-size: small;';
+                }
+
+                $('#chat_output').append(dateSpan); // Append the new message received
+                $('#chat_output').append(imgA); // Append the new message received
                 $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 1000); // Scroll the chat output div
                 console.log("Received " + json.msg);
                 break;

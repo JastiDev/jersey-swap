@@ -9,8 +9,12 @@ use SplObjectStorage;
 use App\Models\Messages;
 use App\Models\User;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
+use Throwable;
 
 /**
  * @author Rohit Dhiman | @aimflaiims
@@ -127,35 +131,101 @@ class WebSocketController implements MessageComponentInterface
         $resource_id = $from->resourceId;
         $data = json_decode($data);
         $type = $data->type;
+
         switch ($type) {
             case 'chat':
                 $message_content = $data->message_content;
-                $response_from = "<span class='d-flex flex-column-reverse' style='text-align:right; background: #dbf1ff;'> $message_content <span style='color: grey;'>" . date('Y-m-d h:i a') . "</span></span><br><br>";
-                $response_to = "<span class='d-flex flex-column-reverse' style='background: #f2f6f9;'> $message_content <span style='color: grey;'>" . date('Y-m-d h:i a') . "</span></span><br><br>";
-                // Output
-                $from->send(json_encode([
-                    "type" => $type,
-                    "msg" => $message_content,
-                    "from" => "me"
-                ]));
+                $images_str = $data->images_str;
+                var_dump($from);
 
-                foreach ($this->clients as $client) {
-                    if ($from != $client) {
-                        $client->send(json_encode([
-                            "type" => $type,
-                            "msg" => $message_content,
-                            "from" => "other"
-                        ]));
-                    }
+                if(strlen($images_str)>0){ //if image is attached.
+                  $images_arr =explode(':::', $images_str);
+                  $temp= array_pop($images_arr);
+
+                  foreach($images_arr as $image){
+                      $base64_image = $image; // your base64 encoded     
+                      @list(, $file_data) = explode(';', $base64_image);
+                      @list(, $img_data) = explode(',', $file_data); 
+                      $imageName = 'is_img'.time().Str::random(10).'.'.'png'; 
+                      Storage::disk('public')->put('messages/'.$imageName, base64_decode($img_data));
+                      try{
+                          app(Spatie\ImageOptimizer\OptimizerChain::class)->optimize(public_path('storage/messages/'.$imageName));
+                      }
+                      catch(Throwable $e){
+                      }
+
+                      $from->send(json_encode([
+                          "type" => "img",
+                          "msg" => $imageName,
+                          "from" => "me"
+                      ]));
+                      foreach ($this->clients as $client) {
+                          if ($from != $client) {
+                              $client->send(json_encode([
+                                  "type" => "img",
+                                  "msg" => $imageName,
+                                  "from" => "other"
+                              ]));
+                          }
+                      }
+                      Messages::create([
+                          'message_content' =>$imageName,
+                          'sent_from'=> $data->from,
+                          'sent_to'=> $data->to
+                      ]);
+                  }
+                  if(strlen($message_content)>0){ //if content is sent too.
+                      $from->send(json_encode([
+                          "type" => $type,
+                          "msg" => $message_content,
+                          "from" => "me"
+                      ]));
+
+                      foreach ($this->clients as $client) {
+                          if ($from != $client) {
+                              $client->send(json_encode([
+                                  "type" => $type,
+                                  "msg" => $message_content,
+                                  "from" => "other"
+                              ]));
+                          }
+                      }
+
+                      // Save to database
+                      $message = new Messages();
+                      $message->sent_from = $data->from;
+                      $message->sent_to = $data->to;
+                      $message->message_content = $message_content;
+                      $message->save();
+                  }
+
+                }else{
+                  $response_from = "<span class='d-flex flex-column-reverse' style='text-align:right; background: #dbf1ff;'> $message_content <span style='color: grey;'>" . date('Y-m-d h:i a') . "</span></span><br><br>";
+                  $response_to = "<span class='d-flex flex-column-reverse' style='background: #f2f6f9;'> $message_content <span style='color: grey;'>" . date('Y-m-d h:i a') . "</span></span><br><br>";
+                  // Output
+                  $from->send(json_encode([
+                      "type" => $type,
+                      "msg" => $message_content,
+                      "from" => "me"
+                  ]));
+
+                  foreach ($this->clients as $client) {
+                      if ($from != $client) {
+                          $client->send(json_encode([
+                              "type" => $type,
+                              "msg" => $message_content,
+                              "from" => "other"
+                          ]));
+                      }
+                  }
+
+                  // Save to database
+                  $message = new Messages();
+                  $message->sent_from = $data->from;
+                  $message->sent_to = $data->to;
+                  $message->message_content = $message_content;
+                  $message->save();
                 }
-
-                // Save to database
-                $message = new Messages();
-                $message->sent_from = $data->from;
-                $message->sent_to = $data->to;
-                $message->message_content = $message_content;
-                $message->save();
-
                 echo "Resource id $resource_id sent $message_content \n";
                 break;
         }
