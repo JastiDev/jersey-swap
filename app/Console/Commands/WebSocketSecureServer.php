@@ -49,8 +49,8 @@ class WebSocketSecureServer extends Command
             new Server('0.0.0.0:8091', $loop),
             $loop,
             array(
-                'local_cert'        => 'C:/xampp/apache/conf/ssl.crt/server.crt', // path to your cert
-                'local_pk'          => 'C:/xampp/apache/conf/ssl.key/server.key', // path to your server private key
+                'local_cert'        => '/opt/bitnami/letsencrypt/certificates/jerseyswaponline.com.crt', // path to your cert
+                'local_pk'          => '/opt/bitnami/letsencrypt/certificates/jerseyswaponline.com.key', // path to your server private key
                 'allow_self_signed' => FALSE, // Allow self signed certs (should be false in production)
                 'verify_peer' => FALSE
             )
