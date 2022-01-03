@@ -178,7 +178,7 @@
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('ws://localhost:8090');
+    let ws = new WebSocket('wss://54.175.113.46:8091');
   
     console.log({{auth()->id()}});
     
