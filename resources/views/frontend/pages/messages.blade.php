@@ -178,7 +178,7 @@
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('wss://localhost:8091');
+    let ws = new WebSocket('wss://jerseyswaponline.com:8091');
   
     console.log({{auth()->id()}});
     
