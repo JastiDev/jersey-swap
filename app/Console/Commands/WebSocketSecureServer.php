@@ -46,7 +46,7 @@ class WebSocketSecureServer extends Command
     {
         $loop   = Factory::create();
         $webSock = new SecureServer(
-            new Server('54.175.113.46:8091', $loop),
+            new Server('0.0.0.0:8091', $loop),
             $loop,
             array(
                 'local_cert'        => '/opt/bitnami/letsencrypt/certificates/jerseyswaponline.com.crt', // path to your cert
