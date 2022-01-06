@@ -46,11 +46,11 @@ class WebSocketSecureServer extends Command
     {
         $loop   = Factory::create();
         $webSock = new SecureServer(
-            new Server('0.0.0.0:443', $loop),
+            new Server('0.0.0.0:8091', $loop),
             $loop,
             array(
-                'local_cert'        => 'opt/bitnami/apache/conf/bitnami/certs/jerseyswaponline.com.crt', // path to your cert
-                'local_pk'          => 'opt/bitnami/apache/conf/bitnami/certs/jerseyswaponline.com.key', // path to your server private key
+                'local_cert'        => '/opt/bitnami/apache/conf/bitnami/certs/jerseyswaponline.com.crt', // path to your cert
+                'local_pk'          => '/opt/bitnami/apache/conf/bitnami/certs/jerseyswaponline.com.key', // path to your server private key
                 'allow_self_signed' => FALSE, // Allow self signed certs (should be false in production)
                 'verify_peer' => FALSE
             )
