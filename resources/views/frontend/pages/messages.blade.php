@@ -172,13 +172,13 @@
             }
         });
       });
-    
+
     $(".back-icon").click(function() {
       $(".chat-box").addClass("close-list");
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('wss://54.175.113.46:8091');
+    let ws = new WebSocket('wss://174.129.151.80:8091');
   
     console.log({{auth()->id()}});
     
