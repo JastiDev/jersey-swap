@@ -10,7 +10,6 @@ use React\EventLoop\Factory;
 use React\Socket\SecureServer;
 use React\Socket\Server;
 use App\Http\Controllers\WebSocketController;
-use Exception;
 
 class WebSocketSecureServer extends Command
 {
@@ -68,9 +67,5 @@ class WebSocketSecureServer extends Command
         );
 
         $loop->run();
-        echo 'started...............';
-        $webServer->on('error', function (Exception $e) {
-            echo 'Error' . $e->getMessage();
-        });
     }
 }
