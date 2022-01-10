@@ -7,6 +7,8 @@ use Ratchet\ConnectionInterface;
 use Exception;
 use SplObjectStorage;
 use App\Models\Messages;
+use App\Models\Rooms;
+use App\Models\RoomUsers;
 use App\Models\User;
 
 use Illuminate\Support\Facades\Storage;
@@ -22,31 +24,25 @@ use Throwable;
 class WebSocketController implements MessageComponentInterface
 {
     private $clients;
+    private $users;
+    private $userresources;
 
     public function __construct()
     {
         $this->clients = new SplObjectStorage;
+        $this->users = [];
+        $this->userresources = [];
     }
 
     public function index(){
       $my_id = Auth::id();
-      
-      $messages_to_me = DB::table('messages')
-                  ->leftJoin('users','sent_from','users.id')
+      $my_room_ids = DB::table('room_users')->where('user_id',$my_id)->pluck('room_id')->all();
+      $user_list = DB::table('room_users')
+                  ->leftJoin('users','user_id','users.id')
                   ->select('users.username', 'users.profile_picture', 'users.id')
-                  ->where('messages.sent_to',$my_id)
-                  ->orderBy('messages.id','DESC')
-                  ->groupBy('messages.sent_from')
+                  ->whereIn('room_id', $my_room_ids)
+                  ->where('user_id', '!=', $my_id)
                   ->get();
-      $messages_from_me = DB::table('messages')
-                  ->leftJoin('users','sent_to','users.id')
-                  ->select('users.username', 'users.profile_picture', 'users.id')
-                  ->where('messages.sent_from',$my_id)
-                  ->orderBy('messages.id','DESC')
-                  ->groupBy('messages.sent_to')
-                  ->get();
-      $user_list = $messages_to_me->merge($messages_from_me);
-      $user_list = $user_list->unique();
 
       return view('frontend.pages.messages',[
         'user_list' => $user_list
@@ -56,19 +52,39 @@ class WebSocketController implements MessageComponentInterface
     public function get_by_user(Request $request){
         $my_id = Auth::id();
         $message_with = (int)$request->message_with;
+        $my_room_ids = DB::table('room_users')->where('user_id',$my_id)->pluck('room_id')->all();
+        $room_user = DB::table('room_users')->where('user_id',$message_with)->whereIn('room_id', $my_room_ids)->first();
 
-        $messages = DB::table('messages')
-            ->where('sent_from', '=', $my_id)
-            ->where('sent_to', '=', $message_with)
-            ->orWhere(function ($query) use ($my_id, $message_with){
-              $query->where('sent_to', '=', $my_id)
-                    ->where('sent_from', '=', $message_with);
-            })
-            ->get();
-        
-        return response()->json([
-            'messages' => $messages
-        ]);
+        if($room_user == NULL){
+            $room = new Rooms();
+            $room->name = $my_id.'-'.$message_with;
+            $room->save();
+
+            $room_user_me = new RoomUsers();
+            $room_user_me->room_id = $room->id;
+            $room_user_me->user_id = $my_id;
+            $room_user_me->save();
+            
+            $room_user_other = new RoomUsers();
+            $room_user_other->room_id = $room->id;
+            $room_user_other->user_id = $message_with;
+            $room_user_other->save();
+
+            return response()->json([
+                'messages' => [],
+                'room_id' => $room->id
+            ]);
+
+        }else {
+          $messages = DB::table('messages')
+              ->where('room_id', '=', $room_user->room_id)
+              ->get();
+
+          return response()->json([
+              'messages' => $messages,
+              'room_id' => $room_user->room_id
+          ]);
+        }
     }
 
     public function get_users(Request $request){
@@ -93,12 +109,7 @@ class WebSocketController implements MessageComponentInterface
     {
         echo "Client connected " . $conn->resourceId . " \n";
         $this->clients->attach($conn);
-        foreach ($this->clients as $client) {
-            $client->send(json_encode([
-                "type" => "socket",
-                "msg" => "Total Connected: " . count($this->clients)
-            ]));
-        }
+        $this->users[$conn->resourceId] = $conn;
     }
 
     /**
@@ -136,7 +147,6 @@ class WebSocketController implements MessageComponentInterface
             case 'chat':
                 $message_content = $data->message_content;
                 $images_str = $data->images_str;
-                var_dump($from);
 
                 if(strlen($images_str)>0){ //if image is attached.
                   $images_arr =explode(':::', $images_str);
@@ -159,19 +169,22 @@ class WebSocketController implements MessageComponentInterface
                           "msg" => $imageName,
                           "from" => "me"
                       ]));
-                      foreach ($this->clients as $client) {
-                          if ($from != $client) {
-                              $client->send(json_encode([
-                                  "type" => "img",
-                                  "msg" => $imageName,
-                                  "from" => "other"
-                              ]));
+                  
+                      if ( isset($this->userresources[$data->to]) ) {
+                          foreach ($this->userresources[$data->to] as $key => $resourceId) {
+                              if ( isset($this->users[$resourceId]) ) {
+                                  $this->users[$resourceId]->send(json_encode([
+                                      "type" => "img",
+                                      "msg" => $imageName,
+                                      "from" => $data->from
+                                  ]));;
+                              }
                           }
                       }
                       Messages::create([
                           'message_content' =>$imageName,
                           'sent_from'=> $data->from,
-                          'sent_to'=> $data->to
+                          'room_id'=> $data->room_id
                       ]);
                   }
                   if(strlen($message_content)>0){ //if content is sent too.
@@ -180,53 +193,68 @@ class WebSocketController implements MessageComponentInterface
                           "msg" => $message_content,
                           "from" => "me"
                       ]));
-
-                      foreach ($this->clients as $client) {
-                          if ($from != $client) {
-                              $client->send(json_encode([
-                                  "type" => $type,
-                                  "msg" => $message_content,
-                                  "from" => "other"
-                              ]));
+                  
+                      if ( isset($this->userresources[$data->to]) ) {
+                          foreach ($this->userresources[$data->to] as $key => $resourceId) {
+                              if ( isset($this->users[$resourceId]) ) {
+                                  $this->users[$resourceId]->send(json_encode([
+                                      "type" => $type,
+                                      "msg" => $message_content,
+                                      "from" => $data->from
+                                  ]));;
+                              }
                           }
                       }
 
                       // Save to database
                       $message = new Messages();
                       $message->sent_from = $data->from;
-                      $message->sent_to = $data->to;
+                      $message->room_id = $data->room_id;
                       $message->message_content = $message_content;
                       $message->save();
                   }
 
-                }else{
-                  $response_from = "<span class='d-flex flex-column-reverse' style='text-align:right; background: #dbf1ff;'> $message_content <span style='color: grey;'>" . date('Y-m-d h:i a') . "</span></span><br><br>";
-                  $response_to = "<span class='d-flex flex-column-reverse' style='background: #f2f6f9;'> $message_content <span style='color: grey;'>" . date('Y-m-d h:i a') . "</span></span><br><br>";
+                }else{ //if image is NOT attached.
                   // Output
                   $from->send(json_encode([
                       "type" => $type,
                       "msg" => $message_content,
                       "from" => "me"
                   ]));
-
-                  foreach ($this->clients as $client) {
-                      if ($from != $client) {
-                          $client->send(json_encode([
-                              "type" => $type,
-                              "msg" => $message_content,
-                              "from" => "other"
-                          ]));
+                  
+                  if ( isset($this->userresources[$data->to]) ) {
+                      foreach ($this->userresources[$data->to] as $key => $resourceId) {
+                          if ( isset($this->users[$resourceId]) ) {
+                              $this->users[$resourceId]->send(json_encode([
+                                  "type" => $type,
+                                  "msg" => $message_content,
+                                  "from" => $data->from
+                              ]));;
+                          }
                       }
                   }
 
                   // Save to database
                   $message = new Messages();
                   $message->sent_from = $data->from;
-                  $message->sent_to = $data->to;
+                  $message->room_id = $data->room_id;
                   $message->message_content = $message_content;
                   $message->save();
                 }
                 echo "Resource id $resource_id sent $message_content \n";
+                break;
+            case 'socket':
+                if (isset($data->user_id)) {
+                    if (isset($this->userresources[$data->user_id])) {
+                        if (!in_array($from->resourceId, $this->userresources[$data->user_id]))
+                        {
+                            $this->userresources[$data->user_id][] = $from->resourceId;
+                        }
+                    }else{
+                        $this->userresources[$data->user_id] = [];
+                        $this->userresources[$data->user_id][] = $from->resourceId;
+                    }
+                }
                 break;
         }
     }
@@ -240,6 +268,18 @@ class WebSocketController implements MessageComponentInterface
     public function onError(ConnectionInterface $conn, Exception $e)
     {
         echo "Client left onError " . $conn->resourceId . " \n";
-        $conn->close();
+        // $conn->close();
+        
+        $this->clients->detach($conn);
+        echo "Connection {$conn->resourceId} has disconnected\n";
+        unset($this->users[$conn->resourceId]);
+
+        foreach ($this->userresources as &$userId) {
+            foreach ($userId as $key => $resourceId) {
+                if ($resourceId==$conn->resourceId) {
+                    unset( $userId[ $key ] );
+                }
+            }
+        }
     }
 }

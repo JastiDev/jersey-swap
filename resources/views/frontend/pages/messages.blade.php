@@ -10,8 +10,8 @@
               <input id="search_input" class="form-control" placeholder="Type a username" style="margin-top: 8px;"/>
               <div id="search_result"></div>
               @foreach($user_list as $user)
-                <div style="display: flex; flex-flow: row nowrap; margin-top: 8px; cursor: pointer;"
-                onclick="onClickUser('{{$user->username}}', '{{$user->id}}')">
+                <div style="display: flex; flex-flow: row nowrap; margin-top: 4px; cursor: pointer; padding:4px; border-radius: 4px;"
+                  onclick="onClickUser('{{$user->username}}', '{{$user->id}}')">
                   <img src="{{ asset($user->profile_picture) }}" style="width:64px; height:64px; border-radius: 32px;" alt="">
                   <div style="display: flex; align-items: center; margin-left: 4px;">{{$user->username}}</div>
                 </div>
@@ -51,10 +51,12 @@
 @endsection
 @section('custom-scripts')
   <script>
-    var sendTo=0;
+    var sendTo = 0;
+    var roomNum = 0;
+    var userList;
     $(document).ready(function() {
 
-      var userList = {!! json_encode($user_list) !!};
+      userList = {!! json_encode($user_list) !!};
       if(userList.length>0){
         sendTo= userList[0].id;
         onClickUser(userList[0].username, userList[0].id);
@@ -66,6 +68,13 @@
       $(".chat-box").removeClass("close-list");
       $(".user-list").addClass("close-list");
       $("#chat_with").text("Chat with "+ userName);
+
+      // $(".user-list>div").removeClass("user-selected");
+      // $(this).addClass("user-selected");
+
+      // $("#search_result").empty();
+      // $("#search_input").empty();
+
       var chatOutput = "";
       var message_with= parseInt(userId);
       sendTo= message_with;
@@ -81,47 +90,50 @@
               message_with: message_with
           },
           success: function(result){
-              result.messages.forEach((item)=>{
-                  var isImg = item.message_content.slice(0, 6) == "is_img" ? true : false;
+              console.log("result........", result);
+              roomNum = result.room_id;
+              if(result.messages.length > 0){
+                result.messages.forEach((item)=>{
+                    var isImg = item.message_content.slice(0, 6) == "is_img" ? true : false;
 
-                  var img = document.createElement('img');
-                  if(isImg) img.setAttribute('src',"{{url('/storage/messages')}}/"+item.message_content);
-                  
-                  var imgA = document.createElement('a');
-                  if(isImg){
-                    imgA.setAttribute('href', "{{url('/storage/messages')}}/" + item.message_content);
-                    imgA.setAttribute('target', '_blank');
-                    imgA.append(img);
-                  }
+                    var img = document.createElement('img');
+                    if(isImg) img.setAttribute('src',"{{url('/storage/messages')}}/"+item.message_content);
+                    
+                    var imgA = document.createElement('a');
+                    if(isImg){
+                      imgA.setAttribute('href', "{{url('/storage/messages')}}/" + item.message_content);
+                      imgA.setAttribute('target', '_blank');
+                      imgA.append(img);
+                    }
 
-                  var span = document.createElement('span');
-                  span.innerHTML = item.message_content;
+                    var span = document.createElement('span');
+                    span.innerHTML = item.message_content;
 
-                  var dateSpan = document.createElement('span');
-                  var date = new Date(item.created_at);
-                  var options = { month: 'short'};
-                  var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                  dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
+                    var dateSpan = document.createElement('span');
+                    var date = new Date(item.created_at);
+                    var options = { month: 'short'};
+                    var month = new Intl.DateTimeFormat('en-US', options).format(date);
+                    dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
-                  if(item.sent_from == message_with){ // if other sent me.
-                    span.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content;';
-                    dateSpan.style.cssText = 'margin-top:4px; color: grey; font-size: small;';
-                    img.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
-                    imgA.style.cssText = 'margin-right: auto;';
-                  }else{
-                    span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
-                    dateSpan.style.cssText = 'text-align: right; margin-top:4px; color: grey; font-size: small;';
-                    img.style.cssText = 'background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
-                    imgA.style.cssText = 'margin-left: auto;';
-                  }
+                    if(item.sent_from == {{auth()->id()}}){ // if I sent to other.
+                      span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
+                      dateSpan.style.cssText = 'text-align: right; margin-top:4px; color: grey; font-size: small;';
+                      img.style.cssText = 'background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
+                      imgA.style.cssText = 'margin-left: auto;';
+                    }else{
+                      span.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content;';
+                      dateSpan.style.cssText = 'margin-top:4px; color: grey; font-size: small;';
+                      img.style.cssText = 'background: #f2f6f9; border-radius: 4px; padding: 8px;margin-top:2px; width:200px;';
+                      imgA.style.cssText = 'margin-right: auto;';
+                    }
 
-                  $("#chat_output").append(dateSpan);
-                  if(isImg)$("#chat_output").append(imgA);
-                  else $("#chat_output").append(span);
-                });
-                $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 500);
-
-          },
+                    $("#chat_output").append(dateSpan);
+                    if(isImg)$("#chat_output").append(imgA);
+                    else $("#chat_output").append(span);
+                  });
+                  $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 500);
+                }    
+              },
           error: function (request, status, error) {
             console.log(error);
           }
@@ -129,48 +141,48 @@
 
       $("#chat_output").html(chatOutput);
       
-      sendTo= userId;
     }
 
     $("#search_input").bind('input', function() { 
         keyword = $(this).val();
         $("#search_result").empty();
-        if(keyword.length<4) return;
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: "{{url('/messages/get_users')}}",
-            method: 'post',
-            data : {
-                keyword: keyword
-            },
-            success: function(result){
-              result.users.forEach((item)=>{
+        if(keyword.length>3){
+          $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+          $.ajax({
+              url: "{{url('/messages/get_users')}}",
+              method: 'post',
+              data : {
+                  keyword: keyword
+              },
+              success: function(result){
+                result.users.forEach((item)=>{
 
-                  var userDiv = $("<div style='display: flex; flex-flow: row nowrap; margin-top: 8px; cursor: pointer;'></div>");
-                  
-                  userDiv.click(function() {
-                    onClickUser(item.username, item.id);
-                  });
+                    var userDiv = $("<div style='display: flex; flex-flow: row nowrap; margin-top: 8px; cursor: pointer;'></div>");
+                    
+                    userDiv.click(function() {
+                      onClickUser(item.username, item.id);
+                    });
 
-                  var img = document.createElement('img');
-                  img.setAttribute('src',base_url+'/'+item.profile_picture);
-                  img.style.cssText = "width:64px; height: 64px; border-radius: 32px;";
-                  userDiv.append(img);
+                    var img = document.createElement('img');
+                    img.setAttribute('src',base_url+'/'+item.profile_picture);
+                    img.style.cssText = "width:64px; height: 64px; border-radius: 32px;";
+                    userDiv.append(img);
 
-                  var usernameDiv = $("<div style='display: flex; align-items: center; margin-left: 4px;'>"+item.username+"</div>");
-                  userDiv.append(usernameDiv);
+                    var usernameDiv = $("<div style='display: flex; align-items: center; margin-left: 4px;'>"+item.username+"</div>");
+                    userDiv.append(usernameDiv);
 
-                  $("#search_result").append(userDiv);
-              });
-            },
-            error: function (request, status, error) {
-              console.error(error);
-            }
-        });
+                    $("#search_result").append(userDiv);
+                });
+              },
+              error: function (request, status, error) {
+                console.error(error);
+              }
+          });
+        }
       });
 
     $(".back-icon").click(function() {
@@ -179,12 +191,17 @@
     })
 
     let ws = new WebSocket('wss://174.129.151.80:8091');
+    // var serverIp =  {!! env('SERVER_IP', '174.129.151.80') !!};
+    // let ws = new WebSocket('ws://localhost:8090');
   
     console.log({{auth()->id()}});
     
     ws.onopen = function (e) {
         // Connect to websocket
         console.log('Connected to websocket');
+        var me = {{auth()->id()}};
+        // ws.send(JSON.stringify({command: "register", userId: me}));
+        // if(sendTo != 0) ws.send(JSON.stringify({command: "register", userId: {{auth()->id()}}}));
         ws.send(
             JSON.stringify({
                 'type': 'socket',
@@ -194,26 +211,28 @@
 
         // Bind onkeyup event after connection
         $('#chat_input').on('keyup', function (e) {
-            if(sendTo==0 || $('#chat_input').val() == "") return;
             let img_str = '';
             let message_content = $(this).val();
             $('#img-gallery').children().each(function () {
               img_str += $(this).children().children("input").val() + ":::";
             });
-            if((img_str.length<1 && message_content=='') || sendTo==0) return;
-            if (e.keyCode === 13 && !e.shiftKey) {
-                ws.send(
-                    JSON.stringify({
-                        'type': 'chat',
-                        'from': '{{auth()->id()}}',
-                        'to': sendTo,
-                        'message_content': message_content,
-                        'images_str':img_str
-                    })
-                );
-                $(this).val('');
-                $('#img-gallery').empty();
-                console.log('{{auth()->id()}} sent ' + message_content);
+            if((img_str.length > 0 || message_content != '') && sendTo != 0){
+              if (e.keyCode === 13 && !e.shiftKey) {
+                  console.log("roomNum__  ", roomNum);
+                  ws.send(
+                      JSON.stringify({
+                          'type': 'chat',
+                          'from': '{{auth()->id()}}',
+                          'to': sendTo,
+                          'room_id': roomNum,
+                          'message_content': message_content,
+                          'images_str':img_str
+                      })
+                  );
+                  $(this).val('');
+                  $('#img-gallery').empty();
+                  console.log('{{auth()->id()}} sent ' + message_content);
+              }
             }
         });
         $('#sendBtn').click(function (e) {
@@ -222,20 +241,22 @@
             $('#img-gallery').children().each(function () {
               img_str += $(this).children().children("input").val() + ":::";
             });
-            if((img_str.length<1 && message_content=='') || sendTo==0) return;
-            ws.send(
-                JSON.stringify({
-                    'type': 'chat',
-                    'from': '{{auth()->id()}}',
-                    'to': sendTo,
-                    'message_content': message_content,
-                    'images_str':img_str
-                })
-            );
-            $('#chat_input').val('');
-            $('#img-gallery').empty();
-            
-            console.log('{{auth()->id()}} sent ' + message_content);
+            if((img_str.length > 0 || message_content != '') && sendTo != 0){
+              ws.send(
+                  JSON.stringify({
+                      'type': 'chat',
+                      'from': '{{auth()->id()}}',
+                      'to': sendTo,
+                      'room_id': roomNum,
+                      'message_content': message_content,
+                      'images_str':img_str
+                  })
+              );
+              $('#chat_input').val('');
+              $('#img-gallery').empty();
+              
+              console.log('{{auth()->id()}} sent ' + message_content);
+            }
         });
     };
     ws.onerror = function (e) {
@@ -248,10 +269,26 @@
         alert('Check if WebSocket server is running!');
     };
     ws.onmessage = function (e) {
-      console.trace(e);
+        // console.trace(e);
+        console.log('onmessage.......');
         let json = JSON.parse(e.data);
+        console.log(json)
         switch (json.type) {
             case 'chat':
+                var hasHistory = false;
+                var sentUser;
+                userList.forEach((item)=>{
+                  if(item.id == json.from){
+                    hasHistory = true;
+                    sentUser = item;
+                  }
+                })
+                if(json.from != 'me' && hasHistory){
+                  onClickUser(sentUser.username, json.from);
+                }else if(json.from != 'me' && !hasHistory){
+                  location.reload();
+                }
+                location.reload();
                 var span = document.createElement('span');
                 span.innerHTML = json.msg;
 
@@ -312,7 +349,7 @@
 
             case 'socket':
                 $('#total_client').html(json.msg);
-                console.log("Received " + json.msg);
+                console.log("Received: " + json.msg);
                 break;
         }
     };

@@ -12,7 +12,7 @@ class Messages extends Model
     protected $fillable = [
         'message_content',
         'sent_from',
-        'sent_to',
+        'room_id',
         'read_at',
     ];
 }
