@@ -190,7 +190,8 @@
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('wss://174.129.151.80:8091');
+    // let ws = new WebSocket('wss://174.129.151.80:8091');
+    var ws = new WebSocket("wss://174.129.151.80/wss2/NNN");
     // var serverIp =  {!! env('SERVER_IP', '174.129.151.80') !!};
     // let ws = new WebSocket('ws://localhost:8090');
   
