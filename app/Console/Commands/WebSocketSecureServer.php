@@ -46,7 +46,7 @@ class WebSocketSecureServer extends Command
     {
         $loop   = Factory::create();
         $webSock = new SecureServer(
-            new Server('174.129.151.80:8091', $loop),
+            new Server('0.0.0.0:8091', $loop),
             $loop,
             array(
                 'local_cert'        => '/etc/letsencrypt/live/jerseyswaponline.com/fullchain.pem', // path to your cert
@@ -66,6 +66,6 @@ class WebSocketSecureServer extends Command
             $webSock
         );
 
-        $loop->run();
+        $webServer->run();
     }
 }
