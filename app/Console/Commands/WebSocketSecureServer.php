@@ -68,6 +68,7 @@ class WebSocketSecureServer extends Command
         );
 
         $loop->run();
+        echo 'started...............';
         $webServer->on('error', function (Exception $e) {
             echo 'Error' . $e->getMessage();
         });

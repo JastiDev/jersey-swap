@@ -1208,7 +1208,3 @@ ul.tab-list li a {
 #category-tab .nav-item {
     cursor: pointer;
 }
-
-.user-selected {
-    background-color: #f2f6f9;
-}
