@@ -269,7 +269,7 @@ class WebSocketController implements MessageComponentInterface
     {
         echo "Client left onError " . $conn->resourceId . " \n";
         // $conn->close();
-        echo 'Error' . $e->getMessage();
+        echo 'Error' . $e->getMessage() . PHP_EOL;
         
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
