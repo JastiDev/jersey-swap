@@ -66,6 +66,6 @@ class WebSocketSecureServer extends Command
             $webSock
         );
 
-        $loop->run();
+        $webServer->run();
     }
 }
