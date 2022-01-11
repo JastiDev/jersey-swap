@@ -190,9 +190,7 @@
       $(".user-list").removeClass("close-list");
     })
 
-    // let ws = new WebSocket('wss://174.129.151.80:8091');
-    var ws = new WebSocket("wss://174.129.151.80/wss2");
-    // let ws = new WebSocket('ws://174.129.151.80:8090');
+    let ws = new WebSocket('wss://174.129.151.80:8091');
   
     console.log({{auth()->id()}});
     
