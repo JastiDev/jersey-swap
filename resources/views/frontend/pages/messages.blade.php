@@ -190,7 +190,7 @@
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('wss://127.0.0.1/wss2');
+    let ws = new WebSocket('wss://3.211.147.42/wss2');
   
     console.log({{auth()->id()}});
     
