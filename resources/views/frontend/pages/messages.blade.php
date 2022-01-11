@@ -190,7 +190,7 @@
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('wss://jerseyswap_online.com');
+    let ws = new WebSocket('wss://jerseyswap_online.com/wss2');
   
     console.log({{auth()->id()}});
     
