@@ -44,37 +44,37 @@ class WebSocketSecureServer extends Command
      */
     public function handle()
     {
-        // $loop   = Factory::create();
-        // $webSock = new SecureServer(
-        //     new Server('0.0.0.0:8091', $loop),
-        //     $loop,
-        //     array(
-        //         'local_cert'        => '/etc/letsencrypt/live/jerseyswaponline.com/fullchain.pem', // path to your cert
-        //         'local_pk'          => '/etc/letsencrypt/live/jerseyswaponline.com/privkey.pem', // path to your server private key
-        //         'verify_peer' => FALSE
-        //     )
-        // );
-
-        // // Ratchet magic
-        // $webServer = new IoServer(
-        //     new HttpServer(
-        //         new WsServer(
-        //             new WebSocketController()
-        //         )
-        //     ),
-        //     $webSock
-        // );
-
-        // $loop->run();
-
-        $server = IoServer::factory(
-          new HttpServer(
-            new WsServer(
-              new WebSocketController()
+        $loop   = Factory::create();
+        $webSock = new SecureServer(
+            new Server('0.0.0.0:8080', $loop),
+            $loop,
+            array(
+                'local_cert'        => '/etc/letsencrypt/live/jerseyswaponline.com/fullchain.pem', // path to your cert
+                'local_pk'          => '/etc/letsencrypt/live/jerseyswaponline.com/privkey.pem', // path to your server private key
+                'verify_peer' => FALSE
             )
-          ),
-          8080
         );
-        $server->run();
+
+        // Ratchet magic
+        $webServer = new IoServer(
+            new HttpServer(
+                new WsServer(
+                    new WebSocketController()
+                )
+            ),
+            $webSock
+        );
+
+        $loop->run();
+
+        // $server = IoServer::factory(
+        //   new HttpServer(
+        //     new WsServer(
+        //       new WebSocketController()
+        //     )
+        //   ),
+        //   8080
+        // );
+        // $server->run();
     }
 }
