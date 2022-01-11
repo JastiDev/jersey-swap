@@ -46,12 +46,11 @@ class WebSocketSecureServer extends Command
     {
         $loop   = Factory::create();
         $webSock = new SecureServer(
-            new Server('172.26.7.41:8091', $loop),
+            new Server('0.0.0.0:8091', $loop),
             $loop,
             array(
                 'local_cert'        => '/etc/letsencrypt/live/jerseyswaponline.com/fullchain.pem', // path to your cert
                 'local_pk'          => '/etc/letsencrypt/live/jerseyswaponline.com/privkey.pem', // path to your server private key
-                'allow_self_signed' => FALSE, // Allow self signed certs (should be false in production)
                 'verify_peer' => FALSE
             )
         );
