@@ -138,81 +138,81 @@
 
                                   $("#table-data-body").append(tr);
                               });
+
+                              // Paginavigation
+                              $("#paginav").empty();
+                              var totalPaginate = Math.ceil(result.offers.length/pageSize);
+                              if(totalPaginate == 0) index = 0;
+
+                              var firstLi = document.createElement('li');
+                              firstLi.className = "page-item";
+                              firstLi.style.cursor = "pointer";
+                              var span = document.createElement('span');
+                              span.className = "page-link";
+                              span.setAttribute('aria-hidden', true);
+                              span.innerHTML = '<<';
+                              firstLi.append(span);
+                              firstLi.onclick = function(){
+                                if(index == 1 || index == 0) return;
+                                index = 1;
+                                printTable();
+                              };
+                              $("#paginav").append(firstLi);
+
+                              var prevLi = document.createElement('li');
+                              prevLi.className = "page-item";
+                              prevLi.style.cursor = "pointer";
+                              var span = document.createElement('span');
+                              span.className = "page-link";
+                              span.setAttribute('aria-hidden', true);
+                              span.innerHTML = '<';
+                              prevLi.append(span);
+                              prevLi.onclick = function(){
+                                if(index == 1 || index == 0) return;
+                                index--;
+                                printTable();
+                              };
+                              $("#paginav").append(prevLi);
+
+                              var content = document.createElement('li');
+                              content.className = "page-item";
+                              var span = document.createElement('span');
+                              span.className = "page-link";
+                              span.innerHTML = index + ' of ' + totalPaginate;
+                              content.append(span);
+                              $("#paginav").append(content);
+
+                              var nextLi = document.createElement('li');
+                              nextLi.className = "page-item";
+                              nextLi.style.cursor = "pointer";
+                              var span = document.createElement('span');
+                              span.className = "page-link";
+                              span.innerHTML = '>';
+                              nextLi.append(span);
+                              nextLi.onclick = function(){
+                                if(index == totalPaginate) return;
+                                index++;
+                                printTable();
+                              };
+                              $("#paginav").append(nextLi);
+
+                              var lastLi = document.createElement('li');
+                              lastLi.className = "page-item";
+                              lastLi.style.cursor = "pointer";
+                              var span = document.createElement('span');
+                              span.className = "page-link";
+                              span.setAttribute('aria-hidden', true);
+                              span.innerHTML = '>>';
+                              lastLi.append(span);
+                              lastLi.onclick = function(){
+                                if(index == totalPaginate) return;
+                                index = totalPaginate;
+                                printTable();
+                              };
+                              $("#paginav").append(lastLi);
                             }
 
                             printTable();
-
-                            // Paginavigation
-                            $("#paginav").empty();
-                            var totalPaginate = Math.ceil(result.offers.length/pageSize);
-                            if(totalPaginate == 0) index = 0;
-
-                            var firstLi = document.createElement('li');
-                            firstLi.className = "page-item";
-                            firstLi.style.cursor = "pointer";
-                            var span = document.createElement('span');
-                            span.className = "page-link";
-                            span.setAttribute('aria-hidden', true);
-                            span.innerHTML = '<<';
-                            firstLi.append(span);
-                            firstLi.onclick = function(){
-                              if(index == 1 || index == 0) return;
-                              index = 1;
-                              printTable();
-                            };
-                            $("#paginav").append(firstLi);
-
-                            var prevLi = document.createElement('li');
-                            prevLi.className = "page-item";
-                            prevLi.style.cursor = "pointer";
-                            var span = document.createElement('span');
-                            span.className = "page-link";
-                            span.setAttribute('aria-hidden', true);
-                            span.innerHTML = '<';
-                            prevLi.append(span);
-                            prevLi.onclick = function(){
-                              if(index == 1 || index == 0) return;
-                              index--;
-                              printTable();
-                            };
-                            $("#paginav").append(prevLi);
-
-                            var content = document.createElement('li');
-                            content.className = "page-item";
-                            var span = document.createElement('span');
-                            span.className = "page-link";
-                            span.innerHTML = index + ' of ' + totalPaginate;
-                            content.append(span);
-                            $("#paginav").append(content);
-
-                            var nextLi = document.createElement('li');
-                            nextLi.className = "page-item";
-                            nextLi.style.cursor = "pointer";
-                            var span = document.createElement('span');
-                            span.className = "page-link";
-                            span.innerHTML = '>';
-                            nextLi.append(span);
-                            nextLi.onclick = function(){
-                              if(index == totalPaginate) return;
-                              index++;
-                              printTable();
-                            };
-                            $("#paginav").append(nextLi);
-
-                            var lastLi = document.createElement('li');
-                            lastLi.className = "page-item";
-                            lastLi.style.cursor = "pointer";
-                            var span = document.createElement('span');
-                            span.className = "page-link";
-                            span.setAttribute('aria-hidden', true);
-                            span.innerHTML = '>>';
-                            lastLi.append(span);
-                            lastLi.onclick = function(){
-                              if(index == totalPaginate) return;
-                              index = totalPaginate;
-                              printTable();
-                            };
-                            $("#paginav").append(lastLi);
                         },
                         error: function (request, status, error) {
                             $('#form-alert').addClass('alert-danger');

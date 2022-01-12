@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <h5>Upload Image Gallery</h5>
-                                    <span>Upload images to the gallery to show condition of the sports jersey/ sports card. </span>
+                                    <span>Upload images to the gallery to show the condition of the sports jersey/ sports card. </span>
                                 </div>
                                 <div class="mb-3 text-center">
                                     <label for="product_photos">

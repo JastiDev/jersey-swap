@@ -38,7 +38,7 @@
 
     <!-- Title -->
     <title>@yield('title','Jersey Swap!')</title>
-    <meta name="description" content="@yield('meta_description','Jersey Swap is an online jersey swapping platform that helps you find best offers and swap your jersey!')">
+    <meta name="description" content="@yield('meta_description','The central hub to buy, sell, and trade sports jerseys and sports cards.')">
     <script>
         var base_url = "{{url('/')}}";
     </script>
