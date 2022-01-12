@@ -27,7 +27,7 @@ class ListingController extends Controller
         $listing = Listing::where([
             'posted_by' => $user_id,
             'status' => 'posted'
-        ])->orderBy('id','DESC')->paginate(10);
+        ])->orderBy('id','DESC')->get();
         
         return response()->json([
             'listings'=>$listing

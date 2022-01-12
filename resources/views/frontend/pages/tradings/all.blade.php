@@ -18,7 +18,7 @@
                                 <a href="#" data-title="Completed" data-status="completed">Completed</a>
                             </li>
                             <li>
-                                <a href="#" data-title="Cancelled" data-status="cancelled">Cancelleda</a>
+                                <a href="#" data-title="Cancelled" data-status="cancelled">Cancelled</a>
                             </li>
                         </ul>
                     </div>
@@ -183,8 +183,6 @@
                             }
 
                             printTable();
-
-                            
                         },
                         error: function (request, status, error) {
                             $('#form-alert').addClass('alert-danger');
