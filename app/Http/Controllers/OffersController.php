@@ -135,7 +135,6 @@ class OffersController extends Controller
         ],200);
     }
     public function get_by_status(Request $request){
-
         $user_id = Auth::id();
         if($request->status=='posted'){
             $offers = Offers::where(function($query) {
@@ -160,11 +159,13 @@ class OffersController extends Controller
             $offers[$i]->gallery = OfferGallery::where('offer_id',$offers[$i]->id)->get();
             $i++;
         }
+        echo('whatsup?');
+        echo($offers);
 
 
-        return response()->json([
-            'offers' => $offers,
-        ]);
+        // return response()->json([
+        //     'offers' => $offers,
+        // ]);
     }
     public function decline_offer(Request $request){
         $listing_id = $request->listing;
