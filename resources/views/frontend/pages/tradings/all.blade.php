@@ -115,8 +115,10 @@
                             $("#paginav").empty();
                             var totalPaginate = Math.ceil(result.listings.length/pageSize);
                             if(totalPaginate == 0) index = 0;
+                            
                             var firstLi = document.createElement('li');
                             firstLi.className = "page-item";
+                            firstLi.style.cursor = "pointer";
                             var span = document.createElement('span');
                             span.className = "page-link";
                             span.setAttribute('aria-hidden', true);
@@ -128,8 +130,10 @@
                               printTable();
                             };
                             $("#paginav").append(firstLi);
+
                             var prevLi = document.createElement('li');
                             prevLi.className = "page-item";
+                            prevLi.style.cursor = "pointer";
                             var span = document.createElement('span');
                             span.className = "page-link";
                             span.setAttribute('aria-hidden', true);
@@ -141,6 +145,7 @@
                               printTable();
                             };
                             $("#paginav").append(prevLi);
+
                             var content = document.createElement('li');
                             content.className = "page-item";
                             var span = document.createElement('span');
@@ -148,8 +153,10 @@
                             span.innerHTML = index + ' of ' + totalPaginate;
                             content.append(span);
                             $("#paginav").append(content);
+
                             var nextLi = document.createElement('li');
                             nextLi.className = "page-item";
+                            nextLi.style.cursor = "pointer";
                             var span = document.createElement('span');
                             span.className = "page-link";
                             span.innerHTML = '>';
@@ -160,8 +167,10 @@
                               printTable();
                             };
                             $("#paginav").append(nextLi);
+
                             var lastLi = document.createElement('li');
                             lastLi.className = "page-item";
+                            lastLi.style.cursor = "pointer";
                             var span = document.createElement('span');
                             span.className = "page-link";
                             span.setAttribute('aria-hidden', true);
