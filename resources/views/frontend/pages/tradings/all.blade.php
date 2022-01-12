@@ -18,17 +18,17 @@
                                 <a href="#" data-title="Completed" data-status="completed">Completed</a>
                             </li>
                             <li>
-                                <a href="#" data-title="Cancelled" data-status="cancelled">Cancelled</a>
+                                <a href="#" data-title="Cancelled" data-status="cancelled">Cancelleda</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-md-12">
                         <div id="deals-table" class="deals-table">
                             <div class="filter-title">
-                                In Progress Deals
+                                Pending Payment Deals
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover w-100">
+                                <table class="table table-hover w-100" style="text-align:center; margin-bottom: 0;">
                                     <thead>
                                         <td>Product</td>
                                         <td>Product Title</td>
@@ -38,11 +38,15 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div id="load-more" class="text-center mb-3">
-                                <button class="btn btn-primary">
-                                    Load More
-                                </button>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                        <div class="d-flex justify-content-center">
+                          <nav>
+                            <ul id="paginav" class="pagination"></ul>
+                          </nav>
                         </div>
                     </div>
                 </div>
@@ -56,6 +60,10 @@
             var base_url = "{{url('/')}}";
             var pg_url = "{{url('/trading/status')}}";
             var status = "payment";
+
+            var index = 1;
+            var pageSize = 7;
+
             function load_data(){
                 if(page_url!=null && page_url!=""){
                     $.ajaxSetup({
@@ -72,33 +80,99 @@
                         success: function(result){
                             console.log(result);
                             if(!result.listings) return;
-                            result.listings.forEach((item)=>{
-                                var tr = document.createElement('tr');
-                                {{-- Creating First Column --}}
-                                var td = document.createElement('td');
-                                var img = document.createElement('img');
-                                img.classList.add('product_img');
-                                img.setAttribute('src',base_url+'/'+item.product_img);
-                                td.append(img);
+                            function printTable(){
+                              $("#table-data-body").children('tr').remove();
+                              var filtered = result.listings.slice((index - 1) * pageSize, index * pageSize);
+                              filtered.forEach((item)=>{
+                                  var tr = document.createElement('tr');
 
-                                tr.appendChild(td);
+                                  {{-- Creating First Column --}}
+                                  var td = document.createElement('td');
+                                  var img = document.createElement('img');
+                                  img.classList.add('product_img');
+                                  img.setAttribute('src',base_url+'/'+item.product_img);
+                                  td.append(img);
+                                  tr.appendChild(td);
 
-                                {{-- Creating Second Column --}}
-                                td = document.createElement('td');
-                                td.innerHTML="<a href='"+base_url+"/listing/"+item.slug+"'>"+item.product_title+"</a>";
-                                tr.appendChild(td);
-                                
+                                  {{-- Creating Second Column --}}
+                                  td = document.createElement('td');
+                                  td.innerHTML="<a href='"+base_url+"/listing/"+item.slug+"'>"+item.product_title+"</a>";
+                                  tr.appendChild(td);
+                                  
+                                  {{-- Creating Fourth Column --}}
+                                  td = document.createElement('td');
+                                  var date = Date.createFromMysql(item.created_at);
+                                  td.innerHTML= date.getDate()+" "+date.toLocaleString('en-us', { month: 'long' })+", "+date.getFullYear();
+                                  tr.appendChild(td);
 
-                                
-                                {{-- Creating Fourth Column --}}
-                                td = document.createElement('td');
-                                var date = Date.createFromMysql(item.created_at);
-                                td.innerHTML= date.getDate()+" "+date.toLocaleString('en-us', { month: 'long' })+", "+date.getFullYear();
-                                tr.appendChild(td);
-                                
+                                  $("#table-data-body").append(tr);
+                              });
+                            }
 
-                                $("#table-data-body").append(tr);
-                            });
+                            printTable();
+
+                            // Paginavigation
+                            $("#paginav").empty();
+                            var totalPaginate = Math.ceil(result.listings.length/pageSize);
+                            if(totalPaginate == 0) index = 0;
+                            var firstLi = document.createElement('li');
+                            firstLi.className = "page-item";
+                            var span = document.createElement('span');
+                            span.className = "page-link";
+                            span.setAttribute('aria-hidden', true);
+                            span.innerHTML = '<<';
+                            firstLi.append(span);
+                            firstLi.onclick = function(){
+                              if(index == 1 || index == 0) return;
+                              index = 1;
+                              printTable();
+                            };
+                            $("#paginav").append(firstLi);
+                            var prevLi = document.createElement('li');
+                            prevLi.className = "page-item";
+                            var span = document.createElement('span');
+                            span.className = "page-link";
+                            span.setAttribute('aria-hidden', true);
+                            span.innerHTML = '<';
+                            prevLi.append(span);
+                            prevLi.onclick = function(){
+                              if(index == 1 || index == 0) return;
+                              index--;
+                              printTable();
+                            };
+                            $("#paginav").append(prevLi);
+                            var content = document.createElement('li');
+                            content.className = "page-item";
+                            var span = document.createElement('span');
+                            span.className = "page-link";
+                            span.innerHTML = index + ' of ' + totalPaginate;
+                            content.append(span);
+                            $("#paginav").append(content);
+                            var nextLi = document.createElement('li');
+                            nextLi.className = "page-item";
+                            var span = document.createElement('span');
+                            span.className = "page-link";
+                            span.innerHTML = '>';
+                            nextLi.append(span);
+                            nextLi.onclick = function(){
+                              if(index == totalPaginate) return;
+                              index++;
+                              printTable();
+                            };
+                            $("#paginav").append(nextLi);
+                            var lastLi = document.createElement('li');
+                            lastLi.className = "page-item";
+                            var span = document.createElement('span');
+                            span.className = "page-link";
+                            span.setAttribute('aria-hidden', true);
+                            span.innerHTML = '>>';
+                            lastLi.append(span);
+                            lastLi.onclick = function(){
+                              if(index == totalPaginate) return;
+                              index = totalPaginate;
+                              printTable();
+                            };
+                            $("#paginav").append(lastLi);
                         },
                         error: function (request, status, error) {
                             $('#form-alert').addClass('alert-danger');
@@ -108,11 +182,9 @@
                     });
                 }
             }
-            $("#load-more").hide();
+
             load_data();
-            $("#load-more").click(function(){
-                load_data();
-            });
+            
             $("#deals-tab li a").click(function(){
                status = $(this).data('status');
                $("#table-data-body").children('tr').remove();

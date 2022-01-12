@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h2 class="footer-logo"><img src="{{asset('assets/images/logo-transparent.png')}}"> Jersey Swap</h2>
-                    <p>Jersey Swap is revolutionizing the industry. Our platform operates as the central hub for sports jersey and sports cards transactions. Everything is completed online!</p>
+                    <p>Jersey Swap is revolutionizing the industry. Our platform operates as the central hub for Sports jersey and Sports cards transactions. Everything is completed online!</p>
                 </div>
                 <div class="col-md-2">
                     <h4>Quick Links</h4>
@@ -39,7 +39,7 @@
                     <ul class="ft-list">
                         <li>
                             <i class="fa fa-envelope"></i> <b>Email: </b>
-                            <a href="mailto:Info@Jerseyswaponline.com">Info@Jerseyswaponline.com</a>
+                            <a href="mailto:officialjerseyswap@gmail.com">officialjerseyswap@gmail.com</a>
                         </li>
                         <li>
                             <i class="fa fa-phone-volume"></i> <b>Phone: </b>

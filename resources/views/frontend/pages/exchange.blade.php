@@ -158,6 +158,7 @@
         // Paginavigation
         $("#paginav").empty();
         var totalPaginate = Math.ceil(listingData.length/pageSize);
+        if(totalPaginate == 0) index = 0;
         var firstLi = document.createElement('li');
         firstLi.className = "page-item";
         var span = document.createElement('span');
@@ -166,7 +167,7 @@
         span.innerHTML = '<<';
         firstLi.append(span);
         firstLi.onclick = function(){
-          if(index == 1) return;
+          if(index == 1 || index == 0) return;
           index = 1;
           load_data();
         };
@@ -179,7 +180,7 @@
         span.innerHTML = '<';
         prevLi.append(span);
         prevLi.onclick = function(){
-          if(index == 1) return;
+          if(index == 1 || index == 0) return;
           index--;
           load_data();
         };
@@ -188,8 +189,7 @@
         content.className = "page-item";
         var span = document.createElement('span');
         span.className = "page-link";
-        span.innerHTML = index+ ' of ' + totalPaginate;
-        if(totalPaginate==0)span.innerHTML = '0 of 0';
+        span.innerHTML = index + ' of ' + totalPaginate;
         content.append(span);
         $("#paginav").append(content);
         var nextLi = document.createElement('li');

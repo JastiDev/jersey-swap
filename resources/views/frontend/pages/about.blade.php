@@ -76,15 +76,16 @@ Jersey Swap is revolutionizing the sports jersey industry by providing a  platfo
                 <div class="col-md-6">
                     <h2 class="mt-3 mb-1">How Can We Help You Expand Your Collection</h2>
                     <div class="divider"></div>
-                    <p>Jersey Swap is revolutionizing the sports jersey industry. Our platform operates as the central hub for sports jersey trading. All transactions will be completed via online where Jersey Swap will facilitate every deal made on our website. 
-                    Sellers, list their items for sale/trade on Jersey Swap, while buyers/traders pursue listings available.
+                    <p>
+                      Jersey Swap is revolutionizing the sports jersey industry. Our platform operates as the central hub for sports jersey trading. All transactions will be completed via online where Jersey Swap will facilitate every deal made on our website.
+                      Sellers, list their items for sale/trade on Jersey Swap, while buyers/traders pursue listings available.
                     </p>
-		    <p>
-                         List It - Sellers / Traders can create listings completely free.
-			 <br/>
-			Send It - When a trade is made both parties will send the sports jersey or sports card to each other.
-			 <br/>
-			Collect It - Expand your sports collections!
+                    <p>
+                      List It - Sellers / Traders can create listings completely free.
+                      <br/>
+                      Send It - When a trade or purchase  is made both parties will send the sports jersey or sports card to each other.
+                      <br/>
+                      Collect It - Expand your sports collections!
                     </p>
                 </div>
             </div>

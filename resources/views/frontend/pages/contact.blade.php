@@ -58,7 +58,7 @@
                                     <i class="fa fa-envelope"></i>
                                 </div>
                                 <div class="icon-content">
-                                    <h4>Info@Jerseyswaponline.com</h4>
+                                    <h4>officialjerseyswap@gmail.com</h4>
                                     <small>Email us your queries.</small>
                                 </div>
                             </li>
