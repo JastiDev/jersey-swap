@@ -62,7 +62,7 @@
             var status = "payment";
 
             var index = 1;
-            var pageSize = 1;
+            var pageSize = 7;
 
             function load_data(){
                 if(page_url!=null && page_url!=""){
