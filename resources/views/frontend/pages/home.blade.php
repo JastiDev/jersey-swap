@@ -2,6 +2,9 @@
 @section('title')
     Home - Jersey Swap
 @endsection
+@section('meta_description')
+    The central hub to buy, sell, and trade sports jerseys and sports cards..
+@endsection
 @section('content')
     <section id="herobox">
         <div class="container">
