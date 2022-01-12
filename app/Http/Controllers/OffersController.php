@@ -159,13 +159,11 @@ class OffersController extends Controller
             $offers[$i]->gallery = OfferGallery::where('offer_id',$offers[$i]->id)->get();
             $i++;
         }
-        echo('whatsup?');
-        echo($offers);
 
 
-        // return response()->json([
-        //     'offers' => $offers,
-        // ]);
+        return response()->json([
+            'offers' => $offers,
+        ]);
     }
     public function decline_offer(Request $request){
         $listing_id = $request->listing;
