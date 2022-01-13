@@ -191,7 +191,7 @@
     })
 
 
-    let ws = new WebSocket('ws://'+window.location.hostname+':{{env('CHAT_PORT')}}');
+    let ws = new WebSocket('wss://jerseyswaponline.com/ws:4000');
   
     console.log({{auth()->id()}});
     

@@ -48,7 +48,7 @@ class WebSocketServer extends Command
                      new WebSocketController()
                  )
              ),
-             4000
+             env('CHAT_PORT')
         );
         $server->run();
     }

@@ -12,9 +12,8 @@ $webSock = new React\Socket\SecureServer(
 	new React\Socket\Server(env('CHAT_SECURE_URL', 8890), $loop),
 	$loop,
 	array(
-        'local_cert'        => 'C:/xampp/apache/conf/ssl.crt/server.crt', // path to your cert
-        'local_pk'          => 'C:/xampp/apache/conf/ssl.key/server.key', // path to your server private key
-        'allow_self_signed' => TRUE, // Allow self signed certs (should be false in production)
+        'local_cert'        => '/var/www/html/certs/fullchain.pem', // path to your cert
+        'local_pk'          => '/var/www/html/certs/privkey.pem', // path to your server private key
         'verify_peer' => FALSE
 	)
 );
