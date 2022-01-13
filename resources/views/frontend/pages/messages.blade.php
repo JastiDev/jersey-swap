@@ -190,7 +190,8 @@
       $(".user-list").removeClass("close-list");
     })
 
-    let ws = new WebSocket('wss://3.211.147.42:4000');
+
+    let ws = new WebSocket('ws://'+window.location.hostname+':{{env('CHAT_PORT')}}');
   
     console.log({{auth()->id()}});
     
