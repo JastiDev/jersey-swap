@@ -287,7 +287,6 @@
                 }else if(json.from != 'me' && !hasHistory){
                   location.reload();
                 }
-                location.reload();
                 var span = document.createElement('span');
                 span.innerHTML = json.msg;
 
