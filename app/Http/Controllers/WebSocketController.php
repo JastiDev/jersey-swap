@@ -80,8 +80,20 @@ class WebSocketController implements MessageComponentInterface
               ->where('room_id', '=', $room_user->room_id)
               ->get();
 
+          $list = [];
+          foreach($messages as $message) {
+              $message = (array)$message;
+              $date = new \DateTime($message['created_at']);
+              $message['created_at'] = $date->format(DATE_ISO8601);
+              $date = new \DateTime($message['updated_at']);
+              $message['updated_at'] = $date->format(DATE_ISO8601);
+              $list[] = $message;
+          }
+
+          unset($message, $date, $messages);
+
           return response()->json([
-              'messages' => $messages,
+              'messages' => $list,
               'room_id' => $room_user->room_id
           ]);
         }

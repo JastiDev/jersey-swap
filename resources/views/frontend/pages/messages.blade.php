@@ -111,7 +111,7 @@
 
                     var dateSpan = document.createElement('span');
                     var date = new Date(item.created_at);
-                    var options = { month: 'short'};
+                    var options = { year: 'numeric', month: 'short', day: '2-digit' };
                     var month = new Intl.DateTimeFormat('en-US', options).format(date);
                     dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
@@ -261,11 +261,11 @@
     ws.onerror = function (e) {
         // Error handling
         console.log(e);
-        alert('Check if WebSocket server is running!');
+       // alert('Check if WebSocket server is running!');
     };
     ws.onclose = function(e) {
         console.log(e);
-        alert('Check if WebSocket server is running!');
+        //alert('Check if WebSocket server is running!');
     };
     ws.onmessage = function (e) {
         // console.trace(e);
@@ -294,7 +294,7 @@
                 var dateNow = Date.now();
                 var date = new Date(dateNow);
 
-                var options = { month: 'short'};
+                var options = { year: 'numeric', month: 'short', day: '2-digit' };
                 var month = new Intl.DateTimeFormat('en-US', options).format(date);
                 dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
@@ -325,7 +325,7 @@
                 var dateNow = Date.now();
                 var date = new Date(dateNow);
 
-                var options = { month: 'short'};
+                var options = { year: 'numeric', month: 'short', day: '2-digit' };
                 var month = new Intl.DateTimeFormat('en-US', options).format(date);
                 dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
