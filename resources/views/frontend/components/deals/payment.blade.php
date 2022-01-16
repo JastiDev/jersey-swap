@@ -6,8 +6,7 @@
                 <hr>
                 <div class="card card-offer mb-3">
                     <div class="card-body">
-                        <p>Your offer has been accepted... To start the jersey exchange proceed, we need you to make the
-                            payment so we can start the order!</p>
+                        <p>Your offer has been accepted. To start the transaction, we need you to make your payment so the transaction can start.</p>
                         <form>
                             <input type="hidden" name="type" value="offerMaker">
                             <input type="listing" name="">

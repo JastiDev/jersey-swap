@@ -13,10 +13,10 @@
                             <a href="{{url('/')}}">Home</a>
                         </li>
                         <li>
-                            <a href="{{route('about')}}">About us</a>
+                            <a href="{{route('about')}}">About Us</a>
                         </li>
                         <li>
-                            <a href="{{route('contact')}}">Contact us</a>
+                            <a href="{{route('contact')}}">Contact Us</a>
                         </li>
                         <li>
                             <a href="{{route('exchange')}}">List It</a>

@@ -164,7 +164,7 @@ class SingleListing extends React.Component {
                         <hr/>
                         <div className="card card-offer mb-3">
                             <div className="card-body">
-                                <p>Your offer has been accepted. To start the jersey exchange, we need you to make your payment so we can start the order.</p>
+                                <p>Your offer has been accepted. To start the transaction, we need you to make your payment so the transaction can start.</p>
                                 <form method="POST" action="/checkout">
                                     <input type="hidden" name="_token" value={csrf} />
                                     <input type="hidden" name="type" value="offerMaker" />

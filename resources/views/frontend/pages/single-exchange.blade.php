@@ -106,7 +106,7 @@
                                 <input type="hidden" name="listing_id" value="{{ $listing->id }}">
                                 <div class="mb-3">
                                     <label for="amount" class="col-form-label">Amount($)</label>
-                                    <input type="number" class="form-control" id="amount" name="amount" placeholder="Amount">
+                                    <input type="number" class="form-control" id="amount" name="amount" value="0" placeholder="Amount">
                                 </div>
                                 <div class="mb-3">
                                     <h5>Upload Image Gallery</h5>

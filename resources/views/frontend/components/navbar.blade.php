@@ -40,7 +40,7 @@
                 </li>
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link @if(Request::path()=='login') active @endif" href="{{url('login')}}">Log in</a>
+                    <a class="nav-link @if(Request::path()=='login') active @endif" href="{{url('login')}}">Log In</a>
                 </li>
                 @endguest
                 @auth
