@@ -10,8 +10,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Jersey Exchange!</h1>
-                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, Sell, and Trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
+                    <h1>Sports Exchange!</h1>
+                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, sell, and trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
                     </p>
                     <a href="{{url('exchange')}}" class="btn btn-primary">Start Exchange</a>
                 </div>
@@ -27,7 +27,7 @@
                         <div class="icon icon-profile"></div>
                         <div class="icon-content">
                             <h3>Free Sign up</h3>
-                            <p>Swap Jersey securely!</p>
+                            <p>Secure transactions</p>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                         <div class="icon icon-swap"></div>
                         <div class="icon-content">
                             <h3>Secure Swapping</h3>
-                            <p>Swap Jersey securely!</p>
+                            <p>Secure transactions</p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <div class="icon icon-shield"></div>
                         <div class="icon-content">
                             <h3>Risk Free</h3>
-                            <p>Swap Jersey securely!</p>
+                            <p>Secure transactions</p>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         <div class="icon icon-support"></div>
                         <div class="icon-content">
                             <a href="{{url('contact')}}"><h3>Support Desk</h3></a>
-                            <p>Swap Jersey securely!</p>
+                            <p>Secure transactions</p>
                         </div>
                     </div>
                 </div>

@@ -18,9 +18,9 @@
                 <div class="col-md-8 mx-auto">
                     <h1>{{ $listing->product_title }}</h1>
                         @if($listing->authentic)
-                        <small style="color: green;">Authentic</small>
+                        <span style="color: green;">Authentic</span>
                         @else
-                        <small style="color: dark;">Non Authentic</small>
+                        <span style="color: dark;">Non Authentic</span>
                         @endif
                     <div class="product-meta d-flex flex-row">
                         <div class="user-avatar p-1">
@@ -35,7 +35,7 @@
                         <span>Buy Now: ${{$listing->price}}</span>
                     </div>
                     <div class="description mt-2 mb-2">
-                        <h3>Description</h3>
+                        <h3>Description: </h3>
                         <p>{{ $listing->product_description }}</p>
                     </div>
                     <div class="gallery mb-3">
@@ -60,7 +60,7 @@
 
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 8px"
                                     data-bs-target="#exampleModal">
-                                    Make trade Offer
+                                    Make trade offer
                                 </button>
                             </div>
                         @endif
@@ -99,7 +99,7 @@
                             <div class="modal-body">
                                 <p>Users can make trade offers! Offers can be made:</p>
                                 <ul>
-                                    <li>Item for item: Please include images of the item you are trading and leave the “amount” empty. Then press “post offer”. </li>
+                                    <li>Item for item: Please include images of the item you are trading and leave the amount as “0”. Then press “post offer”.</li>
                                     <li>Money for item: Please include the amount you wish to offer and leave the “image gallery” empty.  Then press “post offer”. </li>
                                     <li>Item and money for item: Please include the amount you wish to offer and images of the item you are attempting to trade. Then press “post offer”.  (Please use this feature when the trade needs to be more equal). </li>
                                 </ul>
@@ -109,7 +109,7 @@
                                     <input type="number" class="form-control" id="amount" name="amount" value="0" placeholder="Amount">
                                 </div>
                                 <div class="mb-3">
-                                    <h5>Upload Image Gallery</h5>
+                                    <h5>Image Gallery</h5>
                                     <span>Upload images to the gallery to show the condition of the sports jersey/ sports card. </span>
                                 </div>
                                 <div class="mb-3 text-center">

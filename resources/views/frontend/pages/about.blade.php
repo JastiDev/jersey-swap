@@ -3,14 +3,14 @@
     About us - Jersey Swap
 @endsection
 @section('meta_description')
-Jersey Swap is revolutionizing the sports jersey and sports card industry by providing a  platform that operates as the central hub for sports jerseys and sports cards trading.    
+Jersey Swap is revolutionizing the sports collection industry by providing a  platform that operates as the central hub for sports jerseys and sports cards trading.    
 @endsection
 @section('content')
     <section id="page-box" class="page-hero-box">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h1>About us</h1>
+                    <h1>About Us</h1>
                     <ul class="breadcrumb mx-auto justify-content-center" aria-label="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="/">Home</a>
@@ -50,7 +50,7 @@ Jersey Swap is revolutionizing the sports jersey and sports card industry by pro
                         <div class="card-body text-center">
                             <img src="assets/images/icons/team.png" class="mb-2" alt="Reliable Jersey Swap">
                             <h3>Reliable</h3>
-                            <p>Buyers, Sellers, and Traders can be confident in all transactions.</p>
+                            <p>Buyers, sellers, and traders can be confident in all transactions.</p>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ Jersey Swap is revolutionizing the sports jersey and sports card industry by pro
                     <h2 class="mt-3 mb-1">How Can We Help You Expand Your Collection</h2>
                     <div class="divider"></div>
                     <p>
-                      Jersey Swap is revolutionizing the sports jersey industry. Our platform operates as the central hub for sports jerseys and sports cards trading. All transactions will be completed via online where Jersey Swap will facilitate every deal made on our website.
+                      Jersey Swap is revolutionizing the sports collection industry. Our platform operates as the central hub for sports jerseys and sports cards trading. All transactions will be completed via online where Jersey Swap will facilitate every deal made on our website.
                       Sellers, list their items for sale/trade on Jersey Swap, while buyers/traders pursue listings available.
                     </p>
                     <p>

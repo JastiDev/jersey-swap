@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <h1>Contact us</h1>
+                        <h1>Contact Us</h1>
                         <ul class="breadcrumb mx-auto justify-content-center" aria-label="breadcrumb">
                             <li class="breadcrumb-item">
                                 <a href="/">Home</a>

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mb-5">
-                <h2>Read what our customers say</h2>
+                <h2>Read what our customers say:</h2>
             </div>
             <!-- Testimonial 1 -->
             @foreach ($testimonials as $testimonial)

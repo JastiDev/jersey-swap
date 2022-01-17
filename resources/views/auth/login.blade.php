@@ -12,7 +12,7 @@
                     <div class="col-md-4 mx-auto">
                         <div class="card mt-5 mb-5">
                             <div class="card-body">
-                                <h1 class="text-center">Log in</h1>
+                                <h1 class="text-center">Log In</h1>
                                 <form method="POST" action="{{route('login')}}">
                                     @csrf
                                     <div class="mb-3">
@@ -45,7 +45,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 d-grid">
-                                        <button type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Log in</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-sign-in"></i> Log In</button>
                                     </div>
                                     <div class="mb-3">
                                         @if (Route::has('password.request'))
@@ -54,7 +54,7 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3 d-grid">
-                                        <a href="{{route('register')}}" class="btn btn-primary"><i class="fa fa-user"></i> Create an account?</a>
+                                        <a href="{{route('register')}}" class="btn btn-primary"><i class="fa fa-user"></i> Create New Account?</a>
                                     </div>
                                 </form>
                             </div>
