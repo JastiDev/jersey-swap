@@ -12,7 +12,7 @@
                     <div class="col-md-6 mx-auto">
                         <div class="card mt-5 mb-5">
                             <div class="card-body">
-                                <h1 class="text-center">Signup</h1>
+                                <h1 class="text-center">Sign Up</h1>
                                 <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                     <div class="row mb-3">
@@ -81,7 +81,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 d-grid">
-                                        <button type="submit" class="btn btn-success"><i class="fa fa-user"></i> Sign up</button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-user"></i> Sign Up</button>
                                     </div>
                                     <hr>
                                     <div class="mb-3 d-grid">
