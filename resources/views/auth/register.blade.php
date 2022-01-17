@@ -76,7 +76,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" required>
                                             <label class="form-check-label" for="flexCheckChecked">
-                                                By signing up you agree to our terms and conditions.
+                                                By checking the box you agree to the sites terms and conditions.
                                             </label>
                                         </div>
                                     </div>

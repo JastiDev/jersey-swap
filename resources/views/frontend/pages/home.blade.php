@@ -124,7 +124,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-3">
-                    <h2 class="text-white mt-2 mb-md-5 mb-2">The Swap</h2>
+                    <h2 class="text-white mt-2 mb-md-5 mb-2">The Swap:</h2>
                 </div>
                 <div class="col-md-3 d-flex align-items-stretch mb-2">
                     <div class="card">
