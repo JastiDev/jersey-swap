@@ -20,7 +20,7 @@
                             @foreach($listings as $listing)
                                 <tr>
                                     <td>
-                                        <img src="{{asset($listing->product_img)}}" class="table-user-thumb" alt="">
+                                        <img src="{{static_url('products/'.$listing->product_img)}}" class="table-user-thumb" alt="">
                                     </td>
                                     <td>{{$listing->product_title}}</td>
                                     <td>{{$listing->owner->f_name." ".$listing->owner->l_name}}</td>

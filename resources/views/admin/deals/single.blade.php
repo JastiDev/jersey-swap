@@ -43,11 +43,11 @@
                             <input type="hidden" name="deal_id" value="{{$deal->id}}">
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Jersey Recieved" required="">
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Jersey Received" required="">
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea name="message" class="form-control" id="message" placeholder="Jersey Recieved by user" required=""></textarea>
+                                <textarea name="message" class="form-control" id="message" placeholder="Jersey Received by user" required=""></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -86,7 +86,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{asset($listing->product_img)}}" width="100%">
+                                <img src="{{static_url('products_featured/'.$listing->product_img)}}" width="100%">
                             </div>
                             <div class="col-md-8">
                                 <h1>{{$listing->product_title}}</h1>
@@ -96,8 +96,8 @@
                                 <div class="row">
                                     @foreach($listing_gallery as $listing_image)
                                         <div class="col-md-2">
-                                            <a href="{{asset('storage/products/'.$listing_image->image)}}" target="_blank">
-                                                <img src="{{asset('storage/products/'.$listing_image->image)}}" width="100%">
+                                            <a href="{{static_url('products/'.$listing_image->image)}}" target="_blank">
+                                                <img src="{{static_url('products/'.$listing_image->image)}}" width="100%">
                                             </a>
                                         </div>
                                     @endforeach
@@ -122,8 +122,8 @@
                                 <div class="row">
                                     @foreach($offer_gallery as $listing_image)
                                         <div class="col-md-2">
-                                            <a href="{{asset('storage/offers/'.$listing_image->image)}}" target="_blank">
-                                                <img src="{{asset('storage/offers/'.$listing_image->image)}}" width="100%">
+                                            <a href="{{static_url('offers/'.$listing_image->image)}}" target="_blank">
+                                                <img src="{{static_url('offers/'.$listing_image->image)}}" width="100%">
                                             </a>
                                         </div>
                                     @endforeach

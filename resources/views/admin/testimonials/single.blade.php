@@ -61,7 +61,7 @@
                                     name="designation" value="{{ $testimonial->designation }}" required>
                             </div>
                             <div class="form-group">
-                                <img src="{{asset($testimonial->avatar)}}" width="100%" class="rounded">
+                                <img src="{{static_url('testimonials/'.$testimonial->avatar)}}" width="100%" class="rounded">
                             </div>
                             <div class="form-group">
                                 <label for="avatar">Avatar</label>

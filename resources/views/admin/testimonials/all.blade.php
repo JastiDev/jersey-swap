@@ -53,7 +53,7 @@
                             <tbody>
                                 @foreach ($testimonials as $testimonial)
                                     <tr>
-                                        <td><img src="{{ asset($testimonial->avatar) }}" class="table-user-thumb" alt="avatar"></td>
+                                        <td><img src="{{ static_url('testimonials/'.$testimonial->avatar) }}" class="table-user-thumb" alt="avatar"></td>
                                         <td>{{ $testimonial->name }}</td>
                                         <td>{{ $testimonial->designation }}</td>
                                         <td>

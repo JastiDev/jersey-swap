@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Testimonials;
+use Intervention\Image\ImageManagerStatic as Image;
 use PHPUnit\Framework\Test;
 
 class ADTestimonials extends Controller
@@ -33,9 +34,11 @@ class ADTestimonials extends Controller
         ]);
         $imageName = null;
         if($request->has('avatar')){
-            $imageName = time().'.'.$request->avatar->extension();
-            $imageName = "images/testimonials/".$imageName;
-            $request->avatar->move(public_path('images/testimonials'), $imageName);
+            $imageName = uniqid().$request->avatar->extension();
+            $img = Image::make($request->avatar->path());
+            $img->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(storage_path('app/public/testimonials').'/'.$imageName);
         }
         
         $testimonial = null;
@@ -67,9 +70,11 @@ class ADTestimonials extends Controller
         ]);
         $imageName = null;
         if($request->has('avatar')){
-            $imageName = time().'.'.$request->avatar->extension();
-            $imageName = "images/testimonials/".$imageName;
-            $request->avatar->move(public_path('images/testimonials'), $imageName);
+            $imageName = uniqid().$request->avatar->extension();
+            $img = Image::make($request->avatar->path());
+            $img->resize(200, 200, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(storage_path('app/public/testimonials').'/'.$imageName);
         }
         if($imageName==null){
             Testimonials::where("id",$request->id)

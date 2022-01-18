@@ -23,7 +23,7 @@
                                     <td>{{$deal->id}}</td>
                                     <td>{{$deal->deal_number}}</td>
                                     <td>
-                                        <img src="{{asset($deal->listing->product_img)}}" class="table-user-thumb" alt="">
+                                        <img src="{{static_url('products_featured/'.$deal->listing->product_img)}}" class="table-user-thumb" alt="">
                                     </td>
                                     <td>{{$deal->listing->product_title}}</td>
                                     <td>{{date('d M , Y',strtotime($deal->created_at))}}</td>
