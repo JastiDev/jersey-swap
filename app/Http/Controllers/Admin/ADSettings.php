@@ -60,8 +60,7 @@ class ADSettings extends Controller
             @unlink($banner_link->setting_value);
         }
         $imageName = time().'.'.$request->banner->extension();
-        $imageName = "images/banner/".$imageName;
-        $request->banner->move(public_path('images/banner'), $imageName);
+        $request->banner->move(storage_path('app/public/banner'), $imageName);
         $banner->setting_value =  $imageName;
         $banner_link->setting_value = $request->link; $banner_link->save();
         $banner->save();

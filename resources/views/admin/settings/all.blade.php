@@ -100,7 +100,7 @@
                             @csrf
                             @if(isset($settings['banner']) && !empty($settings['banner']))
                                 <div class="form-group">
-                                    <img src="{{asset($settings['banner']->setting_value)}}" width="100%" class="rounded">
+                                    <img src="{{static_url('banner/'.$settings['banner']->setting_value)}}" width="100%" class="rounded">
                                 </div>
                                 <div class="form-group">
                                     <a href="{{$settings['banner_link']->setting_value}}" target="_blank">{{$settings['banner_link']->setting_value}}

@@ -7,7 +7,7 @@
      <div class="container">
           <div class="row" style="border: 1px solid gray; border-radius: 8px; height: 600px; margin-bottom: 10px;">
             <div class="col-md-3 user-list" style="height: 100%; overflow-y: scroll; display: flex; flex-direction: column;">
-              <input id="search_input" class="form-control" placeholder="Type a username" style="margin-top: 8px;"/>
+              <input id="search_input" class="form-control" autocomplete="off" placeholder="Type a username" style="margin-top: 8px;"/>
               <div id="search_result"></div>
               @foreach($user_list as $user)
                 <div style="display: flex; flex-flow: row nowrap; margin-top: 4px; cursor: pointer; padding:4px; border-radius: 4px;"
@@ -97,11 +97,11 @@
                     var isImg = item.message_content.slice(0, 6) == "is_img" ? true : false;
 
                     var img = document.createElement('img');
-                    if(isImg) img.setAttribute('src',"{{url('/storage/messages')}}/"+item.message_content);
+                    if(isImg) img.setAttribute('src',"{{static_url('messages')}}/"+item.message_content);
                     
                     var imgA = document.createElement('a');
                     if(isImg){
-                      imgA.setAttribute('href', "{{url('/storage/messages')}}/" + item.message_content);
+                      imgA.setAttribute('href', "{{static_url('messages')}}/" + item.message_content);
                       imgA.setAttribute('target', '_blank');
                       imgA.append(img);
                     }
@@ -168,7 +168,7 @@
                     });
 
                     var img = document.createElement('img');
-                    img.setAttribute('src',base_url+'/'+item.profile_picture);
+                    img.setAttribute('src','{{static_url('avatar')}}/'+item.profile_picture);
                     img.style.cssText = "width:64px; height: 64px; border-radius: 32px;";
                     userDiv.append(img);
 

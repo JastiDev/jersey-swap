@@ -15,6 +15,7 @@ use App\Models\Invoices;
 use App\Notifications\ListingCreated;
 use App\Notifications\ListingNotification;
 use App\Notifications\OfferNotification;
+use Intervention\Image\ImageManagerStatic as Image;
 use Throwable;
 
 class ListingController extends Controller
@@ -120,15 +121,13 @@ class ListingController extends Controller
             'authenticity' => 'required'
         ]);
 
-        $imageName = time().'.'.$request->product_img->extension();  
+        $imageName = uniqid().'.'.$request->product_img->extension();
 
-        $request->product_img->move(public_path('images/products'), $imageName);
-        try{
-            app(Spatie\ImageOptimizer\OptimizerChain::class)->optimize(public_path('images/products/'.$imageName));
-        }
-        catch(Throwable $e){
+        $img = Image::make($request->product_img->path());
+        $img->resize(600, 600, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(storage_path('app/public/products_featured').'/'.$imageName);
 
-        }
         $posted_by = Auth::id();
         $slug = Str::slug($request->product_title, '-');
         $count = 1;
@@ -143,7 +142,7 @@ class ListingController extends Controller
         $listing = Listing::create([
             'product_title' => $request->product_title,
             'product_description' => $request->product_description,
-            'product_img' => "images/products/".$imageName,
+            'product_img' => $imageName,
             'posted_by' => $posted_by,
             'slug' => $slug,
             'authentic' => $authentic,
@@ -154,7 +153,7 @@ class ListingController extends Controller
         
         $user = Auth::user();
         try {
-            $user->notify(new ListingCreated(url('/'.$listing->product_img)));
+            $user->notify(new ListingCreated(static_url('products_featured/'.$listing->product_img)));
         }catch (Throwable $e) {
             report($e);
         }
@@ -167,15 +166,14 @@ class ListingController extends Controller
             foreach($images as $image){
                 $base64_image = $image; // your base64 encoded     
                 @list($type, $file_data) = explode(';', $base64_image);
-                @list(, $file_data) = explode(',', $file_data); 
-                $imageName = time().Str::random(10).'.'.'png'; 
-                Storage::disk('public')->put('products/'.$imageName, base64_decode($file_data));
-                try{
-                    app(Spatie\ImageOptimizer\OptimizerChain::class)->optimize(public_path('storage/products/'.$imageName));
-                }
-                catch(Throwable $e){
-                    
-                }
+                @list(, $file_data) = explode(',', $file_data);
+
+                $imageName = uniqid().'.png';
+                $img = Image::make($file_data);
+                $img->resize(600, 600, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save(storage_path('app/public/products').'/'.$imageName);
+
                 ListingGallery::create([
                     'listing_id' =>$listing_id,
                     'image'=> $imageName
@@ -207,7 +205,7 @@ class ListingController extends Controller
             'message' => 'Your listing has been cancelled.',
             'url' => url('/')."/listings/add-listing",
             'url_text' => "Create another listing",
-            'image_url' => url('/'.$listing->product_img)
+            'image_url' => static_url('products_featured/'.$listing->product_img)
         ];
         
         $user = Auth::user();
@@ -235,7 +233,7 @@ class ListingController extends Controller
             'message' => 'Your listing has been cancelled by the admin!',
             'url' => url('/')."/listings/add-listing",
             'url_text' => "Create another listing",
-            'image_url' => url('/'.$listing->product_img)
+            'image_url' => static_url('products_featured/'.$listing->product_img)
         ];
         
         $user = User::find($listing->posted_by);
@@ -265,7 +263,7 @@ class ListingController extends Controller
             $data = [
                 'type'=> 'declined',
                 'message' => $user->username.' has declined your offer!',
-                'image_url' => url('/'.$product_img),
+                'image_url' => static_url('products_featured/'.$product_img),
             ];
             try {
                 $user_noti->notify(new OfferNotification($data));

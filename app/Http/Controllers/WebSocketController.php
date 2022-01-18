@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
+use Intervention\Image\ImageManagerStatic as Image;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 use Exception;
@@ -167,14 +168,13 @@ class WebSocketController implements MessageComponentInterface
                   foreach($images_arr as $image){
                       $base64_image = $image; // your base64 encoded     
                       @list(, $file_data) = explode(';', $base64_image);
-                      @list(, $img_data) = explode(',', $file_data); 
-                      $imageName = 'is_img'.time().Str::random(10).'.'.'png'; 
-                      Storage::disk('public')->put('messages/'.$imageName, base64_decode($img_data));
-                      try{
-                          app(Spatie\ImageOptimizer\OptimizerChain::class)->optimize(public_path('storage/messages/'.$imageName));
-                      }
-                      catch(Throwable $e){
-                      }
+                      @list(, $img_data) = explode(',', $file_data);
+
+                      $imageName = uniqid().'.png';
+                      $img = Image::make($file_data);
+                      $img->resize(300, 300, function ($constraint) {
+                          $constraint->aspectRatio();
+                      })->save(storage_path('app/public/messages').'/'.$imageName);
 
                       $from->send(json_encode([
                           "type" => "img",

@@ -68,7 +68,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <a href="{{$banner_url->setting_value}}">
-                        <img src="{{asset($banner->setting_value)}}" class="ad">
+                        <img src="{{static_url('banner/'.$banner->setting_value)}}" class="ad">
                     </a>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                         @foreach($listings as $listing)
                         <div class="item">
                             <div class="card product-card">
-                                <a href="{{url('/exchange/'.$listing->slug)}}"><img src="{{asset(url('/'.$listing->product_img))}}" class="card-img-top"
+                                <a href="{{url('/exchange/'.$listing->slug)}}"><img src="{{static_url('products_featured/'.$listing->product_img)}}" class="card-img-top"
                                         alt="{{$listing->product_title}}"></a>
                                 <div class="card-body">
                                     <div class="mb-2">
