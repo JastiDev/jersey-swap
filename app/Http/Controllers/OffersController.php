@@ -99,7 +99,7 @@ class OffersController extends Controller
             $offer = Offers::find($offer->offer_id);
             $user = User::find($offer->posted_by);
             $offer->username = $user->username;
-            $offer->user_profile_picture =  url('/')."/".$user->profile_picture;
+            $offer->user_profile_picture =  static_url('avatar/'.$user->profile_picture);
             $offer->gallery = OfferGallery::where('offer_id',$offer->id)->get();
             $offer->description="Jersey Swap Offer!";
             $offers[]=$offer;
@@ -122,7 +122,7 @@ class OffersController extends Controller
             while($i<count($offers)){
                 $user = User::find($offers[$i]->posted_by);
                 $offers[$i]->username = $user->username;
-                $offers[$i]->user_profile_picture = url('/')."/".$user->profile_picture;
+                $offers[$i]->user_profile_picture = static_url('avatar/'.$user->profile_picture);
                 $offers[$i]->gallery = OfferGallery::where('offer_id',$offers[$i]->id)->get();
                 $offers[$i]->description="Jersey Swap Offer!";
                 $offers[$i]->offer_status=$offers[$i]->offer_status;
