@@ -46,7 +46,7 @@ class OffersController extends Controller
         $data = [
             'type'=> 'recieved',
             'message' => Auth::user()->username.' has created an offer on your listing!',
-            'image_url' => url('/'.$listingBy->product_img),
+            'image_url' => static_url('products_featured/'.$listingBy->product_img),
             'url' => url('listing/'.$listingBy->slug),
             'url_text' => 'Go to listing'
         ];
@@ -58,7 +58,7 @@ class OffersController extends Controller
         $data = [
             'type'=> 'sent',
             'message' => 'Success! Offer has been made!',
-            'image_url' => url('/'.$listingBy->product_img),
+            'image_url' => static_url('products_featured/'.$listingBy->product_img),
             'url' => null,
             'url_text' => null
         ];
@@ -177,7 +177,7 @@ class OffersController extends Controller
         $data = [
             'type'=> 'declined',
             'message' => Auth::user()->username.' has declined your offer!',
-            'image_url' => url('/'.$listing->product_img),
+            'image_url' => static_url('products_featured/'.$listing->product_img),
         ];
         try {
             $user->notify(new OfferNotification($data));
