@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="product-meta d-flex flex-row">
                                         <div class="user-avatar p-1">
-                                            <img src="{{asset($listing->owner->profile_picture)}}" class="avatar">
+                                            <img src="{{static_url('avatar/'.$listing->owner->profile_picture)}}" class="avatar">
                                         </div>
                                         <div class="user-name align-self-center">
                                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>

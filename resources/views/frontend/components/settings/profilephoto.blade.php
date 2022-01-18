@@ -26,7 +26,7 @@
     <div class="mb-3">
         <div class="upload_avatar mx-auto">
             @if(auth()->user()->profile_picture!='default-user.png')
-                <img src="{{url('/').'/'.auth()->user()->profile_picture}}" class="avatar">
+                <img src="{{static_url('avatar/'.auth()->user()->profile_picture)}}" class="avatar">
             @else
                 <img src="{{asset('assets/images/default-user.png')}}" class="avatar">
             @endif

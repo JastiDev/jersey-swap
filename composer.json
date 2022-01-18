@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "league/flysystem-sftp": "~1.0",
-        "stripe/stripe-php": "^7.97"
+        "stripe/stripe-php": "^7.97",
+        "intervention/image":  "^2.7"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -30,7 +31,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

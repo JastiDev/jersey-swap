@@ -11,7 +11,7 @@
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
                                     @if(auth()->user()->profile_picture!='default-user.png')
-                                    <img src="{{url('/').'/'.auth()->user()->profile_picture}}" alt="Admin" class="rounded-circle" width="150">
+                                    <img src="{{static_url('avatar/'.auth()->user()->profile_picture)}}" alt="Admin" class="rounded-circle" width="150">
                                     @else
                                     <img src="{{asset('assets/images/default-user.png')}}" alt="Admin" class="rounded-circle" width="150">
                                     @endif

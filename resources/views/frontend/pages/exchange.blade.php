@@ -51,7 +51,7 @@
                               </div>
                               <div class="product-meta d-flex flex-row">
                                   <div class="user-avatar p-1">
-                                      <img src="{{ asset($list->user->profile_picture) }}" class="avatar">
+                                      <img src="{{ static_url('avatar/'.$list->user->profile_picture) }}" class="avatar">
                                   </div>
                                   <div class="user-name align-self-center">
                                       By <a href="{{url('user/'.$list->owner->username)}}">{{$list->user->f_name." ".$list->user->l_name}}</a>
@@ -132,7 +132,7 @@
           var userAvatarDiv = document.createElement('div');
           userAvatarDiv.className = "user-avatar p-1";
           var imgUserAvatar = document.createElement("img");
-          imgUserAvatar.setAttribute("src", "{{asset(url(''))}}/"+list.user.profile_picture);
+          imgUserAvatar.setAttribute("src", "{{static_url('avatar')}}/"+list.user.profile_picture);
           imgUserAvatar.className = "avatar";
           userAvatarDiv.append(imgUserAvatar);
           userDiv.append(userAvatarDiv);

@@ -33,7 +33,7 @@
                                 @foreach ($users as $user)
                                     @if($user->role->role=='user')
                                     <tr>
-                                        <td><img src="{{ asset($user->profile_picture) }}" class="table-user-thumb" alt=""></td>
+                                        <td><img src="{{ static_url('avatar/'.$user->profile_picture) }}" class="table-user-thumb" alt=""></td>
                                         <td>{{ $user->f_name . ' ' . $user->l_name }}</td>
                                         <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>

@@ -12,7 +12,7 @@
               @foreach($user_list as $user)
                 <div style="display: flex; flex-flow: row nowrap; margin-top: 4px; cursor: pointer; padding:4px; border-radius: 4px;"
                   onclick="onClickUser('{{$user->username}}', '{{$user->id}}')">
-                  <img src="{{ asset($user->profile_picture) }}" style="width:64px; height:64px; border-radius: 32px;" alt="">
+                  <img src="{{ static_url('avatar/'.$user->profile_picture) }}" style="width:64px; height:64px; border-radius: 32px;" alt="">
                   <div style="display: flex; align-items: center; margin-left: 4px;">{{$user->username}}</div>
                 </div>
               @endforeach

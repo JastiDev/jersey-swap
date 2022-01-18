@@ -24,7 +24,7 @@
                         @endif
                     <div class="product-meta d-flex flex-row">
                         <div class="user-avatar p-1">
-                            <img src="{{ asset($listing->user->profile_picture) }}" class="avatar" alt="User Avatar">
+                            <img src="{{ static_url('avatar/'.$listing->user->profile_picture) }}" class="avatar" alt="User Avatar">
                         </div>
                         <div class="user-name align-self-center">
                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>

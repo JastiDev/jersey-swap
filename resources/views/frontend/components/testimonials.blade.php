@@ -14,7 +14,7 @@
                             <p>{{$testimonial->description}}</p>
                             <div class="product-meta d-flex flex-row">
                                 <div class="user-avatar p-1">
-                                    <img src="{{asset($testimonial->avatar)}}" class="avatar">
+                                    <img src="{{static_url('testimonials/'.$testimonial->avatar)}}" class="avatar">
                                 </div>
                                 <div class="user-name align-self-center">
                                     <p>{{$testimonial->name}}</p>

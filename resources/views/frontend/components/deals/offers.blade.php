@@ -10,7 +10,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-1">
-                                        <img class="avatar" src="{{ asset($offer->owner->profile_picture) }}">
+                                        <img class="avatar" src="{{ static_url('avatar/'.$offer->owner->profile_picture) }}">
                                     </div>
                                     <div class="col-md-11">
                                         <div class="row">

@@ -20,7 +20,7 @@
                                 <tr>
                                     <td>
                                         <a href="{{url('admin/users/'.$credit->user_id)}}">
-                                            <img src="{{asset($credit->owner->profile_picture)}}" class="table-user-thumb" alt="">
+                                            <img src="{{static_url('avatar/'.$credit->owner->profile_picture)}}" class="table-user-thumb" alt="">
                                         </a>
                                     </td>
                                     <td>$ {{$credit->credit}}</td>

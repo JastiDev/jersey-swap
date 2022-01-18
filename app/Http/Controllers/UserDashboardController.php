@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserDashboardController extends Controller
 {
@@ -74,21 +75,17 @@ class UserDashboardController extends Controller
             'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        /** @var User $user */
         $user = Auth::user();
+        $imageName = 'ava_'.$user->id.'.'.$request->avatar->extension();
 
-        $imageName = time().'.'.$request->avatar->extension();  
+        $img = Image::make($request->avatar->path());
+        $img->resize(200, 200, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save(storage_path('app/public/avatar').'/'.$imageName);
 
-        $request->avatar->move(public_path('images'), $imageName);
-        
-        $path = "images/".$imageName;
-
-        $user->profile_picture = $path;
-
+        $user->profile_picture = $imageName;
         $user->save();
-
-        /* Store $imageName name in DATABASE from HERE */
-
-    
 
         return back()
             ->with('success','You have successfully updated the profile photo!')
