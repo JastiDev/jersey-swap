@@ -18,7 +18,7 @@
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h1>Post Details About Your Sports Jersey to Get Offers</h1>
+                                <h1>Fill out details about your item to get offers!</h1>
                                 <hr>
                                 <form id="product-upload-form" method="POST" action="{{url('/listing/update')}}" enctype="multipart/form-data">
                                     @csrf
@@ -76,7 +76,7 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3">
-                                        <h2>Upload Image Gallery</h2>
+                                        <h2>Image Gallery</h2>
                                         <small>Gallery images are used to show the condition of the sports jersey or sports card.</small>
                                     </div>
                                     <div class="mb-3 text-center">

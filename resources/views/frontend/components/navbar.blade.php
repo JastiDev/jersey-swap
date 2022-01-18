@@ -97,7 +97,7 @@
             @guest
             <div class="d-flex">
                 <a class="btn btn-primary ms-2 me-2" href="{{route('exchange')}}">Start Trading Now</a>
-                <a class="btn btn-primary" href="{{route('register')}}">Sign up</a>
+                <a class="btn btn-primary" href="{{route('register')}}">Sign Up</a>
             </div>
             @endguest
         </div>

@@ -54,7 +54,7 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3 d-grid">
-                                        <a href="{{route('register')}}" class="btn btn-primary"><i class="fa fa-user"></i> Create New Account?</a>
+                                        <a href="{{route('register')}}" class="btn btn-primary"><i class="fa fa-user"></i> Create Account</a>
                                     </div>
                                 </form>
                             </div>
