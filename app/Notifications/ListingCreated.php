@@ -18,7 +18,7 @@ class ListingCreated extends Notification
      */
     public function __construct($data)
     {
-        $this->image_url = $data;
+        $this->image_url = static_url('products_featured/'.$data);
     }
 
     /**
