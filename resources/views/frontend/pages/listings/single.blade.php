@@ -101,7 +101,7 @@
                        <div class="card-body">
                            <div class="row">
                                <div class="col-md-1">
-                                   <img class="avatar" src="{{asset($review->avatar())}}">
+                                   <img class="avatar" src="{{static_url('avatar/'.$review->avatar())}}">
                                </div><div class="col-md-11">
                                    <div class="row">
                                        <div class="col">
@@ -138,7 +138,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <img class="avatar" src="{{asset($review->avatar())}}">
+                                            <img class="avatar" src="{{static_url('avatar/'.$review->avatar())}}">
                                         </div><div class="col-md-11">
                                             <div class="row">
                                                 <div class="col">

@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <img src="{{asset(url('/'.$listing->product_img))}}" class="w-100">
+                                <img src="{{static_url('products_featured/'.$listing->product_img)}}" class="w-100">
                             </div>
                             <div class="col-md-8">
                                 @if($listing->status=="cancelled")
@@ -21,8 +21,8 @@
                                 </div>
                                 <div class="gallery mb-3">
                                    @foreach($listing_gallery as $img)
-                                        <a href="{{asset('storage/products/'.$img->image)}}" target="_blank">
-                                            <img src="{{asset('storage/products/'.$img->image)}}" class="rounded" alt="...">
+                                        <a href="{{static_url('products/'.$img->image)}}" target="_blank">
+                                            <img src="{{static_url('products/'.$img->image)}}" class="rounded" alt="...">
                                         </a>
                                     @endforeach
                                 </div>
