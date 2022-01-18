@@ -58,6 +58,7 @@
         $(document).ready(function() {
             var page_url="{{url('/trading/status')}}";
             var base_url = "{{url('/')}}";
+            var static_url = "{{static_url('/')}}"
             var pg_url = "{{url('/trading/status')}}";
             var status = "payment";
 
@@ -91,7 +92,7 @@
                                   var td = document.createElement('td');
                                   var img = document.createElement('img');
                                   img.classList.add('product_img');
-                                  img.setAttribute('src',base_url+'/'+item.product_img);
+                                  img.setAttribute('src',static_url+'products_featured/'+item.product_img);
                                   td.append(img);
                                   tr.appendChild(td);
 

@@ -20,7 +20,7 @@
                         @if($listing->authentic)
                         <span style="color: green;">Authentic</span>
                         @else
-                        <span style="color: dark;">Non Authentic</span>
+                        <span style="color: darkgreen;">Non Authentic</span>
                         @endif
                     <div class="product-meta d-flex flex-row">
                         <div class="user-avatar p-1">
@@ -30,7 +30,7 @@
                             By <a href="{{url('user/'.$listing->owner->username)}}">{{$listing->owner->username}}</a>
                         </div>
                     </div>
-                    <img id="featured" src="{{ asset($listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
+                    <img id="featured" src="{{ static_url('products_featured/'.$listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
                     <div style="margin-top: 8px; color: green; font-weight: bold;">
                         <span>Buy Now: ${{$listing->price}}</span>
                     </div>
@@ -40,8 +40,8 @@
                     </div>
                     <div class="gallery mb-3">
                         @foreach ($listing_gallery as $img)
-                            <a href="{{ asset('storage/products/' . $img->image) }}" target="_blank">
-                                <img src="{{ asset('storage/products/' . $img->image) }}" class="rounded" alt="Listing Gallery">
+                            <a href="{{ static_url('products/' . $img->image) }}" target="_blank">
+                                <img src="{{ static_url('products/' . $img->image) }}" class="rounded" alt="Listing Gallery">
                             </a>
                         @endforeach
                     </div>

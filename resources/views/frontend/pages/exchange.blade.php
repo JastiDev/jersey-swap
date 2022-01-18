@@ -107,7 +107,7 @@
           imgA.setAttribute('href', "{{url('/exchange')}}/" + list.slug);
           
           var imgProd = document.createElement("img");
-          imgProd.setAttribute("src", "{{asset(url(''))}}/"+list.product_img);
+          imgProd.setAttribute("src", "{{static_url('/')}}products_featured/"+list.product_img);
           imgProd.className = "card-img-top";
           imgProd.alt = "...";
           imgA.append(imgProd);

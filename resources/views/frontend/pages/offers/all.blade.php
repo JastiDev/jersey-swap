@@ -56,6 +56,7 @@
         $(document).ready(function() {
             var page_url="{{url('/offers/status')}}";
             var base_url = "{{url('/')}}";
+            var static_url = "{{static_url('/')}}"
             var pg_url = "{{url('/offers/status')}}";
             var status = "posted";
 
@@ -90,14 +91,14 @@
                                   if(status == 'closed' || status == 'cancelled'){
                                       var img = document.createElement('img');
                                       img.classList.add('product_img');
-                                      img.setAttribute('src',base_url+'/'+item.product_img);
+                                      img.setAttribute('src',static_url+'products_featured/'+item.product_img);
                                       td.append(img);
                                   } else{
                                       var imgA = document.createElement('a');
                                       imgA.setAttribute('href', "{{url('/exchange')}}/" + item.slug);
                                       var img = document.createElement('img');
                                       img.classList.add('product_img');
-                                      img.setAttribute('src',base_url+'/'+item.product_img);
+                                      img.setAttribute('src',static_url+'products_featured/'+item.product_img);
                                       imgA.append(img);
                                       td.append(imgA);
                                   }  
@@ -110,11 +111,11 @@
                                   if(item.gallery.length>0){
                                       item.gallery.forEach(element => {
                                           var imgA = document.createElement('a');
-                                          imgA.setAttribute('href', "{{url('/storage/offers')}}/" + element.image);
+                                          imgA.setAttribute('href', "{{static_url('offers')}}/" + element.image);
                                           imgA.setAttribute('target', '_blank');
 
                                           var imgProd = document.createElement("img");
-                                          imgProd.setAttribute("src", "{{asset('storage/offers')}}/"+element.image);
+                                          imgProd.setAttribute("src", "{{static_url('offers')}}/"+element.image);
                                           imgProd.classList.add('product_img');
                                           imgProd.alt = "...";
                                           imgA.append(imgProd);

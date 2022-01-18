@@ -54,6 +54,7 @@
         $(document).ready(function() {
             var page_url="{{url('/my/listings')}}";
             var base_url = "{{url('/')}}";
+            var static_url = "{{static_url('/')}}"
 
             var index = 1;
             var pageSize = 7;
@@ -71,9 +72,7 @@
                         success: function(result){
                             function printTable(){
                               $("#table-data tbody").children('tr').remove();
-                              console.log(result.listings);
                               var filtered = result.listings.slice((index - 1) * pageSize, index * pageSize);
-                              console.log(filtered);
                         
                               filtered.forEach((item)=>{
                                   var tr = document.createElement('tr');
@@ -81,7 +80,7 @@
                                   var td = document.createElement('td');
                                   var img = document.createElement('img');
                                   img.classList.add('product_img');
-                                  img.setAttribute('src',base_url+'/'+item.product_img);
+                                  img.setAttribute('src',static_url+'product_featured/'+item.product_img);
                                   td.append(img);
 
                                   tr.appendChild(td);
