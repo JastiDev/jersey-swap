@@ -79,7 +79,7 @@ class ListingController extends Controller
             'listing_id' => 'required',
             'product_title' => 'required|max:100',
             'product_description' => 'required|max:500',
-            'product_img' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'product_img' => 'image|mimes:jpeg,png,jpg|max:15360',
             'authenticity' => 'required'
         ]);
         $id = $request->listing_id;
@@ -117,7 +117,7 @@ class ListingController extends Controller
         $request->validate([
             'product_title' => 'required|max:100',
             'product_description' => 'required|max:500',
-            'product_img' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'product_img' => 'required|image|mimes:jpeg,png,jpg|max:15360',
             'authenticity' => 'required'
         ]);
 

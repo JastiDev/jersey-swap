@@ -43,7 +43,7 @@ class ADSettings extends Controller
     }
     public function update_banner(Request $request){
         $request->validate([
-            'banner' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'banner' => 'required|image|mimes:jpeg,png,jpg|max:15360',
             'link' => 'required'
         ]);
         $banner = Settings::where('setting_name','site_banner')->first();

@@ -63,10 +63,10 @@ $(document).ready(function() {
         var fileUpload = this;
         if (typeof (fileUpload.files) != "undefined") {
             var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
-            if(size>2000){
+            if(size>15000){
                 swal(
                     "Error", 
-                    "Image size is larger than 2 MB, you can optimize the images using the online tool https://tinypng.com/. Drop the Images to the box and press “download”, “view”, and lastly screen shot the images. Then upload the images to our website!", 
+                    "Image size is larger than 15 MB, you can optimize the images using the online tool https://tinypng.com/. Drop the Images to the box and press “download”, “view”, and lastly screen shot the images. Then upload the images to our website!",
                     "warning",{
                         'buttons' : {
                             'cancel' : 'Cancel',
@@ -96,10 +96,10 @@ $(document).ready(function() {
         var fileUpload = this;
         if (typeof (fileUpload.files) != "undefined") {
             var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
-            if(size>2000){
+            if(size>15000){
                 swal(
                     "Error", 
-                    "Image size is larger than 2 MB, you can optimize the images using the online tool https://tinypng.com/. Drop the Images to the box and press “download”, “view”, and lastly screen shot the images. Then upload the images to our website!", 
+                    "Image size is larger than 15 MB, you can optimize the images using the online tool https://tinypng.com/. Drop the Images to the box and press “download”, “view”, and lastly screen shot the images. Then upload the images to our website!",
                     "warning",{
                         'buttons' : {
                             'cancel' : 'Cancel',
