@@ -95,7 +95,7 @@ class ReviewsContainer extends React.Component {
                                 <div className="row">
                                     <div className="col-md-1 col-2">
                                         <div className="user-avatar p-1">
-                                            <img src={base_url+"/"+review.owner.profile_picture} className="avatar w-100" />
+                                            <img src={static_url+"avatar/"+review.owner.profile_picture} className="avatar w-100" />
                                         </div>
                                     </div>
                                     <div className="col-md-11">

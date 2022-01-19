@@ -41,6 +41,7 @@
     <meta name="description" content="@yield('meta_description','The central hub to buy, sell, and trade sports jerseys and sports cards.')">
     <script>
         var base_url = "{{url('/')}}";
+        var static_url = "{{static_url('')}}";
     </script>
 </head>
 
