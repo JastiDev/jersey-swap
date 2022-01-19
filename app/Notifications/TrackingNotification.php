@@ -58,7 +58,7 @@ class TrackingNotification extends Notification
         return [
             'type' => $this->data['type'],
             'message' => $this->data['message'],
-            'url' => $this->data['url'],
+            'url' => $this->data['url'] ?? "",
             'url_text' => $this->data['url_text'] ?? "",
             'image_url' => $this->data['image_url'] ?? ""
         ];
