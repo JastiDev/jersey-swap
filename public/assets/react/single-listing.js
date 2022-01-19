@@ -106,7 +106,7 @@ class SingleListing extends React.Component {
                                                     
                                                     <div className="gallery mb-3">
                                                     {offer.gallery.map(function(image,i){
-                                                        var img_link = "/storage/offers/"+image.image;
+                                                        var img_link = static_url+"offers/"+image.image;
                                                         return (
                                                             <a href={img_link} target="__blank">
                                                                 <img src={img_link} className="rounded" alt="..." />
