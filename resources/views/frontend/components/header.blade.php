@@ -30,7 +30,6 @@
 
     <!-- Custom CSS-->
     <link rel="stylesheet" href="{{asset('assets/style/style.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/style/style.css')}}">
 
     <!-- Fav Icon -->
     <link rel="icon" href="{{asset('assets/images/logo-transparent.png')}}">
