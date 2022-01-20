@@ -154,7 +154,7 @@ class ListingController extends Controller
         
         $user = Auth::user();
         try {
-            $user->notify(new ListingCreated(static_url('products_featured/'.$listing->product_img)));
+            $user->notify(new ListingCreated($listing->product_img));
         }catch (Throwable $e) {
             report($e);
         }
