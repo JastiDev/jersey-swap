@@ -55,7 +55,7 @@ $(document).ready(function() {
     var images = 0;
     if($("#img-gallery .col-md-3").length>0){
         images = images + $("#img-gallery .col-md-3").length;
-        if(images>=5){
+        if(images>=3){
             $("#uitp_gallery").hide();
         }
     }
@@ -164,7 +164,7 @@ $(document).ready(function() {
         col.append(image_box);
         $("#img-gallery").append(col);
         images++;
-        if(images>=5){
+        if(images>=3){
             $("#uitp_gallery").hide();
         }
     });
@@ -175,7 +175,7 @@ $(document).ready(function() {
         }
         $(this).parents('.col-md-3').remove();
         images--;
-        if(images<=5){
+        if(images<=3){
             $("#uitp_gallery").show();
         }
     });
