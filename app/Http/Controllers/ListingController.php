@@ -15,6 +15,7 @@ use App\Models\Invoices;
 use App\Notifications\ListingCreated;
 use App\Notifications\ListingNotification;
 use App\Notifications\OfferNotification;
+use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\ImageManagerStatic as Image;
 use Throwable;
 
@@ -164,20 +165,23 @@ class ListingController extends Controller
         if($request->has('image') && $listing_id!==null){
             $images = $request->image;
             foreach($images as $image){
-                $base64_image = $image; // your base64 encoded     
-                @list($type, $file_data) = explode(';', $base64_image);
-                @list(, $file_data) = explode(',', $file_data);
+                try {
+                    @list($type, $file_data) = explode(';', $image);
+                    @list(, $file_data) = explode(',', $file_data);
 
-                $imageName = uniqid().'.png';
-                $img = Image::make($file_data);
-                $img->resize(600, 600, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save(storage_path('app/public/products').'/'.$imageName);
+                    $imageName = uniqid() . '.png';
+                    $img = Image::make($file_data);
+                    $img->resize(600, 600, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save(storage_path('app/public/products') . '/' . $imageName);
 
-                ListingGallery::create([
-                    'listing_id' =>$listing_id,
-                    'image'=> $imageName
-                ]);
+                    ListingGallery::create([
+                        'listing_id' => $listing_id,
+                        'image' => $imageName
+                    ]);
+                } catch (NotReadableException $e) {
+                    report($e);
+                }
             }
         }
     }
@@ -205,7 +209,7 @@ class ListingController extends Controller
             'message' => 'Your listing has been cancelled.',
             'url' => url('/')."/listings/add-listing",
             'url_text' => "Create another listing",
-            'image_url' => static_url('products_featured/'.$listing->product_img)
+            'image_url' => $listing->product_img
         ];
         
         $user = Auth::user();
@@ -233,7 +237,7 @@ class ListingController extends Controller
             'message' => 'Your listing has been cancelled by the admin!',
             'url' => url('/')."/listings/add-listing",
             'url_text' => "Create another listing",
-            'image_url' => static_url('products_featured/'.$listing->product_img)
+            'image_url' => $listing->product_img
         ];
         
         $user = User::find($listing->posted_by);
@@ -263,7 +267,7 @@ class ListingController extends Controller
             $data = [
                 'type'=> 'declined',
                 'message' => $user->username.' has declined your offer!',
-                'image_url' => static_url('products_featured/'.$product_img),
+                'image_url' => $product_img
             ];
             try {
                 $user_noti->notify(new OfferNotification($data));

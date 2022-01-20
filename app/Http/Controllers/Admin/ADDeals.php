@@ -80,7 +80,7 @@ class ADDeals extends Controller
             'message' => 'Hooray! Your trading status has been changed to completed. You can leave your feedback now!',
             'url' => url('listing/'.$listing->slug),
             'url_text' => 'Give Feedback',
-            'image_url' => static_url('products_featured/'.$listing->product_img)
+            'image_url' => $listing->product_img
         ];
         try {
             $user->notify(new DealNotification($data));
@@ -91,7 +91,7 @@ class ADDeals extends Controller
         if($offer->offer_price>0){
             $data = [
                 'type' => 'escrow',
-                'message' => 'You just recieved an amount of $'.$offer->offer_price.' from your last trading!',
+                'message' => 'You just received an amount of $'.$offer->offer_price.' from your last trading!',
                 'url' => url('users/'.$user->username.'/dashboard'),
                 'url_text' => 'Go to Dashboard'
             ];
@@ -115,7 +115,7 @@ class ADDeals extends Controller
             'message' => 'There is a new update available for the tracking of the trade.',
             'url' => url('listing/'.$listing->slug),
             'url_text' => 'Go to Listing',
-            'image_url' => static_url('products_featured/'.$listing->product_img)
+            'image_url' => $listing->product_img
         ];
         try {
             $user->notify(new TrackingNotification($data));
@@ -160,8 +160,7 @@ class ADDeals extends Controller
             'type' => 'cancelled',
             'message' => 'Your trading status has been cancelled by the Jersey Swap Team!',
             'url' => url('listing/'.$listing->slug),
-            'url_text' => 'Go to Listing',
-            'url' => url('listing/'.$listing->product_img)
+            'url_text' => 'Go to Listing'
         ];
         try {
             $user->notify(new DealNotification($data));

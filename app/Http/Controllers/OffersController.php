@@ -12,6 +12,8 @@ use App\Models\Deals;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Notifications\OfferNotification;
+use Intervention\Image\Exception\NotReadableException;
+use Intervention\Image\ImageManagerStatic as Image;
 use Throwable;
 
 class OffersController extends Controller
@@ -45,7 +47,7 @@ class OffersController extends Controller
         $data = [
             'type'=> 'recieved',
             'message' => Auth::user()->username.' has created an offer on your listing!',
-            'image_url' => static_url('products_featured/'.$listingBy->product_img),
+            'image_url' => $listingBy->product_img,
             'url' => url('listing/'.$listingBy->slug),
             'url_text' => 'Go to listing'
         ];
@@ -57,7 +59,7 @@ class OffersController extends Controller
         $data = [
             'type'=> 'sent',
             'message' => 'Success! Offer has been made!',
-            'image_url' => static_url('products_featured/'.$listingBy->product_img),
+            'image_url' => $listingBy->product_img,
             'url' => null,
             'url_text' => null
         ];
@@ -73,15 +75,23 @@ class OffersController extends Controller
         if($request->has('image') && $offer_id!==null){
             $images = $request->image;
             foreach($images as $image){
-                $base64_image = $image; // your base64 encoded     
-                @list($type, $file_data) = explode(';', $base64_image);
-                @list(, $file_data) = explode(',', $file_data); 
-                $imageName = time().Str::random(10).'.'.'png'; 
-                Storage::disk('public')->put('offers/'.$imageName, base64_decode($file_data));
-                OfferGallery::create([
-                    'offer_id' =>$offer_id,
-                    'image'=> $imageName
-                ]);
+                try {
+                    @list($type, $file_data) = explode(';', $image);
+                    @list(, $file_data) = explode(',', $file_data);
+
+                    $imageName = uniqid() . '.png';
+                    $img = Image::make($file_data);
+                    $img->resize(600, 600, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save(storage_path('app/public/offers') . '/' . $imageName);
+
+                    OfferGallery::create([
+                        'offer_id' => $offer_id,
+                        'image'=> $imageName
+                    ]);
+                } catch (NotReadableException $e) {
+                    report($e);
+                }
             }
         }
     }
@@ -176,7 +186,7 @@ class OffersController extends Controller
         $data = [
             'type'=> 'declined',
             'message' => Auth::user()->username.' has declined your offer!',
-            'image_url' => static_url('products_featured/'.$listing->product_img),
+            'image_url' => $listing->product_img,
         ];
         try {
             $user->notify(new OfferNotification($data));

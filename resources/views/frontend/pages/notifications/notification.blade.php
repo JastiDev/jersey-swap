@@ -47,7 +47,7 @@
                                                 <div class="row">
                                                     <div id="notify_img" class="col-md-2 col-12 mb-md-0 mb-2">
                                                         @if(isset($notification->data['image_url']))
-                                                            <img src="{{$notification->data['image_url']}}" class="product_img" alt="Jersey Swap">
+                                                            <img src="{{static_url('products_featured/'.$notification->data['image_url'])}}" class="product_img" alt="Jersey Swap">
                                                         @endif
                                                     </div>
                                                     <div class="col-md-6 col-12 mb-md-0 mb-2">
