@@ -96,7 +96,7 @@
                                             @foreach($listing_gallery as $listing_data)
                                             <div class="col-md-3">
                                                 <div class="img-box">
-                                                    <img src="{{asset('storage/products/'.$listing_data->image)}}" data-img="{{$listing_data->id}}">
+                                                    <img src="{{static_url('products/'.$listing_data->image)}}" data-img="{{$listing_data->id}}">
                                                     <button class="btn btn-circle btn-remove">
                                                     <i class="fa fa-times"></i>
                                                     </button>
