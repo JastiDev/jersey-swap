@@ -54,7 +54,7 @@
                                                         {{$notification->data['message']}}
                                                     </div>
                                                     <div class="col-md-4 col-12 text-end">
-                                                        @if($notification->data['url']!==null)
+                                                        @if(!empty($notification->data['url']))
                                                         <a href="{{$notification->data['url']}}" class="btn btn-sm btn-success ">{{$notification->data['url_text']}}</a>
                                                         @endif
                                                         <a href="{{url('notification/markasread/'.$notification->id)}}" class="btn btn-sm btn-success">Mark as Read</a>

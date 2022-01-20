@@ -25,7 +25,6 @@ class OffersController extends Controller
             'amount' => 'required'
         ]);
         $user_id = Auth::id();
-        $offer;
         if($request->isBuy== true)
             $offer = Offers::create([
                 'listing_id' => $request->listing_id,
