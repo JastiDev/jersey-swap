@@ -14,7 +14,7 @@ class ReviewsController extends Controller
 {
     public function index($user_id){
         $user = User::find($user_id);
-        $reviews = Reviews::with('owner')->where('given_to',$user->id)->orderBy('id','DESC')->paginate(10);
+        $reviews = Reviews::with('owner')->where('given_to',$user->id)->orderBy('id','DESC')->get();
         return response()->json([
             'reviews' => $reviews
         ],200);

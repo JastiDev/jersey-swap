@@ -2,40 +2,30 @@
 
 
 const e = React.createElement;
+const pageSize = 7;
 
 class ReviewsContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loadMore : false,
             data : [],
             isLoaded: false,
             avgRating:0,
             totalRating:0,
-            page:1
+            index: 0,
+            totalPages: 0,
         };
     }
     componentDidMount() {
-        fetch('/reviews/'+user+"?page="+this.state.page)
+        fetch('/reviews/'+user)
         .then(res => res.json())
         .then(result => {
             this.setState({
-            isLoaded: true,
-            data: result.reviews.data
+                isLoaded: true,
+                data: result.reviews,
             });
-            if(result.reviews.next_page_url==null){
-                this.setState({
-                    loadMore:false
-                });
-            }
-            else{
-                var new_page = this.state.page+1;
-                this.setState({
-                    page: new_page,
-                    loadMore: true
-                });
-            }
-            console.log(result);
+            if(result.reviews.length > 1)
+                this.setState({totalPages: Math.ceil(result.reviews.length/pageSize), index: 1});
         });
 
         fetch('/reviews_meta/'+user)
@@ -47,29 +37,27 @@ class ReviewsContainer extends React.Component {
             });
         });
     }
-    loadReviews = event =>{
-        fetch('/reviews/'+user+"?page="+this.state.page)
-        .then(res => res.json())
-        .then(result => {
-            var reviews = this.state.data;
-            reviews.push(...result.reviews.data);
-            this.setState({
-            data: reviews
-            });
-            if(result.reviews.next_page_url==null){
-                this.setState({
-                    loadMore: false
-                });
-            }
-            else{
-                var new_page = this.state.page+1;
-                this.setState({
-                    page: new_page,
-                    loadMore: true
-                });
-            }
-        });
+
+    onClickFirst(){
+        if(this.state.index<2) return;
+        this.setState({index: 1});
     }
+
+    onClickPrev(){
+        if(this.state.index<2) return;
+        this.setState({index: this.state.index - 1});
+    }
+
+    onClickNext(){
+        if(this.state.index>=this.state.totalPages) return;
+        this.setState({index: this.state.index + 1});
+    }
+
+    onClickLast(){
+        if(this.state.index>=this.state.totalPages) return;
+        this.setState({index: this.state.totalPages});
+    }
+
     render() {
         if(!this.state.isLoaded){
             return(
@@ -78,17 +66,20 @@ class ReviewsContainer extends React.Component {
                 </div>
             );
         }
+
         if(this.state.data.length){
+            let showData= this.state.data.slice((this.state.index - 1) * pageSize, this.state.index * pageSize);
+            console.log(showData);
             return (
                 <div>
                     <div className="col-md-12">
-                        <h2>Reviews as a user
+                        <h2>Reviews
                             <span className="star">Avg <i className="fa fa-star yellow"></i>{parseFloat(this.state.avgRating)}</span>
                             <span>| Total {this.state.totalRating}</span>
                         </h2>
                         <hr/>
                     </div>
-                    {this.state.data.map(function(review,i){
+                    {showData.map(function(review,i){
                         var date = new Date(review.created_at);
                         return (
                             <div className="col-md-12 review">
@@ -109,12 +100,33 @@ class ReviewsContainer extends React.Component {
                             </div>
                         );
                     })}
-                    {this.state.loadMore ? 
-                        <div className="col-md-12 text-end">
-                            <button className="btn btn-primary" onClick={this.loadReviews}><i className="fa fa-plus"></i> Load More</button>
+                    <div className="row">
+                        <div className="col-md-12 mt-4">
+                            <div className="d-flex justify-content-center">
+                            <nav>
+                                <ul className="pagination">
+                                    <li className="page-item" onClick={this.onClickFirst.bind(this)}>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{"<<"}</span>
+                                    </li>
+                                    <li className="page-item" onClick={this.onClickPrev.bind(this)}>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{"<"}</span>
+                                    </li>
+                                    <li className="page-item">
+                                        <span className="page-link" aria-hidden="true">
+                                            {this.state.index} of {this.state.totalPages}    
+                                        </span>
+                                    </li>
+                                    <li className="page-item" onClick={this.onClickNext.bind(this)}>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{">"}</span>
+                                    </li>
+                                    <li className="page-item" onClick={this.onClickLast.bind(this)}>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{">>"}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                            </div>
                         </div>
-                         : ' '
-                    }
+                    </div>
                 </div>
             );
         }
