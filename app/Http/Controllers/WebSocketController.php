@@ -193,7 +193,7 @@ class WebSocketController implements MessageComponentInterface
                         @list(, $img_data) = explode(',', $file_data);
 
                         $imageName = uniqid() . '.png';
-                        $img = Image::make($file_data);
+                        $img = Image::make($img_data);
                         $img->resize(300, 300, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save(storage_path('app/public/messages') . '/' . $imageName);
