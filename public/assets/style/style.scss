@@ -546,6 +546,8 @@ span.star {
 .img-gallery-uploader {
     .img-box {
         position: relative;
+        margin-bottom: 10px;
+        margin-top: 10px;
         img {
             width: 100%;
         }
@@ -1103,4 +1105,72 @@ a.btn-success.btn-markall-notifications{
     text-align: center;
     opacity: 1;
     z-index: 999;
+}
+
+.chat-wrapper {
+    @media (max-width: 760px), screen and (orientation: portrait) {
+        margin-top: 0 !important;
+    }
+    
+    @media (min-width: 761px) {
+        .back-icon {
+            display: none;
+        }
+        & > .container {
+            min-height: 690px;
+        }
+    }
+
+    #chat-header, .chat-footer {
+        display: none;
+    }
+
+    .user-list {
+        display: flex;
+        flex-direction: column;
+        height: 690px;
+        @media (min-width: 761px) {
+            float: left;
+            width: 300px;
+        }
+        @media (max-width: 760px) {
+            &.close-list {
+                display: none;
+            }
+        }
+
+        #search_input {
+            padding: 10px;
+            border-radius: 0;
+            line-height: 23px;
+            :focus{
+                outline: none;
+            }
+        }
+
+        #contacts {
+            height: 100%;
+            overflow-y: scroll;
+            max-height: 690px;
+        }
+    }
+
+    @media (max-width: 760px) {
+        #chat-header {
+            display: none;
+        }
+        #chat-box {
+            display: none;
+        }
+        .chat-footer {
+            display: none
+        }
+    }
+
+    @media (min-width: 761px) {
+        .chat-footer {
+            margin-left: 300px;
+        }
+    }
+
 }

@@ -3,49 +3,47 @@
     Messages - Jersey Swap
 @endsection
 @section('content')
-   <section id="heading" class="mt-5">
+   <section id="heading" class="mt-5 chat-wrapper">
      <div class="container">
-          <div class="row" style="border: 1px solid gray; border-radius: 8px; height: 600px; margin-bottom: 10px;">
-            <div class="col-md-3 user-list" style="height: 100%; overflow-y: scroll; display: flex; flex-direction: column;">
-              <input id="search_input" class="form-control" autocomplete="off" placeholder="Type a username" style="margin-top: 8px;"/>
-              <div id="search_result"></div>
-              @foreach($user_list as $user)
-                <div style="display: flex; flex-flow: row nowrap; margin-top: 4px; cursor: pointer; padding:4px; border-radius: 4px;"
-                  onclick="onClickUser('{{$user->username}}', '{{$user->id}}')">
-                  <img src="{{ static_url('avatar/'.$user->profile_picture) }}" style="width:64px; height:64px; border-radius: 32px;" alt="">
-                  <div style="display: flex; align-items: center; margin-left: 4px;">{{$user->username}}</div>
-                </div>
-              @endforeach
-            </div>
-            <div class="col-md-9 chat-box" style="height: 100%; padding: 4px; display: flex; flex-direction: column;">
-              <div class="d-flex align-items-center">
-                <i class="fa fa-arrow-left back-icon"></i>
-                <span id="chat_with" style="margin: 10px; font-weight: bold;"></span>
-              </div>
-              <div id="chat_output" style="flex: 1; overflow-y: scroll; padding: 4px; margin: 4px; display: flex; flex-direction:column;">
-              </div>
-                <div class="mb-3 text-center">
-                    <div id="img-gallery" class="row g-3 img-gallery-uploader">
-                        
-                    </div>
-                </div>
-                <div style="display: flex; flex-flow: row nowrap;">
-                  <input id="chat_input" class="form-control" style="z-index: 1000;" placeholder="Type a message and press Enter"/>
-                  
-                  <label for="product_photos">
-                      <button type="button" id="uitp_gallery" class="btn">
-                        <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
-                      </button>
-                  </label>
-                  <div style="visibility:hidden; width: 0">
-                      <input type="file" id='product_photos' name="file" accept="image/*">
-                  </div>
-                  <button id="sendBtn" type="submit" class="btn">
-                    <i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i>
-                  </button>
-                </div>
+         <div class="user-list">
+             <input id="search_input" class="form-control" autocomplete="off" placeholder="Type a username" />
+             <div id="search_result"></div>
+             <div id="contacts">
+                 @foreach($user_list as $user)
+                     <div style="display: flex; flex-flow: row nowrap; margin-top: 4px; cursor: pointer; padding:4px; border-radius: 4px;" onclick="onClickUser('{{$user->username}}', '{{$user->id}}')">
+                         <img src="{{ static_url('avatar/'.$user->profile_picture) }}" style="width:64px; height:64px; border-radius: 32px;" alt="">
+                         <div style="display: flex; align-items: center; margin-left: 4px;">{{$user->username}}</div>
+                     </div>
+                 @endforeach
+             </div>
+         </div>
+         <div id="chat-header" class="align-items-center" style="padding-left: 5px;">
+             <i class="fa fa-arrow-left back-icon" style="width: 40px; text-align: center;"></i>
+             <span id="chat_with" style="margin: 10px; font-weight: bold;"></span>
+         </div>
+          <div id="chat-box" class="row" style="min-height: 600px; max-height: 600px;overflow-y: scroll;  margin: 0;">
+            <?php /* <div class="col-md-9 chat-box" style="height: 100%; padding: 4px; display: flex; flex-direction: column; overflow: hidden;"> */ ?>
+              <div id="chat_output" style="flex: 1; padding: 4px; margin: 4px; display: flex; flex-direction:column;">
+            <?php /*  </div> */ ?>
             </div>
           </div>
+         <div class="text-center"><div id="img-gallery" class="row img-gallery-uploader"></div></div>
+         <div class="chat-footer" style="margin-bottom: 10px;">
+             <input id="chat_input" class="form-control" style="z-index: 1000; outline: none" placeholder="Type a message and press Enter"/>
+             <div style="display: flex; flex-flow: row nowrap;">
+                 <label for="product_photos">
+                     <button type="button" id="uitp_gallery" class="btn">
+                         <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                     </button>
+                 </label>
+                 <div style="visibility:hidden; width: 0">
+                     <input type="file" id='product_photos' name="file" accept="image/*">
+                 </div>
+                 <button id="sendBtn" type="submit" class="btn">
+                     <i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i>
+                 </button>
+             </div>
+         </div>
       </div>
   </section>
 @endsection
@@ -56,17 +54,20 @@
     var userList;
     $(document).ready(function() {
 
-      userList = {!! json_encode($user_list) !!};
+      /*userList = {!! json_encode($user_list) !!};
       if(userList.length>0){
         sendTo= userList[0].id;
         onClickUser(userList[0].username, userList[0].id);
-      } 
+      } */
     })
 
     function onClickUser(userName, userId){
-      
-      $(".chat-box").removeClass("close-list");
-      $(".user-list").addClass("close-list");
+        $("#chat-header").css("display", 'flex');
+        $(".user-list").addClass("close-list");
+        $("#chat-box").css("display", 'flex');
+        $(".chat-footer").css("display", 'flex');
+      //$("#chat-header").removeClass("close-list");
+      //$(".user-list").addClass("close-list");
       $("#chat_with").text("Chat with "+ userName);
 
       // $(".user-list>div").removeClass("user-selected");
@@ -113,7 +114,7 @@
                     var date = new Date(item.created_at);
                     var options = { year: 'numeric', month: 'short', day: '2-digit' };
                     var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                    dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
+                    dateSpan.innerHTML = month + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
                     if(item.sent_from == {{auth()->id()}}){ // if I sent to other.
                       span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
@@ -131,9 +132,12 @@
                     if(isImg)$("#chat_output").append(imgA);
                     else $("#chat_output").append(span);
                   });
-                  $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 500);
-                }    
-              },
+                setTimeout(function () {
+                    $("#chat-box").animate({scrollTop: $("#chat_output").height()}, 200);
+                }, 200);
+
+              }
+          },
           error: function (request, status, error) {
             console.log(error);
           }
@@ -147,6 +151,7 @@
         keyword = $(this).val();
         $("#search_result").empty();
         if(keyword.length>3){
+            $('#contacts').hide();
           $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -162,10 +167,6 @@
                 result.users.forEach((item)=>{
 
                     var userDiv = $("<div style='display: flex; flex-flow: row nowrap; margin-top: 8px; cursor: pointer;'></div>");
-                    
-                    userDiv.click(function() {
-                      onClickUser(item.username, item.id);
-                    });
 
                     var img = document.createElement('img');
                     img.setAttribute('src','{{static_url('avatar')}}/'+item.profile_picture);
@@ -176,6 +177,15 @@
                     userDiv.append(usernameDiv);
 
                     $("#search_result").append(userDiv);
+
+                    userDiv.click(function() {
+                        $('#contacts').show();
+                        $("#search_result").empty();
+                        $("#search_input").val('');
+                        $("#contacts").append(userDiv);
+                        onClickUser(item.username, item.id);
+                    });
+
                 });
               },
               error: function (request, status, error) {
@@ -186,10 +196,11 @@
       });
 
     $(".back-icon").click(function() {
-      $(".chat-box").addClass("close-list");
-      $(".user-list").removeClass("close-list");
+        $("#chat-box").css("display", "none");
+        $(".user-list").removeClass("close-list");
+        $("#chat-header").css("display", "none");
+        $(".chat-footer").css("display", "none");
     })
-
 
     let ws = new WebSocket('{{getenv('CHAT_WSS_URL')}}');
   
@@ -296,7 +307,7 @@
 
                 var options = { year: 'numeric', month: 'short', day: '2-digit' };
                 var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
+                dateSpan.innerHTML = month + ", " + ("0" + date.getHours()).slice(-2)  + ":" + ("0" + date.getMinutes()).slice(-2);
 
                 if(json.from == 'me'){
                   span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
@@ -308,7 +319,11 @@
 
                 $('#chat_output').append(dateSpan); // Append the new message received
                 $('#chat_output').append(span); // Append the new message received
-                $("#chat_output").animate({scrollTop: $('#chat_output').prop("scrollHeight")}, 1000); // Scroll the chat output div
+
+                setTimeout(function () {
+                    $("#chat-box").animate({scrollTop: $("#chat_output").height()}, 200);
+                }, 200);
+
                 console.log("Received " + json.msg);
                 break;
 
