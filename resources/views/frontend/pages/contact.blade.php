@@ -3,7 +3,7 @@
     Contact us - Jersey Swap
 @endsection
 @section('meta_description')
-    Jersey Swap - We’re here to answer any question you might have. We look forward to hearing from you.
+    Jersey Swap - Your excellent experience is our upmost priority. We are here to answer any question, comment, or concern you may have.
 @endsection
 @section('content')
         <section id="page-box" class="page-hero-box">
@@ -30,7 +30,7 @@
                     <div class="col-md-5 mx-auto text-center">
                         <h2>Contact Jersey Swap!</h2>
                         <div class="divider mx-auto"></div>
-                        <p>We’re here to answer any question you might have. We look forward to hearing from you.
+                        <p>Your excellent experience is our upmost priority. We are here to answer any question, comment, or concern you may have.
                         </p>
                     </div>
                 </div>
@@ -42,7 +42,6 @@
                 <div class="row">
                     <div class="col-md-6 mb-md-0 mb-1">
                         <h3>Contact Details</h3>
-                        <small>Get in touch with us! Call us, email us or contact via Social Media!</small>
                         <ul class="contact-list">
                             <li>
                                 <div class="icon-box">
@@ -72,7 +71,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <h3>Follow us on</h3>
+                        <h3>Follow Us</h3>
                         <div class="divider"></div>
                         <ul class="social-media-list mt-3">
                             <li>
@@ -95,7 +94,7 @@
                     <div class="col-md-6">
                         <div class="card bg-white p-4">
                             <div class="card-body">
-                                <h3>Let's start a conversation!</h3>
+                                <h3>Get in touch!</h3>
                                 <form id="contact-form">
                                     <div class="mb-3">
                                         <label class="form-label">Full Name</label>

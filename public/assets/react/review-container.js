@@ -113,7 +113,7 @@ class ReviewsContainer extends React.Component {
                                     </li>
                                     <li className="page-item">
                                         <span className="page-link" aria-hidden="true">
-                                            {this.state.index} of {this.state.totalPages}    
+                                            {this.state.index} {'\u00A0'}of {'\u00A0'}{this.state.totalPages}    
                                         </span>
                                     </li>
                                     <li className="page-item" onClick={this.onClickNext.bind(this)}>
