@@ -59,16 +59,9 @@
         var roomNum = 0;
         var userList;
         $(document).ready(function () {
-
-            /*userList = {!! json_encode($user_list) !!};
-      if(userList.length>0){
-        sendTo= userList[0].id;
-        onClickUser(userList[0].username, userList[0].id);
-      } */
             countNewMessages();
-
             setInterval(function () {
-                //countNewMessages()
+                countNewMessages()
             }, 10000);
         })
 
@@ -97,16 +90,7 @@
             $(".user-list").addClass("close-list");
             $("#chat-box").css("display", 'flex');
             $(".chat-footer").css("display", 'flex');
-            //$("#chat-header").removeClass("close-list");
-            //$(".user-list").addClass("close-list");
             $("#chat_with").text("Chat with " + userName);
-
-            // $(".user-list>div").removeClass("user-selected");
-            // $(this).addClass("user-selected");
-
-            // $("#search_result").empty();
-            // $("#search_input").empty();
-
             var chatOutput = "";
             var message_with = parseInt(userId);
             sendTo = message_with;
@@ -167,7 +151,6 @@
                             $("#chat-box").animate({scrollTop: $("#chat_output").height()}, 200);
                         }, 200);
                         countNewMessages();
-
                     }
                 },
                 error: function (request, status, error) {

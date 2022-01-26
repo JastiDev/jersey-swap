@@ -123,6 +123,7 @@ class WebSocketController implements MessageComponentInterface
                 'room_id' => $room_id,
                 'messages' => DB::table('messages')
                     ->where('room_id', '=', $room_id)
+                    ->where('sent_from', '!=', $my_id)
                     ->whereNull('read_at')
                     ->count()
             ];
