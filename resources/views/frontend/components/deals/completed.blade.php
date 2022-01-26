@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <p>
-                    <i class="fa fa-check"></i> Order Completed... Jersey Swapped!
+                    <i class="fa fa-check"></i> Order Complete.
                 </p>
             </div>
         </div>

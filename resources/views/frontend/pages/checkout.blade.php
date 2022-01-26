@@ -10,8 +10,8 @@
 
                         <div class="py-5 text-center">
                             <img class="d-block mx-auto mb-4" src="assets/images/logo-transparent.png" alt="" width="50">
-                            <h2>Checkout form</h2>
-                            <p class="lead">Complete to start transaction!</p>
+                            <h2>Checkout Form</h2>
+                            <p class="lead">Complete to start the transaction!</p>
                         </div>
 
                         <div class="row g-5">
@@ -24,7 +24,7 @@
                                     <li class="list-group-item d-flex justify-content-between lh-sm">
                                         <div>
                                             <h6 class="my-0">Security Fee</h6>
-                                            <small class="text-muted">Protect your jersey</small>
+                                            <small class="text-muted">Transaction Protected</small>
                                         </div>
                                         <span class="text-muted">${{$prices['security']}}</span>
                                     </li>
@@ -200,7 +200,7 @@
                                     <div id="card-element"></div>
 
                                     <hr class="my-4">
-                                    <button class="w-100 btn btn-primary btn-lg" id="card-button" type="submit" >Complete checkout</button>
+                                    <button class="w-100 btn btn-primary btn-lg" id="card-button" type="submit" >Complete Checkout</button>
                                 </form>
                             </div>
                         </div>
@@ -238,8 +238,8 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    const stripe = Stripe("{{env('STRIPE_KEY','pk_live_51JMJCNLaRKsO1rdUaYMI4zbBHPssGkbtMFsbtGzAEwzcFZzZfPuFTxu37UDy2oy6hVHZdhRLlB1hdJZktcIlpZrl00RVv5kmjq')}}");
-    // const stripe = Stripe("{{env('STRIPE_KEY','pk_test_51JMJCNLaRKsO1rdUIvC4wtL5UHKd23TNkDVB28r9n2Pa9KtjDMwO9fQOEsD42Skh6yAfg6BCQsMoTGyJBvoTDLV400VtyPWbEh')}}");
+    // const stripe = Stripe("{{env('STRIPE_KEY','pk_live_51JMJCNLaRKsO1rdUaYMI4zbBHPssGkbtMFsbtGzAEwzcFZzZfPuFTxu37UDy2oy6hVHZdhRLlB1hdJZktcIlpZrl00RVv5kmjq')}}");
+    const stripe = Stripe("{{env('STRIPE_KEY','pk_test_51JMJCNLaRKsO1rdUIvC4wtL5UHKd23TNkDVB28r9n2Pa9KtjDMwO9fQOEsD42Skh6yAfg6BCQsMoTGyJBvoTDLV400VtyPWbEh')}}");
 
     var flag = false;
 
