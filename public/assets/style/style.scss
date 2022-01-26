@@ -1172,5 +1172,17 @@ a.btn-success.btn-markall-notifications{
             margin-left: 300px;
         }
     }
-
+    .notifier {
+        margin-left: 10px;
+    }
+    .notifier > i {
+        display: block;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: red;
+        text-align: center;
+        color: #fff;
+        line-height: 28px;
+    }
 }

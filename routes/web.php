@@ -96,6 +96,7 @@ Route::middleware(['auth', 'checkuserrole:user','checkbanned'])->group(function 
     Route::get('/messages', [WebSocketController::class, 'index']);
     Route::post('/messages/get_by_user', [WebSocketController::class, 'get_by_user']);
     Route::post('/messages/get_users', [WebSocketController::class, 'get_users']);
+    Route::get('/messages/count_new', [WebSocketController::class, 'count_new']);
 
     Route::post('/offer/post', [OffersController::class, 'store']);
 
