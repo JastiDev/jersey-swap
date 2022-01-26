@@ -187,7 +187,7 @@ class WebSocketController implements MessageComponentInterface
                     $images_arr = explode(':::', $images_str);
                     $temp = array_pop($images_arr);
 
-                    foreach ($images_arr as $image) {
+                    foreach ($temp as $image) {
                         $base64_image = $image; // your base64 encoded
                         @list(, $file_data) = explode(';', $base64_image);
                         @list(, $img_data) = explode(',', $file_data);

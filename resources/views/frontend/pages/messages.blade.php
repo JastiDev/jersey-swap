@@ -57,7 +57,7 @@
     <script>
         var sendTo = 0;
         var roomNum = 0;
-        var userList;
+        //var userList;
         $(document).ready(function () {
             countNewMessages();
             setInterval(function () {
