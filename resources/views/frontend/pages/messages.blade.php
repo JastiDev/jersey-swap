@@ -342,10 +342,10 @@
 
                 case 'img':
                     var img = document.createElement('img');
-                    img.setAttribute('src', "{{url('/storage/messages')}}/" + json.msg);
+                    img.setAttribute('src', "{{static_url('messages')}}/" + json.msg);
 
                     var imgA = document.createElement('a');
-                    imgA.setAttribute('href', "{{url('/storage/messages')}}/" + json.msg);
+                    imgA.setAttribute('href', "{{static_url('messages')}}/" + json.msg);
                     imgA.setAttribute('target', '_blank');
                     imgA.append(img);
 
@@ -355,7 +355,7 @@
 
                     var options = {year: 'numeric', month: 'short', day: '2-digit'};
                     var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                    dateSpan.innerHTML = month + " " + date.getDate() + " " + date.getFullYear() + ", " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+                    dateSpan.innerHTML = month + ", " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
 
                     if (json.from == 'me') {
                         img.style.cssText = 'background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:200px; margin-left: auto';

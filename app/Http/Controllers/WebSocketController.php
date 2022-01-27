@@ -185,24 +185,12 @@ class WebSocketController implements MessageComponentInterface
 
                 if (strlen($images_str) > 0) { //if image is attached.
                     $images_arr = explode(':::', $images_str);
-                    $temp = array_pop($images_arr);
-
-                    foreach ($temp as $image) {
-                        $base64_image = $image; // your base64 encoded
-                        @list(, $file_data) = explode(';', $base64_image);
-                        @list(, $img_data) = explode(',', $file_data);
-
-                        $imageName = uniqid() . '.png';
-                        $img = Image::make($img_data);
+                    foreach ($images_arr as $image) {
+                        $imageName = 'is_img' . uniqid() . '.png';
+                        $img = Image::make($image);
                         $img->resize(300, 300, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save(storage_path('app/public/messages') . '/' . $imageName);
-
-                        $from->send(json_encode([
-                            "type" => "img",
-                            "msg" => $imageName,
-                            "from" => "me"
-                        ]));
 
                         if (isset($this->userresources[$data->to])) {
                             foreach ($this->userresources[$data->to] as $key => $resourceId) {
@@ -215,6 +203,13 @@ class WebSocketController implements MessageComponentInterface
                                 }
                             }
                         }
+
+                        $from->send(json_encode([
+                            "type" => "img",
+                            "msg" => $imageName,
+                            "from" => "me"
+                        ]));
+
                         Messages::create([
                             'message_content' => $imageName,
                             'sent_from' => $data->from,
@@ -302,7 +297,7 @@ class WebSocketController implements MessageComponentInterface
     {
         echo "Client left onError " . $conn->resourceId . " \n";
         // $conn->close();
-        echo 'Error' . $e->getMessage() . PHP_EOL;
+        echo 'Error' . $e->getMessage() . ' on line '.$e->getLine(). PHP_EOL;
 
         $this->clients->detach($conn);
         echo "Connection {$conn->resourceId} has disconnected\n";
