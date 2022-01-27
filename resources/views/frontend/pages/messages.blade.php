@@ -277,6 +277,7 @@
                     );
                     $('#chat_input').val('');
                     $('#img-gallery').empty();
+                    $("#uitp_gallery").show();
 
                     console.log('{{auth()->id()}} sent ' + message_content);
                 }
