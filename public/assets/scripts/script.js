@@ -164,7 +164,7 @@ $(document).ready(function() {
         col.append(image_box);
         $("#img-gallery").append(col);
         images++;
-        if(images>=3){
+        if($("#img-gallery .col-md-3").length>=3){
             $("#uitp_gallery").hide();
         }
     });
