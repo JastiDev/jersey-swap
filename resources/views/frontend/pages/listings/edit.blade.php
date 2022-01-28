@@ -64,7 +64,7 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <p>Jersey Status</P>
+                                        <p>Item Status</P>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="authenticity" id="inlineRadio1" value="1" @if($listing->authentic==1) checked="" @endif>
                                             <label class="form-check-label" for="inlineRadio1">Authentic</label>

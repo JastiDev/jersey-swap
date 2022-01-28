@@ -109,7 +109,7 @@
                                         <input id="subject" type="text" class="form-control" placeholder="Subject" required>
                                     </div>
                                     <div class="mb-2">
-                                        <label class="form-label">Message <small>(Max 500 Chraters)</small></label>
+                                        <label class="form-label">Message</label>
                                         <textarea id="message" class="form-control" placeholder="Leave a comment here"
                                             rows="5" maxlength="500" required></textarea>
                                     </div>
