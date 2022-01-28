@@ -43,5 +43,4 @@
         var static_url = "{{static_url('')}}";
     </script>
 </head>
-
 <body id="body">

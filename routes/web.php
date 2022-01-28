@@ -84,7 +84,7 @@ Route::middleware(['auth', 'checkuserrole:user','checkbanned'])->group(function 
 
     Route::post('/change/password', [UserDashboardController::class, 'change_password'])->name('change-password');
 
-    
+    Route::get('/users/count_messages', [UserDashboardController::class, 'count_new_messages']);
     Route::get('/my/listings', [ListingController::class, 'get_listing']);
     Route::get('/listings/add-listing', [ListingController::class, 'newView']);
     Route::post('/listings/add-listing', [ListingController::class, 'newPost']);

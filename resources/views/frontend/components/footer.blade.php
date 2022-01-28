@@ -83,6 +83,34 @@
     @include('frontend.components.scripts')
     @yield('custom-scripts')
 
+            <script>
+                @if (\Illuminate\Support\Facades\Auth::check())
+                    $(document).ready(function () {
+                        countTotalMessages();
+                        setInterval(function () {
+                            countTotalMessages()
+                        }, 10000);
+                    })
+                    function countTotalMessages() {
+                        $.ajax({
+                            url: "{{url('/users/count_messages')}}",
+                            method: 'get',
+                            data: { },
+                            success: function (result) {
+                                if(result.count_messages > 0) {
+                                    $('#msgnotify').html('<i>'+result.count_messages+'</i>')
+                                } else {
+                                    $('#msgnotify').html('')
+                                }
+                            },
+                            error: function (request, status, error) {
+                                console.error(error);
+                            }
+                        });
+                    }
+                @endif
+            </script>
+
 </body>
 
 </html>

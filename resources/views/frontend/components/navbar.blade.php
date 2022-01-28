@@ -30,7 +30,7 @@
                     <a class="nav-link @if(Request::path()=='listings/add-listing') active @endif" href="{{url('listings/add-listing')}}">Create Listing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Request::path()=='messages') active @endif" href="{{url('messages')}}">Inbox</a>
+                    <a style="position: relative" class="nav-link @if(Request::path()=='messages') active @endif" href="{{url('messages')}}">Inbox<span id="msgnotify"></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(Request::path()=='about') active @endif" href="{{url('about')}}">About</a>

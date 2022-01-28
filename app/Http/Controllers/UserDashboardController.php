@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Credits;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -90,5 +91,18 @@ class UserDashboardController extends Controller
         return back()
             ->with('success','You have successfully updated the profile photo!')
             ->with('avatar',$imageName); 
+    }
+
+    public function count_new_messages()
+    {
+        $my_id = Auth::id();
+        $my_room_ids = DB::table('room_users')->where('user_id', $my_id)->pluck('room_id')->all();
+        return response()->json([
+            'count_messages' => DB::table('messages')
+                ->whereIn('room_id', $my_room_ids)
+                ->where('sent_from', '!=', $my_id)
+                ->whereNull('read_at')
+                ->count()
+        ]);
     }
 }

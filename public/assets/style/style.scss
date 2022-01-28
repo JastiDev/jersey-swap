@@ -1186,3 +1186,20 @@ a.btn-success.btn-markall-notifications{
         line-height: 28px;
     }
 }
+
+#msgnotify {
+    position: absolute;
+    top: 7px;
+    left: 51px;
+}
+#msgnotify > i {
+    display: block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: red;
+    text-align: center;
+    color: #fff;
+    line-height: 12px;
+    font-size: 8px;
+}
