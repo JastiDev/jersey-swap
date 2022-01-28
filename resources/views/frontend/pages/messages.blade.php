@@ -160,7 +160,7 @@
             $("#chat_output").html(chatOutput);
         }
 
-        $("#search_input").bind('input', function () {
+        $("#search_input").donetyping(function () {
             keyword = $(this).val();
             $("#search_result").empty();
             if (keyword.length > 3) {
