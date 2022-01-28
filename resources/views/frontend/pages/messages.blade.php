@@ -37,7 +37,7 @@
                 <input id="chat_input" class="form-control" style="z-index: 1000; outline: none"
                        placeholder="Type a message and press Enter"/>
                 <div style="display: flex; flex-flow: row nowrap;">
-                    <label for="product_photos">
+                    <label for="product_photos" style="display: none">
                         <button type="button" id="uitp_gallery" class="btn">
                             <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
                         </button>
