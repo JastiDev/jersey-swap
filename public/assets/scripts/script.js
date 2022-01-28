@@ -99,7 +99,7 @@ $(document).ready(function() {
             if(size>3000){
                 swal(
                     "Error", 
-                    "Image size is larger than 3 MB, you can optimize the images using the online tool https://tinypng.com/. Drop the Images to the box and press “download”, “view”, and lastly screen shot the images. Then upload the images to our website!",
+                    "Image size is larger than 3 MB, you can optimize the images using the online tool https://tinypng.com/. Drop the Images to the box and press “download”, “view”, and lastly screen shot the images. Then upload the images to our chat!",
                     "warning",{
                         'buttons' : {
                             'cancel' : 'Cancel',
