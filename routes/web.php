@@ -42,6 +42,7 @@ Route::get('',[PagesController::class, 'home']);
 Route::get('/', [PagesController::class, 'home'])->name('home');
 
 Route::get('/about', [PagesController::class, 'about'])->name('about');
+Route::get('/faq', [PagesController::class, 'faq'])->name('faq');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 Route::post('/contact/post', [PagesController::class, 'contact_post']);
 

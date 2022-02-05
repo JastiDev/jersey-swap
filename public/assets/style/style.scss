@@ -746,6 +746,18 @@ a.btn-success.btn-markall-notifications{
 * Button
 */
 
+*:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+    outline: none !important;
+}
+button {
+    outline: none;
+    focus:outline-none
+}
+button:focus {outline: none !important;}
+
 .btn-primary {
     background-color: $primary_color;
     color: #fff;
@@ -1202,4 +1214,23 @@ a.btn-success.btn-markall-notifications{
     color: #fff;
     line-height: 12px;
     font-size: 8px;
+}
+
+#faqAccordion {
+    .accordion-item {
+        border: 0;
+        .accordion-button:not(.collapsed) {
+            background: none;
+            outline: 0;
+        }
+        .accordion-button {
+            font-weight: 500;
+            &:focus, &:active {
+                outline: 0 !important;
+            }
+        }
+        .accordion-body {
+            font-size: 14px;
+        }
+    }
 }

@@ -32,6 +32,11 @@ class PagesController extends Controller
             'testimonials' => $testimonials
         ]);
     }
+
+    public function faq(){
+        return view('frontend.pages.faq');
+    }
+
     public function contact(){
         return view('frontend.pages.contact');
     }
