@@ -19,7 +19,17 @@
         </div>
     </section>
 
-    <section id="why-choose-us" class="pt-md-5 pb-md-5 pt-2 pb-2">
+    <section id="video-tutorial" class="pt-md-5 pb-md-5 pt-2 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 video-wrapper">
+                    <iframe src="https://player.vimeo.com/video/675557251?h=ea87267b55" style="width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe><script src="https://player.vimeo.com/api/player.js"></script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-choose-us" class="pt-md-5 pb-md-5 pb-2">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
