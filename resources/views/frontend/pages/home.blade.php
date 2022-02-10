@@ -23,9 +23,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-12 video-wrapper">
-                    <iframe src="https://player.vimeo.com/video/675557251?h=ea87267b55" style="width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe><script src="https://player.vimeo.com/api/player.js"></script>
+                    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/675557251?h=ea87267b55&title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
                 </div>
-            </div>
         </div>
     </section>
 

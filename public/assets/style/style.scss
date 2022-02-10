@@ -1237,6 +1237,7 @@ button:focus {outline: none !important;}
 
 #video-tutorial .video-wrapper {
     @media (min-width: 761px) {
-        height: 360px;
+        max-width: 900px;
+        margin: 0 auto;
     }
 }
