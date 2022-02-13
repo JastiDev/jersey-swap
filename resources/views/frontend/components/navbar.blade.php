@@ -29,9 +29,11 @@
                 <li class="nav-item">
                     <a class="nav-link @if(Request::path()=='listings/add-listing') active @endif" href="{{url('listings/add-listing')}}">Create Listing</a>
                 </li>
+                @auth
                 <li class="nav-item">
                     <a class="nav-link @if(Request::path()=='messages') active @endif" href="{{url('messages')}}">Inbox</a>
                 </li>
+                @endauth
                 <li class="nav-item">
                     <a class="nav-link @if(Request::path()=='about') active @endif" href="{{url('about')}}">About</a>
                 </li>
