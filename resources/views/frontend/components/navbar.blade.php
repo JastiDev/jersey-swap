@@ -29,6 +29,10 @@
                 <li class="nav-item">
                     <a class="nav-link @if(Request::path()=='listings/add-listing') active @endif" href="{{url('listings/add-listing')}}">Create Listing</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(Request::path()=='messages') active @endif" href="{{url('messages')}}">Inbox</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link @if(Request::path()=='about') active @endif" href="{{url('about')}}">About</a>
                 </li>
                 <li class="nav-item">
@@ -62,9 +66,6 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{url('/users/listings')}}">Listings</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{url('messages')}}">Inbox</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{url('offers')}}">Active Offers</a>
