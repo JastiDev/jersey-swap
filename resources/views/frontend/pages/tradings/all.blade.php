@@ -79,10 +79,8 @@
                             status: status
                         },
                         success: function(result){
-                            console.log(result);
                             if(!result.listings) return;
                             function printTable(){
-                              console.log(index);
                               $("#table-data-body").children('tr').remove();
                               var filtered = result.listings.slice((index - 1) * pageSize, index * pageSize);
                               filtered.forEach((item)=>{
@@ -121,7 +119,7 @@
                               var span = document.createElement('span');
                               span.className = "page-link";
                               span.setAttribute('aria-hidden', true);
-                              span.innerHTML = '<<';
+                              span.innerHTML = '<i class="fa fa-chevron-double-left"></i>';
                               firstLi.append(span);
                               firstLi.onclick = function(){
                                 if(index == 1 || index == 0) return;
@@ -136,7 +134,7 @@
                               var span = document.createElement('span');
                               span.className = "page-link";
                               span.setAttribute('aria-hidden', true);
-                              span.innerHTML = '<';
+                              span.innerHTML = '<i class="fa fa-chevron-left"></i>';
                               prevLi.append(span);
                               prevLi.onclick = function(){
                                 if(index == 1 || index == 0) return;
@@ -158,7 +156,7 @@
                               nextLi.style.cursor = "pointer";
                               var span = document.createElement('span');
                               span.className = "page-link";
-                              span.innerHTML = '>';
+                              span.innerHTML = '<i class="fa fa-chevron-right"></i>';
                               nextLi.append(span);
                               nextLi.onclick = function(){
                                 if(index == totalPaginate) return;
@@ -173,7 +171,7 @@
                               var span = document.createElement('span');
                               span.className = "page-link";
                               span.setAttribute('aria-hidden', true);
-                              span.innerHTML = '>>';
+                              span.innerHTML = '<i class="fa fa-chevron-double-right"></i>';
                               lastLi.append(span);
                               lastLi.onclick = function(){
                                 if(index == totalPaginate) return;

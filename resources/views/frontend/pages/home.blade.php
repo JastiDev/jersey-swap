@@ -9,16 +9,16 @@
     <section id="herobox">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <h1>Sports Exchange!</h1>
+                <div class="col-md-6" style="color: #f9f937">
+                    <h1>The #1 marketplace for exchanging sports jerseys and sports cards!</h1>
                     <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, sell, and trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
                     </p>
-                    <a href="{{url('exchange')}}" class="btn btn-primary">Start Exchange</a>
+                    <a href="{{url('exchange')}}" class="btn btn-dark">Start Exchange</a>
                 </div>
             </div>
         </div>
     </section>
-
+                
     <section id="video-tutorial" class="pt-md-5 pb-md-5 pt-2 pb-2">
         <div class="container">
             <div class="row">
@@ -71,7 +71,7 @@
         </div>
     </section>
     
-    @if($banner!==null && $banner_url !== null)
+    <!-- @if($banner!==null && $banner_url !== null)
     <section id="ad" class="mt-md-5 mb-md-5 m-sm-0">
         <div class="container">
             <div class="row">
@@ -83,7 +83,7 @@
             </div>
         </div>
     </section>
-    @endif
+    @endif -->
 
     @if($listings!==null && count($listings)>0)
     <section id="recent-trades" class="mt-5">
@@ -99,7 +99,7 @@
                         <div class="item">
                             <div class="card product-card">
                                 <a href="{{url('/exchange/'.$listing->slug)}}"><img src="{{static_url('products_featured/'.$listing->product_img)}}" class="card-img-top"
-                                        alt="{{$listing->product_title}}"></a>
+                                        alt="{{$listing->product_title}}"><i class="fa fa-heart text-danger"></i></a>
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h6 class="font-weight-semibold mb-2 product-title">
@@ -186,5 +186,14 @@
     @include('frontend.components.testimonials',[
         'testimonials' => $testimonials
     ])
+    <section class="pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="{{url('exchange')}}" class="btn btn-primary">Start Exchange</a>
+                </div>
+            </div>
+        </div>
+    </section>
     
 @endsection

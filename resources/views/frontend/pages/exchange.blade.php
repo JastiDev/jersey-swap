@@ -6,7 +6,7 @@
     Swap your jersey and find best offers for your listing.
 @endsection
 @section('content')
-   <section id="heading" class="mt-5"><div class="container">
+   <section class="pt-5"><div class="container">
           <div class="row exchange-header">
               <div class="col-md-5">
                   <h1>Available Exchange</h1>
@@ -14,13 +14,13 @@
               </div>
               <div class="col-md-4">
                 <ul id="category-tab" class="nav nav-pills">
-                  <li class="nav-item">
+                  <li class="nav-item" style="cursor: pointer">
                     <a id="categoryAll" class="nav-link active" aria-current="page">All</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" style="cursor: pointer">
                     <a id="categoryJersey" class="nav-link">Sports Jerseys</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item" style="cursor: pointer">
                     <a id="categoryCard" class="nav-link">Sports Cards</a>
                   </li>
                 </ul>
@@ -166,7 +166,7 @@
         var span = document.createElement('span');
         span.className = "page-link";
         span.setAttribute('aria-hidden', true);
-        span.innerHTML = '<<';
+        span.innerHTML = '<i class="fa fa-chevron-double-left"></i>';
         firstLi.append(span);
         firstLi.onclick = function(){
           if(index == 1 || index == 0) return;
@@ -181,7 +181,7 @@
         var span = document.createElement('span');
         span.className = "page-link";
         span.setAttribute('aria-hidden', true);
-        span.innerHTML = '<';
+        span.innerHTML = '<i class="fa fa-chevron-left"></i>';
         prevLi.append(span);
         prevLi.onclick = function(){
           if(index == 1 || index == 0) return;
@@ -203,7 +203,7 @@
         nextLi.style.cursor = "pointer";
         var span = document.createElement('span');
         span.className = "page-link";
-        span.innerHTML = '>';
+        span.innerHTML = '<i class="fa fa-chevron-right"></i>';
         nextLi.append(span);
         nextLi.onclick = function(){
           if(index == totalPaginate) return;
@@ -218,7 +218,7 @@
         var span = document.createElement('span');
         span.className = "page-link";
         span.setAttribute('aria-hidden', true);
-        span.innerHTML = '>>';
+        span.innerHTML = '<i class="fa fa-chevron-double-right"></i>';
         lastLi.append(span);
         lastLi.onclick = function(){
           if(index == totalPaginate) return;

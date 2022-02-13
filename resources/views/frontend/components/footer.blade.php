@@ -69,6 +69,7 @@
                             </a>
                         </li>
                     </ul>
+                    <img class="mt-4" src="https://www.merchantequip.com/image/?logos=v|m|a|d&height=32" alt="Merchant Equipment Store Credit Card Logos"/>
                 </div>
             </div>
         </div>

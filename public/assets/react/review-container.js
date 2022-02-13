@@ -69,7 +69,6 @@ class ReviewsContainer extends React.Component {
 
         if(this.state.data.length){
             let showData= this.state.data.slice((this.state.index - 1) * pageSize, this.state.index * pageSize);
-            console.log(showData);
             return (
                 <div>
                     <div className="col-md-12">
@@ -106,10 +105,10 @@ class ReviewsContainer extends React.Component {
                             <nav>
                                 <ul className="pagination">
                                     <li className="page-item" onClick={this.onClickFirst.bind(this)}>
-                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{"<<"}</span>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true"><i class="fa fa-chevron-double-left"></i></span>
                                     </li>
                                     <li className="page-item" onClick={this.onClickPrev.bind(this)}>
-                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{"<"}</span>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
                                     </li>
                                     <li className="page-item">
                                         <span className="page-link" aria-hidden="true">
@@ -117,10 +116,10 @@ class ReviewsContainer extends React.Component {
                                         </span>
                                     </li>
                                     <li className="page-item" onClick={this.onClickNext.bind(this)}>
-                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{">"}</span>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
                                     </li>
                                     <li className="page-item" onClick={this.onClickLast.bind(this)}>
-                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true">{">>"}</span>
+                                        <span className="page-link" style={{cursor: 'pointer'}} aria-hidden="true"><i class="fa fa-chevron-double-right"></i></span>
                                     </li>
                                 </ul>
                             </nav>

@@ -3,7 +3,7 @@
     Messages - Jersey Swap
 @endsection
 @section('content')
-    <section id="heading" class="mt-5 chat-wrapper">
+    <section class="pt-5 chat-wrapper">
         <div class="container">
             <div class="user-list">
                 <input id="search_input" class="form-control" autocomplete="off" placeholder="Type a username"/>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div id="chat-header" class="align-items-center" style="padding-left: 5px;">
-                <i class="fa fa-arrow-left back-icon" style="width: 40px; text-align: center;"></i>
+                <i class="fa fa-chevron-left back-icon" style="width: 40px; text-align: center;"></i>
                 <span id="chat_with" style="margin: 10px; font-weight: bold;"></span>
             </div>
             <div id="chat-box" class="row" style="min-height: 600px; max-height: 600px;overflow-y: scroll;  margin: 0;">
