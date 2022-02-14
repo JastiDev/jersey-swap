@@ -16,7 +16,7 @@
             </div>
             <!-- <div id="herobox" class="col-md-6"></div> -->
             <div class="col-md-6">
-                <img src="assets/images/banner.jpg" alt="banner" style="height:100%">
+                <img src="assets/images/banner-new.jpg" alt="banner" style="height:100%">
             </div>
         </div>
     </section>
