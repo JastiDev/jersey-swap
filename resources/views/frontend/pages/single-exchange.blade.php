@@ -100,39 +100,59 @@
                         <form id="offer-form" method="POST" action="{{ url('offer/post') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
-                                <p>Users can make trade offers! Offers can be made:</p>
-                                <ul>
-                                    <li>Item for item: Please include images of the item you are trading and leave the amount as “0”. Then press “post offer”.</li>
-                                    <li>Money for item: Please include the amount you wish to offer and leave the “image gallery” empty.  Then press “post offer”. </li>
-                                    <li>Item and money for item: Please include the amount you wish to offer and images of the item you are attempting to trade. Then press “post offer”.  (Please use this feature when the trade needs to be more equal). </li>
-                                </ul>
+                                <div class="my-4">
+                                    <div class="fs-5 text mb-4">
+                                        How would you like to acquire item?
+                                    </div>
+
+                                    <div class="form-check my-2">
+                                        <input class="form-check-input" type="radio" name="trade_method" id="item4item">
+                                        <label class="form-check-label" for="item4item">
+                                            Item for item
+                                        </label>
+                                    </div>
+                                    <div class="form-check my-2">
+                                        <input class="form-check-input" type="radio" name="trade_method" id="money4item">
+                                        <label class="form-check-label" for="money4item">
+                                            Money for item
+                                        </label>
+                                    </div>
+                                    <div class="form-check my-2">
+                                        <input class="form-check-input" type="radio" name="trade_method" id="both4them">
+                                        <label class="form-check-label" for="both4them">
+                                            Item and money for them
+                                        </label>
+                                    </div>
+                                </div>
                                 <input type="hidden" name="listing_id" value="{{ $listing->id }}">
-                                <div class="mb-3">
+                                <div id="exchange_amount" class="mb-3">
                                     <label for="amount" class="col-form-label">Amount($)</label>
                                     <input type="number" class="form-control" id="amount" name="amount" value="0" placeholder="Amount">
                                 </div>
-                                <div class="mb-3">
+                                <div id="exchagne_gallery" class="mb-3">
                                     <h5>Image Gallery</h5>
                                     <span>Upload images to the gallery to show the condition of the sports jersey/ sports card. </span>
-                                </div>
-                                <div class="mb-3 text-center">
-                                    <label for="product_photos">
-                                        <button type="button" id="uitp_gallery" class="btn btn-primary btn-circle btn-lg"><i
-                                                class="fa fa-plus"></i></button>
-                                    </label>
-                                    <div style="visibility:hidden">
-                                        <input type="file" id='product_photos' name="files" accept="image/*">
+                                    <div class="mb-3 text-center">
+                                        <label for="product_photos">
+                                            <button type="button" id="uitp_gallery" class="btn btn-primary btn-circle btn-lg">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </label>
+                                        <div style="visibility:hidden">
+                                            <input type="file" id='product_photos' name="files" accept="image/*">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mb-3 text-center">
-                                    <div id="img-gallery" class="row g-3 img-gallery-uploader">
+                                    <div class="mb-3 text-center">
+                                        <div id="img-gallery" class="row g-3 img-gallery-uploader">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" />
-                                    <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                                                class="image-title">Uploaded Image</span></button>
+                                    <div class="file-upload-content">
+                                        <img class="file-upload-image" src="#" alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image">
+                                                Remove <span class="image-title">Uploaded Image</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -146,4 +166,29 @@
             </div>
         @endif
     @endauth
+@endsection
+
+@section('custom-scripts')
+<script>
+    $(document).ready(function() {
+        $("#exchange_amount").css("display","none");
+        $("#exchagne_gallery").css("display","none");
+
+        $('input[type="radio"]').bind('click', function(){
+            console.log(this.id);
+            if(this.id == 'item4item'){
+                $("#exchange_amount").css("display","block");
+                $("#exchagne_gallery").css("display","none");
+            }else if(this.id == 'money4item'){
+                $("#exchange_amount").css("display","none");
+                $("#exchagne_gallery").css("display","block");
+            }else if(this.id == 'both4them'){
+                $("#exchange_amount").css("display","block");
+                $("#exchagne_gallery").css("display","block");
+            }
+
+        });
+
+    }); 
+</script>
 @endsection
