@@ -6,7 +6,7 @@
     The central hub to buy, sell, and trade sports jerseys and sports cards..
 @endsection
 @section('content')
-    <section style="background-color: #3a9db6">
+    <section style="background-image: linear-gradient(to right, rgb(72 193 224), rgb(98 219 212), rgb(98 219 212));">
         <div class="row">
             <div class="col-md-6 text-white desc-part" style="padding: 150px 40px">
                 <h1>The #1 marketplace for exchanging sports jerseys and sports cards!</h1>
