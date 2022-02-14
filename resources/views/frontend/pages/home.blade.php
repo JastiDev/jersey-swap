@@ -6,15 +6,17 @@
     The central hub to buy, sell, and trade sports jerseys and sports cards..
 @endsection
 @section('content')
-    <section id="herobox">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6" style="color: #f9f937">
-                    <h1>The #1 marketplace for exchanging sports jerseys and sports cards!</h1>
-                    <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, sell, and trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
-                    </p>
-                    <a href="{{url('exchange')}}" class="btn btn-dark">Start Exchange</a>
-                </div>
+    <section style="background-color: #3a9db6">
+        <div class="row">
+            <div class="col-md-6 desc-part">
+                <h1>The #1 marketplace for exchanging sports jerseys and sports cards!</h1>
+                <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, sell, and trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
+                </p>
+                <a href="{{url('exchange')}}" class="btn btn-dark">Start Exchange</a>
+            </div>
+            <!-- <div id="herobox" class="col-md-6"></div> -->
+            <div class="col-md-6">
+                <img src="assets/images/banner.jpg" alt="banner" style="height:100%">
             </div>
         </div>
     </section>
