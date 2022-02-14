@@ -104,7 +104,12 @@
                                     <div class="fs-5 text mb-4">
                                         How would you like to acquire item?
                                     </div>
-
+                                <p>Users can make trade offers! Offers can be made:</p>
+                                <ul class="ps-4">
+                                    <li>Item for item: Please include images of the item you are trading and leave the amount as “0”. Then press “post offer”.</li>
+                                    <li>Money for item: Please include the amount you wish to offer and leave the “image gallery” empty.  Then press “post offer”. </li>
+                                    <li>Item and money for item: Please include the amount you wish to offer and images of the item you are attempting to trade. Then press “post offer”.  (Please use this feature when the trade needs to be more equal). </li>
+                                </ul>
                                     <div class="form-check my-2">
                                         <input class="form-check-input" type="radio" name="trade_method" id="item4item">
                                         <label class="form-check-label" for="item4item">
@@ -177,11 +182,11 @@
         $('input[type="radio"]').bind('click', function(){
             console.log(this.id);
             if(this.id == 'item4item'){
-                $("#exchange_amount").css("display","block");
-                $("#exchagne_gallery").css("display","none");
-            }else if(this.id == 'money4item'){
                 $("#exchange_amount").css("display","none");
                 $("#exchagne_gallery").css("display","block");
+            }else if(this.id == 'money4item'){
+                $("#exchange_amount").css("display","block");
+                $("#exchagne_gallery").css("display","none");
             }else if(this.id == 'both4them'){
                 $("#exchange_amount").css("display","block");
                 $("#exchagne_gallery").css("display","block");
