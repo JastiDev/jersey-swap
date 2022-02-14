@@ -18,14 +18,14 @@
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h1>Fill out details about your item to get offers!</h1>
+                                <h4>Fill out details about your item to get offers!</h4>
                                 <hr>
                                 <form id="product-upload-form" method="POST" action="{{url('/listing/update')}}" enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="listing_id" value="{{$listing->id}}">
                                     <div class="mb-3">
                                         <label for="product_title" class="form-label">Product Title</label>
-                                        <input type="text" class="form-control @error('product_title') is-invalid @enderror" id="product_title" placeholder="Product Title" value="{{$listing->product_title}}" name="product_title" required>
+                                        <input type="text" class="form-control border border-1 @error('product_title') is-invalid @enderror" id="product_title" placeholder="Product Title" value="{{$listing->product_title}}" name="product_title" required>
                                         @error('product_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -35,17 +35,17 @@
                                     <div class="row">
                                       <div class="col-md-6 mb-3">
                                           <label for="price" class="form-label">Price($)</label>
-                                          <input type="number" class="form-control" id="price" min="1" name="price"  value="{{$listing->price}}">
+                                          <input type="number" class="form-control border border-1" id="price" min="1" name="price"  value="{{$listing->price}}">
                                       </div>
                                       <div class="col-md-6 mb-3">
                                           <label for="category" class="form-label">Category</label>
-                                          <select name="category" id="category" class="form-control" value=1>
+                                          <select name="category" id="category" class="form-control border border-1 form-select" value=1>
                                               <option value = 0 @if($listing->category==0) selected="selected" @endif>Jersey</option>
                                               <option value = 1 @if($listing->category==1) selected="selected" @endif>Card</option>
                                           </select>
                                       </div>
                                     </div>                                        <label for="product_description" class="form-label">Description</label>
-                                        <textarea class="form-control @error('product_description') is-invalid @enderror" id="product_description" rows="5" name="product_description" required>{{$listing->product_description}}</textarea>
+                                        <textarea class="form-control border border-1 @error('product_description') is-invalid @enderror" id="product_description" rows="5" name="product_description" required>{{$listing->product_description}}</textarea>
                                         @error('product_description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                                         <img src="{{asset($listing->product_img)}}" width="30%">
                                     <div class="mb-3">
                                         <label for="product_img" class="form-label">Featured Image</label>
-                                        <input type="file" class="form-control @error('product_img') is-invalid @enderror" id="product_img" accept="image/*" name="product_img">
+                                        <input type="file" class="form-control border border-1 @error('product_img') is-invalid @enderror" id="product_img" accept="image/*" name="product_img">
                                         @error('product_img')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -106,10 +106,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 text-end">
+                                    <div class="mb-3 text-center">
                                         <button id="post-listing-btn" type="submit" class="btn btn-primary">Update Listing</button>
                                     </div>
-                                    <div id="spinner" class="text-end"></div>
+                                    <div id="spinner" class="text-center"></div>
                                 </form>
                             </div>
                         </div>

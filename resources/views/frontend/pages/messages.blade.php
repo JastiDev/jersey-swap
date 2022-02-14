@@ -6,7 +6,7 @@
     <section class="pt-5 chat-wrapper">
         <div class="container">
             <div class="user-list">
-                <input id="search_input" class="form-control" autocomplete="off" placeholder="Type a username"/>
+                <input id="search_input" class="form-control" autocomplete="off" placeholder="Type username to chat"/>
                 <div id="search_result"></div>
                 <div id="contacts">
                     @foreach($user_list as $user)

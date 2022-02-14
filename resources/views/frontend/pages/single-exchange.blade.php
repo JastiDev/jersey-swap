@@ -18,9 +18,9 @@
                 <div class="col-md-8 mx-auto">
                     <h1>{{ $listing->product_title }}</h1>
                         @if($listing->authentic)
-                        <span style="color: green;">Authentic</span>
+                        <span class="text-success">Authentic</span>
                         @else
-                        <span style="color: darkgreen;">Non Authentic</span>
+                        <span class="text-dark">Non Authentic</span>
                         @endif
                     <div class="product-meta d-flex flex-row">
                         <div class="user-avatar p-1">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <img id="featured" src="{{ static_url('products_featured/'.$listing->product_img) }}" width="100%" alt="{{$listing->product_title}}">
-                    <div style="margin-top: 8px; color: green; font-weight: bold;">
+                    <div class="mt-3 text-success fw-bold">
                         <span>Buy Now: ${{$listing->price}}</span>
                     </div>
                     <div class="description mt-2 mb-2">
@@ -47,21 +47,24 @@
                     </div>
                     @auth
                         @if (auth()->user()->id !== $listing->posted_by && auth()->user()->role->role!=="admin")
-                            <div class="text-end" style="display: flex; justify-content: flex-end">
-                              <form method="POST" action="{{ url('offer/post') }}">
-                                @csrf
-                                <input type="hidden" name="listing_id"  value="{{$listing->id}}">
-                                <input type="hidden" name="amount"  value="{{$listing->price}}">
-                                <input type="hidden" name="isBuy"  value="true">
-                                <button type="submit" class="btn btn-success">
-                                    Buy it now
-                                </button>
-                              </form>
+                            <div class="text-end d-flex my-4">
+                                <form method="POST" action="{{ url('offer/post') }}">
+                                    @csrf
+                                    <input type="hidden" name="listing_id"  value="{{$listing->id}}">
+                                    <input type="hidden" name="amount"  value="{{$listing->price}}">
+                                    <input type="hidden" name="isBuy"  value="true">
+                                    <button type="submit" class="btn btn-success fs-5">
+                                        Buy it now
+                                    </button>
+                                </form>
 
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="margin-left: 8px"
-                                    data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary ms-2 fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Make trade offer
                                 </button>
+                            </div>
+                            <div class="mb-5">
+                                <span>Have a question about the item?</span>
+                                <a href="{{url('/messages')}}" class="btn btn-success ms-4">Message Seller</a>
                             </div>
                         @endif
                         @if (auth()->user()->role->role=="admin" && $listing->status!=="cancelled" && $listing->status!=="closed")
@@ -80,7 +83,7 @@
                             <a href="{{url('login')}}" class="btn btn-success"> Log in to make offer</a>
                         </div>
                     @endguest
-                </div>
+                </span>
             </div>
         </div>
     </section>

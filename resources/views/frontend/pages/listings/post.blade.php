@@ -9,35 +9,35 @@
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h1>Fill out details about your item to get offers!</h1>
+                                <h3>Fill out details about your item to get offers!</h3>
                                 <hr>
                                 <form id="product-upload-form" method="POST" action="{{url('/listings/add-listing')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="product_title" class="form-label">Product Title</label>
-                                        <input type="text" class="form-control @error('product_title') is-invalid @enderror" id="product_title" placeholder="Product Title" name="product_title" required>
+                                        <input type="text" class="form-control border border-1 @error('product_title') is-invalid @enderror" id="product_title" placeholder="Product Title" name="product_title" required>
                                         @error('product_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
-				                            <div class="row">
-                                      <div class="col-md-6 mb-3">
-                                          <label for="price" class="form-label">Price($)</label>
-                                          <input type="number" class="form-control" id="price" min="1" name="price" value="0">
-                                      </div>
-                                      <div class="col-md-6 mb-3">
-                                          <label for="category" class="form-label">Category</label>
-                                          <select name="category" id="category" class="form-control">
-                                              <option value = 0>Jersey</option>
-                                              <option value = 1>Card</option>
-                                          </select>
-                                      </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="price" class="form-label">Price($)</label>
+                                            <input type="number" class="form-control border border-1" id="price" min="1" name="price" value="0">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="category" class="form-label">Category</label>
+                                            <select name="category" id="category" class="form-control form-select border border-1">
+                                                <option value = 0>Jersey</option>
+                                                <option value = 1>Card</option>
+                                            </select>
+                                        </div>
                                     </div>                                    
                                     <div class="mb-3">
                                         <label for="product_description" class="form-label">Description</label>
-                                        <textarea class="form-control @error('product_description') is-invalid @enderror" id="product_description" rows="5" name="product_description" required></textarea>
+                                        <textarea class="form-control border border-1 @error('product_description') is-invalid @enderror" id="product_description" rows="5" name="product_description" required></textarea>
                                         @error('product_description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
 
                                     <div class="mb-3">
                                         <label for="product_img" class="form-label">Featured Image</label>
-                                        <input type="file" class="form-control @error('product_img') is-invalid @enderror" id="product_img" accept="image/*" name="product_img" required>
+                                        <input type="file" class="form-control border border-1 @error('product_img') is-invalid @enderror" id="product_img" accept="image/*" name="product_img" required>
                                         @error('product_img')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -68,7 +68,7 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3">
-                                        <h2>Image Gallery</h2>
+                                        <h4>Image Gallery</h4>
                                         <small>Gallery images are used to show the condition of the sports jersey or sports card.</small>
                                     </div>
                                     <div class="mb-3 text-center">
@@ -87,10 +87,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 text-end">
+                                    <div class="mb-3 text-center">
                                         <button id="post-listing-btn" type="submit" class="btn btn-primary">Post Listing</button>
                                     </div>
-                                    <div id="spinner" class="text-end"></div>
+                                    <div id="spinner" class="text-center"></div>
                                 </form>
                             </div>
                         </div>

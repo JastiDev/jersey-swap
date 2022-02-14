@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card mb-3">
                             <div class="card-body">
                                 <div class="d-flex flex-column">
                                     <div class="mt-3">
@@ -36,6 +36,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-center">
+                            <a href="{{url('/messages')}}" class="btn btn-success" style="margin-left: 16px;">Message Seller</a>
                         </div>
                     </div>
 

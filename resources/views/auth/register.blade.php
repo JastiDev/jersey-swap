@@ -85,7 +85,7 @@
                                     </div>
                                     <hr>
                                     <div class="mb-3 d-grid">
-                                        <a href="{{route('login')}}" class="btn btn-primary"><i class="fa fa-sign-in"></i> Log In</a>
+                                        <a href="{{route('login')}}" class="btn btn-primary"><i class="fa fa-sign-in"></i> Already have an account? Log In</a>
                                     </div>
                                 </form>
                             </div>
