@@ -8,7 +8,7 @@
 @section('content')
     <section style="background-color: #3a9db6">
         <div class="row">
-            <div class="col-md-6 desc-part">
+            <div class="col-md-6 text-white desc-part">
                 <h1>The #1 marketplace for exchanging sports jerseys and sports cards!</h1>
                 <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, sell, and trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
                 </p>
