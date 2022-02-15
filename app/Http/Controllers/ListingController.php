@@ -131,6 +131,7 @@ class ListingController extends Controller
 
         $posted_by = Auth::id();
         $slug = Str::slug($request->product_title, '-');
+        $slug = $slug.'-'.substr(md5(mt_rand()),0, 4);
         $count = 1;
         while(1){
             $slug_duplicated = Listing::where('slug',$slug)->get();
