@@ -200,7 +200,7 @@ footer {
         height: 300px;
         object-fit: cover;
         @include breakpoint(sm) {
-            height: auto;
+            height: 400px;
         }
     }
 }
