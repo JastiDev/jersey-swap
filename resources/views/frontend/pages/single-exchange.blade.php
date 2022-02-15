@@ -15,7 +15,7 @@
                 </div>
             @endif
             <div class="row">
-                <div class="col-md-8 mx-auto">
+                <div class="col-md-8 mx-auto mb-5">
                     <h1>{{ $listing->product_title }}</h1>
                         @if($listing->authentic)
                         <span class="text-success">Authentic</span>
@@ -47,8 +47,8 @@
                     </div>
                     @auth
                         @if (auth()->user()->id !== $listing->posted_by && auth()->user()->role->role!=="admin")
-                            <div class="text-end d-flex my-4">
-                                <form method="POST" action="{{ url('offer/post') }}">
+                            <div class="text-end d-flex my-5">
+                                <!-- <form method="POST" action="{{ url('offer/post') }}">
                                     @csrf
                                     <input type="hidden" name="listing_id"  value="{{$listing->id}}">
                                     <input type="hidden" name="amount"  value="{{$listing->price}}">
@@ -56,15 +56,15 @@
                                     <button type="submit" class="btn btn-success fs-5">
                                         Buy it now
                                     </button>
-                                </form>
+                                </form> -->
 
-                                <button type="button" class="btn btn-primary ms-2 fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Make trade offer
+                                <button type="button" class="btn btn-primary fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Make Offer
                                 </button>
                             </div>
-                            <div class="mb-5">
+                            <div class="my-5">
                                 <span>Have a question about the item?</span>
-                                <a href="{{url('/messages')}}" class="btn btn-success ms-4">Message Seller</a>
+                                <a href="{{url('/messages')}}" class="btn btn-success ms-4 fs-5">Message Seller</a>
                             </div>
                         @endif
                         @if (auth()->user()->role->role=="admin" && $listing->status!=="cancelled" && $listing->status!=="closed")
@@ -79,7 +79,7 @@
                         @endif
                     @endauth
                     @guest
-                        <div class="text-end">
+                        <div class="text-start">
                             <a href="{{url('login')}}" class="btn btn-success"> Log in to make offer</a>
                         </div>
                     @endguest
@@ -101,15 +101,15 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="my-4">
+                                    <p>Offers can be made:</p>
+                                    <ul class="ps-4">
+                                        <li>Item for item: Please include images of the item you are trading and leave the amount as “0”. Then press “post offer”.</li>
+                                        <li>Money for item: Please include the amount you wish to offer and leave the “image gallery” empty.  Then press “post offer”. </li>
+                                        <li>Item and money for item: Please include the amount you wish to offer and images of the item you are attempting to trade. Then press “post offer”.  (Please use this feature when the trade needs to be more equal). </li>
+                                    </ul>
                                     <div class="fs-5 text mb-4">
                                         How would you like to acquire item?
                                     </div>
-                                <p>Users can make trade offers! Offers can be made:</p>
-                                <ul class="ps-4">
-                                    <li>Item for item: Please include images of the item you are trading and leave the amount as “0”. Then press “post offer”.</li>
-                                    <li>Money for item: Please include the amount you wish to offer and leave the “image gallery” empty.  Then press “post offer”. </li>
-                                    <li>Item and money for item: Please include the amount you wish to offer and images of the item you are attempting to trade. Then press “post offer”.  (Please use this feature when the trade needs to be more equal). </li>
-                                </ul>
                                     <div class="form-check my-2">
                                         <input class="form-check-input" type="radio" name="trade_method" id="item4item">
                                         <label class="form-check-label" for="item4item">

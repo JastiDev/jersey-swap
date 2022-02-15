@@ -66,7 +66,7 @@ class LoginController extends Controller
                 Session::flush();
                 return redirect('banned')->with('error',$message);
             }
-            return redirect()->intended('');
+            return redirect()->intended('/exchange');
 
         }else{
             return back()->withErrors([

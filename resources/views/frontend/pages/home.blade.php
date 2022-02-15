@@ -12,7 +12,7 @@
                 <h1>The #1 marketplace for exchanging sports jerseys and sports cards!</h1>
                 <p>Jersey Swap is the nation’s platform for the best products from the past, present, and future. Buy, sell, and trade for iconic sports jerseys and sports cards with users across the country! The destination for sports jerseys and sports cards on desktop, iPhone, and Android. 
                 </p>
-                <a href="{{url('exchange')}}" class="btn btn-dark">Start Exchange</a>
+                <a href="{{url('exchange')}}" class="btn btn-dark mt-5">Start Exchange</a>
             </div>
             <!-- <div id="herobox" class="col-md-6"></div> -->
             <div class="col-md-6 d-flex justify-content-end overflow-hidden">
@@ -100,8 +100,9 @@
                         @foreach($listings as $listing)
                         <div class="item">
                             <div class="card product-card">
-                                <a href="{{url('/exchange/'.$listing->slug)}}"><img src="{{static_url('products_featured/'.$listing->product_img)}}" class="card-img-top"
-                                        alt="{{$listing->product_title}}"><i class="fa fa-heart text-danger"></i></a>
+                                <a href="{{url('/exchange/'.$listing->slug)}}">
+                                    <img src="{{static_url('products_featured/'.$listing->product_img)}}" class="card-img-top" alt="{{$listing->product_title}}">
+                                </a>
                                 <div class="card-body">
                                     <div class="mb-2">
                                         <h6 class="font-weight-semibold mb-2 product-title">
