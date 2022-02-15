@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-    <div class="d-flex w-100 mx-4">
+    <div class="container">
         <a class="navbar-brand" href="{{url('/')}}">
             <img src="{{asset('assets/images/logo-transparent.png')}}"> Jersey Swap
         </a>
