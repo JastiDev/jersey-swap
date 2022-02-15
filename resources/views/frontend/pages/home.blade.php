@@ -15,7 +15,7 @@
                 <a href="{{url('exchange')}}" class="btn btn-dark">Start Exchange</a>
             </div>
             <!-- <div id="herobox" class="col-md-6"></div> -->
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex justify-content-end overflow-hidden">
                 <img src="assets/images/banner-new.jpg" alt="banner" style="height:100%">
             </div>
         </div>
