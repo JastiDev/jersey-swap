@@ -190,11 +190,17 @@ footer {
 .product-card {
     border-radius: 15px;
     overflow: hidden;
-    padding-top: 10px;
     .product-title {
         a {
             text-decoration: none;
             color: #000;
+        }
+    }
+    img {
+        height: 300px;
+        object-fit: cover;
+        @include breakpoint(sm) {
+            height: auto;
         }
     }
 }
