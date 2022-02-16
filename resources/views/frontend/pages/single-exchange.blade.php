@@ -125,7 +125,7 @@
                                     <div class="form-check my-2">
                                         <input class="form-check-input" type="radio" name="trade_method" id="both4them">
                                         <label class="form-check-label" for="both4them">
-                                            Item and money for them
+                                            Item and money for item
                                         </label>
                                     </div>
                                 </div>
