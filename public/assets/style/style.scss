@@ -330,6 +330,7 @@ footer {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: right;
+    min-height: calc(100vh - 498px);
 }
 
 #about-boxes {
