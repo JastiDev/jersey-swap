@@ -6,7 +6,7 @@
     Register your account and start trading your jersey and get offers.
 @endsection
 @section('content')
-<section id="login" class="auth-section">
+<section id="login" class="auth-section" style="min-height: calc(100vh - 498px);">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto">

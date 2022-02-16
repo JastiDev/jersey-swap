@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section id="login" class="auth-section">
+    <section id="login" class="auth-section" style="min-height: calc(100vh - 498px);">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mx-auto">
