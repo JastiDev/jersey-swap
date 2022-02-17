@@ -141,9 +141,14 @@
 
                             var dateSpan = document.createElement('span');
                             var date = new Date(item.created_at);
-                            var options = {year: 'numeric', month: 'short', day: '2-digit'};
-                            var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                            dateSpan.innerHTML = month + ", " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+                            dateSpan.innerHTML = new Intl.DateTimeFormat('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: '2-digit',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                hour12: true
+                            }).format(date);
 
                             if (item.sent_from == {{auth()->id()}}) { // if I sent to other.
                                 span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
@@ -333,9 +338,14 @@
                     var dateNow = Date.now();
                     var date = new Date(dateNow);
 
-                    var options = {year: 'numeric', month: 'short', day: '2-digit'};
-                    var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                    dateSpan.innerHTML = month + ", " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+                    dateSpan.innerHTML = new Intl.DateTimeFormat('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: true
+                    }).format(date);
 
                     if (json.from == 'me') {
                         span.style.cssText = 'text-align: right; background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:fit-content; margin-left: auto';
@@ -368,9 +378,14 @@
                     var dateNow = Date.now();
                     var date = new Date(dateNow);
 
-                    var options = {year: 'numeric', month: 'short', day: '2-digit'};
-                    var month = new Intl.DateTimeFormat('en-US', options).format(date);
-                    dateSpan.innerHTML = month + ", " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2);
+                    dateSpan.innerHTML = new Intl.DateTimeFormat('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        hour12: true
+                    }).format(date);
 
                     if (json.from == 'me') {
                         img.style.cssText = 'background: #dbf1ff; border-radius: 4px; padding: 8px;margin-top:2px; width:200px; margin-left: auto';

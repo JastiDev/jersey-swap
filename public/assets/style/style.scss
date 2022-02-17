@@ -1126,7 +1126,7 @@ button:focus {
 
 .chat-wrapper {
     @media (max-width: 760px), screen and (orientation: portrait) {
-        margin-top: 0 !important;
+        padding-top: 15px !important;
     }
 
     @media (min-width: 761px) {
@@ -1194,6 +1194,12 @@ button:focus {
             overflow-y: scroll;
             max-height: 690px;
         }
+    }
+
+    #sendBtn {
+        background-color: #007900;
+        color: #ffffff;
+        margin-left: 3px;
     }
 
     @media (max-width: 760px) {
