@@ -6,7 +6,11 @@
     <section class="pt-5 chat-wrapper">
         <div class="container">
             <div class="user-list">
-                <input id="search_input" class="form-control" autocomplete="off" placeholder="Type username to chat"/>
+                <div class="search-wrapper">
+                    <i id="all_search" class="fa fa-search" onclick="showSearch(this)"></i>
+                    <a id="all_convs" href="/messages">All conversations ({{count($user_list)}})</a>
+                    <input id="search_input" class="form-control" autocomplete="off" placeholder="Type username to find user" />
+                </div>
                 <div id="search_result"></div>
                 <div id="contacts">
                     @foreach($user_list as $user)
@@ -26,16 +30,16 @@
             </div>
             <div id="chat-box" class="row" style="min-height: 600px; max-height: 600px;overflow-y: scroll;  margin: 0;">
                 <?php /* <div class="col-md-9 chat-box" style="height: 100%; padding: 4px; display: flex; flex-direction: column; overflow: hidden;"> */ ?>
-                <div id="chat_output" style="flex: 1; padding: 4px; margin: 4px; display: flex; flex-direction:column;">
-                    <?php /*  </div> */ ?>
+                <div id="chat_output">
+                    <div class="welcome">Search for user and press profile picture to begin chat!</div>
                 </div>
             </div>
             <div class="text-center">
                 <div id="img-gallery" class="row img-gallery-uploader"></div>
             </div>
-            <div class="chat-footer" style="margin-bottom: 10px;">
+            <div class="chat-footer">
                 <input id="chat_input" class="form-control" style="z-index: 1000; outline: none"
-                       placeholder="Type a message and press Enter"/>
+                       placeholder="Type message here"/>
                 <div style="display: flex; flex-flow: row nowrap;">
                     <label for="product_photos" style="display: none">
                         <button type="button" id="uitp_gallery" class="btn">
@@ -46,7 +50,7 @@
                         <input type="file" id='product_photos' name="file" accept="image/*">
                     </div>
                     <button id="sendBtn" type="submit" class="btn">
-                        <i class="fa fa-paper-plane fa-lg" aria-hidden="true"></i>
+                        Send
                     </button>
                 </div>
             </div>
@@ -85,12 +89,22 @@
             });
         }
 
+        function showSearch(el) {
+            el.style.display = 'none'
+            document.getElementById('all_convs').style.display = 'none'
+            document.getElementById('search_input').style.display = 'block'
+        }
+
         function onClickUser(userName, userId) {
             $("#chat-header").css("display", 'flex');
             $(".user-list").addClass("close-list");
             $("#chat-box").css("display", 'flex');
             $(".chat-footer").css("display", 'flex');
             $("#chat_with").text("Chat with " + userName);
+            document.getElementById('all_convs').style.display = 'block'
+            document.getElementById('search_input').style.display = 'none'
+            document.getElementById('all_search').style.display = 'block'
+
             var chatOutput = "";
             var message_with = parseInt(userId);
             sendTo = message_with;

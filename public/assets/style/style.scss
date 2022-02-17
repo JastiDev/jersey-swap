@@ -1134,22 +1134,44 @@ button:focus {
             display: none;
         }
         & > .container {
-            min-height: 690px;
+            min-height: 710px;
         }
     }
 
     #chat-header,
     .chat-footer {
         display: none;
+        background-color: #f8f9fa;
+    }
+
+    .chat-footer {
+        padding: 15px;
+    }
+
+    .search-wrapper {
+        background-color: #f8f9fa;
+        line-height: 45px;
+        & > .fa-search {
+            float: right;
+            font-size: 26px;
+            color: #aaa;
+            width: 45px;
+            height: 45px;
+            text-align: center;
+            line-height: 45px;
+        }
     }
 
     .user-list {
         display: flex;
         flex-direction: column;
-        height: 690px;
+        height: 710px;
+
+
         @media (min-width: 761px) {
             float: left;
             width: 300px;
+            border-right: 5px solid #f8f9fa;
         }
         @media (max-width: 760px) {
             &.close-list {
@@ -1161,6 +1183,7 @@ button:focus {
             padding: 10px;
             border-radius: 0;
             line-height: 23px;
+            display: none;
             :focus {
                 outline: none;
             }
@@ -1190,6 +1213,21 @@ button:focus {
             margin-left: 300px;
         }
     }
+
+    #chat_output {
+        flex: 1;
+        padding: 5px 20px 5px 20px;
+        margin: 5px;
+        display: flex;
+        flex-direction:column;
+        & > .welcome {
+            text-align: center;
+            position: relative;
+            top: 40%;
+        }
+    }
+
+
     .notifier {
         margin-left: 10px;
     }
