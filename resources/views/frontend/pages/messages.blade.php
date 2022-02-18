@@ -9,7 +9,7 @@
                 <div class="search-wrapper">
                     <i id="all_search" class="fa fa-search" onclick="showSearch(this)"></i>
                     <a id="all_convs" href="/messages">All conversations ({{count($user_list)}})</a>
-                    <input id="search_input" class="form-control" autocomplete="off" placeholder="Type username to find user" />
+                    <input id="search_input" class="form-control" autocomplete="off" placeholder="Type username to chat with users" />
                 </div>
                 <div id="search_result"></div>
                 <div id="contacts">
