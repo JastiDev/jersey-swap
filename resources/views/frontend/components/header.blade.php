@@ -34,13 +34,20 @@
     <!-- Fav Icon -->
     <link rel="icon" href="{{asset('assets/images/logo-transparent.png')}}">
 
-
     <!-- Title -->
     <title>@yield('title','Jersey Swap!')</title>
     <meta name="description" content="@yield('meta_description','The central hub to buy, sell, and trade sports jerseys and sports cards.')">
     <script>
         var base_url = "{{url('/')}}";
         var static_url = "{{static_url('')}}";
+    </script>
+
+    <!-- Gtag -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-228181667-1');
     </script>
 </head>
 <body id="body">
