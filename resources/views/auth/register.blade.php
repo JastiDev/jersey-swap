@@ -6,7 +6,11 @@
     Register your account and start trading your jersey and get offers.
 @endsection
 @section('content')
-<section id="login" class="auth-section" style="min-height: calc(100vh - 498px);">
+        <!-- Event snippet for Submit lead form conversion page -->
+        <script>
+            gtag('event', 'conversion', {'send_to': 'AW-10898340525/904yCKHZorwDEK313cwo'});
+        </script>
+        <section id="login" class="auth-section" style="min-height: calc(100vh - 498px);">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 mx-auto">
@@ -48,7 +52,7 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    
+
                                     {{-- Username --}}
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username</label>

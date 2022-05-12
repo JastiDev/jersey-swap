@@ -3,7 +3,11 @@
     Checkout - Jersey Swap
 @endsection
 @section('content')
-    <section id="checkout-form" class="mb-5">
+        <!-- Event snippet for Submit lead form conversion page -->
+        <script>
+            gtag('event', 'conversion', {'send_to': 'AW-10898340525/904yCKHZorwDEK313cwo'});
+        </script>
+        <section id="checkout-form" class="mb-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 mx-auto">
@@ -87,7 +91,7 @@
                                                 Please enter a valid phone number.
                                             </div>
                                         </div> -->
-                                        
+
                                         <div class="col-12">
                                             <label for="transaction" class="form-label">Transaction</span></label>
                                             <input type="text" class="form-control" id="text" placeholder="transaction" value="${{$prices['security']+$prices['offer']}}" required="" readonly="">
@@ -225,7 +229,7 @@
             .overlay.show{
                 visibility: visible;
             }
-        </style> 
+        </style>
         <div id="loader" class="overlay text-center">
             <div class="spinner-border text-light" role="status">
                 <span class="sr-only">Loading...</span>
@@ -249,7 +253,7 @@
     cardElement.mount('#card-element');
     const cardHolderName = document.getElementById('card-holder-name');
     const cardButton = document.getElementById('card-button');
-    
+
 
     $("#payment-form").submit(function(e){
         if(flag==false){
@@ -257,7 +261,7 @@
             return false;
         }
     });
-    function isUSAZipCode(str) 
+    function isUSAZipCode(str)
     {
         return /^\d{5}(-\d{4})?$/.test(str);
     }
